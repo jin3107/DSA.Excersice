@@ -44,12 +44,23 @@ namespace StudentManagement
 
         public void KhoiTaoGiaTri()
         {
-            students = new Student[]
+            //students = new Student[]
+            //{
+            //    new Student { Id = 1, M1 = 8.5, M2 = 9.0, M3 = 7.8 },
+            //    new Student { Id = 2, M1 = 7.6, M2 = 8.0, M3 = 8.8 },
+            //    new Student { Id = 3, M1 = 9.2, M2 = 9.5, M3 = 8.9 }
+            //};
+            students = new Student[100];
+            for (int i = 0; i < 100; i++)
             {
-                new Student { Id = 1, M1 = 8.5, M2 = 9.0, M3 = 7.8 },
-                new Student { Id = 2, M1 = 7.6, M2 = 8.0, M3 = 8.8 },
-                new Student { Id = 3, M1 = 9.2, M2 = 9.5, M3 = 8.9 }
-            };
+                students[i] = new Student
+                {
+                    Id = i + 1,
+                    M1 = (i % 10) * 10 + 5,
+                    M2 = (i % 5) * 20 + 10,
+                    M3 = (i % 7) * 15 + 5
+                };
+            }
         }
 
         public void NhapTuFile()
