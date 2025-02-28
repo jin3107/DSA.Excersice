@@ -43,7 +43,8 @@ namespace StudentManagement
                     if (nhapDiem.Length != 3 || !double.TryParse(nhapDiem[0], out double m1)
                         || !double.TryParse(nhapDiem[1], out double m2) || !double.TryParse(nhapDiem[2], out double m3))
                     {
-                        HienThiDanhSachList();
+                        Console.WriteLine("Lỗi khi nhập điểm. Vui lòng nhập lại");
+                        //HienThiDanhSach();
                         break;
                     }
                     Console.WriteLine("\n");
@@ -226,7 +227,7 @@ namespace StudentManagement
             return (sumM1 / Students.Count + sumM2 / Students.Count + sumM3 / Students.Count) / 3;
         }
 
-        public void HienThiDanhSachList()
+        public void HienThiDanhSach()
         {
             if (Students.Count == 0)
             {
