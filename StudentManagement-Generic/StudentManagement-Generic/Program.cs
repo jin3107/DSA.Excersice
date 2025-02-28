@@ -51,7 +51,7 @@ namespace StudentManagement_Generic
                 case 1: manager.NhapTuBanPhim(N); break;
                 case 2: manager.KhoiTaoGiaTri(); break;
                 case 3: manager.NhapTuFile(); break;
-                case 4: manager.DauVaoNgauNhien(); break;
+                case 4: manager.DauVaoNgauNhien(N); break;
                 default: Console.WriteLine("Lựa chọn không hợp lệ!"); return;
             }
             manager.DoLuongHieuSuat();

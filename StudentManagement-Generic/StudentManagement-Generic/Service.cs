@@ -44,7 +44,6 @@ namespace StudentManagement
                         || !double.TryParse(nhapDiem[1], out double m2) || !double.TryParse(nhapDiem[2], out double m3))
                     {
                         Console.WriteLine("Lỗi khi nhập điểm. Vui lòng nhập lại");
-                        //HienThiDanhSach();
                         break;
                     }
                     Console.WriteLine("\n");
@@ -150,10 +149,10 @@ namespace StudentManagement
             }
         }
 
-        public void DauVaoNgauNhien()
+        public void DauVaoNgauNhien(int N)
         {
             Random rand = new Random();
-            for (int i = 0; i < students.Length; i++)
+            for (int i = 0; i < N; i++)
             {
                 students[i] = new Student
                 {
