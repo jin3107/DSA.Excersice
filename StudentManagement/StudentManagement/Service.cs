@@ -66,7 +66,7 @@ namespace StudentManagement
 
         public void NhapTuFile()
         {
-            Console.WriteLine("Chọn loại file để nhập:");
+            Console.WriteLine("\nChọn loại file để nhập:");
             Console.WriteLine("1. File .txt");
             Console.WriteLine("2. File .xlsx");
             Console.Write("Lựa chọn: ");
