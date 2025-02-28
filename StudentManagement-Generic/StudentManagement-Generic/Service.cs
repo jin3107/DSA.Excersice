@@ -22,6 +22,12 @@ namespace StudentManagement
 
         public void NhapTuBanPhim(int n)
         {
+            if (n > 100)
+            {
+                Console.WriteLine("Số lượng sinh viên quá lớn!");
+                return;
+            }
+
             students = new Student[n];
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
@@ -30,16 +36,19 @@ namespace StudentManagement
             {
                 while (true)
                 {
+                    Console.Write($"Nhập mã sinh viên thứ {i + 1}: ");
+                    int maSinhVien = int.Parse(Console.ReadLine()!);
                     Console.Write($"Nhập điểm sinh viên thứ {i + 1} (M1 M2 M3): ");
                     string[] nhapDiem = Console.ReadLine()!.Split();
                     if (nhapDiem.Length != 3 || !double.TryParse(nhapDiem[0], out double m1)
                         || !double.TryParse(nhapDiem[1], out double m2) || !double.TryParse(nhapDiem[2], out double m3))
                     {
-                        Console.WriteLine("Dữ liệu không hợp lệ! Vui lòng nhập lại.");
-                        continue;
+                        HienThiDanhSachList();
+                        break;
                     }
-                    students[i] = new Student { Id = i + 1, M1 = m1, M2 = m2, M3 = m3 };
-                    Students.Add(new Student { Id = i + 1, M1 = m1, M2 = m2, M3 = m3 });
+                    Console.WriteLine("\n");
+                    students[i] = new Student { Id = maSinhVien, M1 = m1, M2 = m2, M3 = m3 };
+                    Students.Add(new Student { Id = maSinhVien, M1 = m1, M2 = m2, M3 = m3 });
                     break;
                 }
             }
@@ -167,8 +176,13 @@ namespace StudentManagement
         {
             double sum = 0;
             foreach (var student in students)
-                sum += student.Average;
-            return sum / students.Length;
+            {
+                if (student != null)
+                {
+                    sum += student.Average;
+                }
+            }
+            return students.Length > 0 ? sum / students.Length : 0;
         }
 
         public double TinhDTB_C2Array()
@@ -176,9 +190,12 @@ namespace StudentManagement
             double sumM1 = 0, sumM2 = 0, sumM3 = 0;
             foreach (var student in students)
             {
-                sumM1 += student.M1;
-                sumM2 += student.M2;
-                sumM3 += student.M3;
+                if (student != null)
+                {
+                    sumM1 += student.M1;
+                    sumM2 += student.M2;
+                    sumM3 += student.M3;
+                }
             }
             return (sumM1 / students.Length + sumM2 / students.Length + sumM3 / students.Length) / 3;
         }
@@ -187,7 +204,10 @@ namespace StudentManagement
         {
             double sum = 0;
             foreach (var student in Students)
-                sum += student.Average;
+            { 
+                if (student != null)
+                    sum += student.Average;
+            }
             return sum / Students.Count;
         }
 
@@ -196,11 +216,32 @@ namespace StudentManagement
             double sumM1 = 0, sumM2 = 0, sumM3 = 0;
             foreach (var student in Students)
             {
-                sumM1 += student.M1;
-                sumM2 += student.M2;
-                sumM3 += student.M3;
+                if (student != null)
+                {
+                    sumM1 += student.M1;
+                    sumM2 += student.M2;
+                    sumM3 += student.M3;
+                }
             }
             return (sumM1 / Students.Count + sumM2 / Students.Count + sumM3 / Students.Count) / 3;
+        }
+
+        public void HienThiDanhSachList()
+        {
+            if (Students.Count == 0)
+            {
+                Console.WriteLine("Danh sách sinh viên rỗng!");
+                return;
+            }
+
+            Console.WriteLine("\n----Danh sách sinh viên----");
+            Console.WriteLine("ID\tM1\tM2\tM3\tĐiểm TB");
+            Console.WriteLine("-------------------------------------------");
+            foreach (var student in Students)
+            {
+                if (student != null)
+                    Console.WriteLine($"{student.Id}\t{student.M1:F2}\t{student.M2:F2}\t{student.M3:F2}\t{student.Average:F2}");
+            }
         }
 
         public void DoLuongHieuSuat()
