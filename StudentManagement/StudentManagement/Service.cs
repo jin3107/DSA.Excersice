@@ -61,6 +61,7 @@ namespace StudentManagement
                     M3 = (i % 7) * 15 + 5
                 };
             }
+            Console.WriteLine(students);
         }
 
         public void NhapTuFile()
