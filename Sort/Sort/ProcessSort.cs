@@ -74,5 +74,57 @@ namespace Sort
                 }
             }
         }
+
+        public void ShakerSortAscending()
+        {
+            int n = students.Count;
+            int left = 0;
+            int right = n - 1;
+            while (left <= right)
+            {
+                for (int i = left; i < right; i++)
+                {
+                    if (students[i].GetAverage() > students[i + 1].GetAverage())
+                    {
+                        (students[i], students[i + 1]) = (students[i + 1], students[i]);
+                    }
+                }
+                right--;
+                for (int i = right; i > left; i--)
+                {
+                    if (students[i].GetAverage() < students[i - 1].GetAverage())
+                    {
+                        (students[i], students[i - 1]) = (students[i - 1], students[i]);
+                    }
+                }
+                left++;
+            }
+        }
+
+        public void ShakerSortDescending()
+        {
+            int n = students.Count;
+            int left = 0;
+            int right = n - 1;
+            while (left <= right)
+            {
+                for (int i = left; i < right; i++)
+                {
+                    if (students[i].GetAverage() < students[i + 1].GetAverage())
+                    {
+                        (students[i], students[i + 1]) = (students[i + 1], students[i]);
+                    }
+                }
+                right--;
+                for (int i = right; i > left; i--)
+                {
+                    if (students[i].GetAverage() > students[i - 1].GetAverage())
+                    {
+                        (students[i], students[i - 1]) = (students[i - 1], students[i]);
+                    }
+                }
+                left++;
+            }
+        }
     }
 }

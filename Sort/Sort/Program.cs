@@ -64,14 +64,46 @@ namespace Sort
                 return;
             }
 
+            Console.WriteLine("\n-- Chọn thuật toán sắp xếp --");
+            Console.WriteLine("1. Interchange Sort");
+            Console.WriteLine("2. Bubble Sort");
+            Console.WriteLine("3. Shaker Sort");
+            Console.Write("Lựa chọn: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int algorithmChoice))
+            {
+                Console.WriteLine("Lựa chọn không hợp lệ!");
+                return;
+            }
+
             ProcessSort sorter = new ProcessSort(manager.Students);
             switch (sortChoice)
             {
                 case 1:
-                    sorter.InterchangeSortAscending();
+                    if (algorithmChoice == 1)
+                        sorter.InterchangeSortAscending();
+                    else if (algorithmChoice == 2)
+                        sorter.BullbleSortAscending();
+                    else if (algorithmChoice == 3)
+                        sorter.ShakerSortAscending();
+                    else
+                    {
+                        Console.WriteLine("Lựa chọn không hợp lệ!");
+                        return;
+                    }
                     break;
                 case 2:
-                    sorter.InterchangeSortDescending();
+                    if (algorithmChoice == 1)
+                        sorter.InterchangeSortDescending();
+                    else if (algorithmChoice == 2)
+                        sorter.BullbleSortDescending();
+                    else if (algorithmChoice == 3)
+                        sorter.ShakerSortDescending();
+                    else
+                    {
+                        Console.WriteLine("Lựa chọn không hợp lệ!");
+                        return;
+                    }
                     break;
                 default:
                     Console.WriteLine("Lựa chọn không hợp lệ!");
