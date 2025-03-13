@@ -68,6 +68,8 @@ namespace Sort
             Console.WriteLine("1. Interchange Sort");
             Console.WriteLine("2. Bubble Sort");
             Console.WriteLine("3. Shaker Sort");
+            Console.WriteLine("4. Selection Sort");
+            Console.WriteLine("5. Quick Sort");
             Console.Write("Lựa chọn: ");
 
             if (!int.TryParse(Console.ReadLine(), out int algorithmChoice))
@@ -86,6 +88,10 @@ namespace Sort
                         sorter.BullbleSortAscending();
                     else if (algorithmChoice == 3)
                         sorter.ShakerSortAscending();
+                    else if (algorithmChoice == 4)
+                        sorter.SelectionSortAscending();
+                    else if (algorithmChoice == 5)
+                        sorter.QuickSortAscending(0, manager.Students.Count - 1);
                     else
                     {
                         Console.WriteLine("Lựa chọn không hợp lệ!");
@@ -99,6 +105,10 @@ namespace Sort
                         sorter.BullbleSortDescending();
                     else if (algorithmChoice == 3)
                         sorter.ShakerSortDescending();
+                    else if (algorithmChoice == 4)
+                        sorter.SelectionSortDescending();
+                    else if (algorithmChoice == 5)
+                        sorter.QuickSortDescending(0, manager.Students.Count - 1);
                     else
                     {
                         Console.WriteLine("Lựa chọn không hợp lệ!");
