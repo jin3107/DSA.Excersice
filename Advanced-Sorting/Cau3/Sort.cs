@@ -112,84 +112,84 @@ namespace Cau3
             }
         }
 
-        // 3.7 Sắp xếp nhanh, trong đó phân hoạch dùng pp đệ quy
-        private int partitionStep = 0;
-        public void QuickSortRecursive(int[] arr, int n)
-        {
-            partitionStep = 0;
-            QuickSortRecursiveHelper(arr, 0, n - 1);
-        }
+        //// 3.7 Sắp xếp nhanh, trong đó phân hoạch dùng pp đệ quy
+        //private int partitionStep = 0;
+        //public void QuickSortRecursive(int[] arr, int n)
+        //{
+        //    partitionStep = 0;
+        //    QuickSortRecursiveHelper(arr, 0, n - 1);
+        //}
 
-        private void QuickSortRecursiveHelper(int[] arr, int low, int high)
-        {
-            if (low < high)
-            {
-                int pivotIndex = PartitionRecursive(arr, low, high);
-                Console.WriteLine($"Sau khi phân hoạch lần {partitionStep}: " + string.Join(", ", arr));
-                QuickSortRecursiveHelper(arr, low, pivotIndex - 1);
-                QuickSortRecursiveHelper(arr, pivotIndex + 1, high);
-            }
-        }
+        //private void QuickSortRecursiveHelper(int[] arr, int low, int high)
+        //{
+        //    if (low < high)
+        //    {
+        //        int pivotIndex = PartitionRecursive(arr, low, high);
+        //        Console.WriteLine($"Sau khi phân hoạch lần {partitionStep}: " + string.Join(", ", arr));
+        //        QuickSortRecursiveHelper(arr, low, pivotIndex - 1);
+        //        QuickSortRecursiveHelper(arr, pivotIndex + 1, high);
+        //    }
+        //}
 
-        private int PartitionRecursive(int[] arr, int low, int high)
-        {
-            partitionStep++;
-            int pivot = arr[high];
-            int i = (low - 1);
-            for (int j = low; j < high; j++)
-            {
-                if (arr[j] <= pivot)
-                {
-                    i++;
-                    Swap(ref arr[i], ref arr[j]);
-                }
-            }
-            Swap(ref arr[i + 1], ref arr[high]);
-            return i + 1;
-        }
+        //private int PartitionRecursive(int[] arr, int low, int high)
+        //{
+        //    partitionStep++;
+        //    int pivot = arr[high];
+        //    int i = (low - 1);
+        //    for (int j = low; j < high; j++)
+        //    {
+        //        if (arr[j] <= pivot)
+        //        {
+        //            i++;
+        //            Swap(ref arr[i], ref arr[j]);
+        //        }
+        //    }
+        //    Swap(ref arr[i + 1], ref arr[high]);
+        //    return i + 1;
+        //}
 
-        // 3.8 Sắp xếp nhanh, trong đó phân hoạch dùng pp lặp
-        public void QuickSortIterative(int[] arr, int n)
-        {
-            int[] stack = new int[n];
-            int top = -1;
-            int partitionStep = 0;
-            stack[++top] = 0;
-            stack[++top] = n - 1;
-            while (top >= 0)
-            {
-                int high = stack[top--];
-                int low = stack[top--];
-                int pivotIndex = PartitionIterative(arr, low, high);
-                partitionStep++;
-                Console.WriteLine($"Sau khi phân hoạch lần {partitionStep}: " + string.Join(", ", arr));
-                if (pivotIndex - 1 > low)
-                {
-                    stack[++top] = low;
-                    stack[++top] = pivotIndex - 1;
-                }
-                if (pivotIndex + 1 < high)
-                {
-                    stack[++top] = pivotIndex + 1;
-                    stack[++top] = high;
-                }
-            }
-        }
+        //// 3.8 Sắp xếp nhanh, trong đó phân hoạch dùng pp lặp
+        //public void QuickSortIterative(int[] arr, int n)
+        //{
+        //    int[] stack = new int[n];
+        //    int top = -1;
+        //    int partitionStep = 0;
+        //    stack[++top] = 0;
+        //    stack[++top] = n - 1;
+        //    while (top >= 0)
+        //    {
+        //        int high = stack[top--];
+        //        int low = stack[top--];
+        //        int pivotIndex = PartitionIterative(arr, low, high);
+        //        partitionStep++;
+        //        Console.WriteLine($"Sau khi phân hoạch lần {partitionStep}: " + string.Join(", ", arr));
+        //        if (pivotIndex - 1 > low)
+        //        {
+        //            stack[++top] = low;
+        //            stack[++top] = pivotIndex - 1;
+        //        }
+        //        if (pivotIndex + 1 < high)
+        //        {
+        //            stack[++top] = pivotIndex + 1;
+        //            stack[++top] = high;
+        //        }
+        //    }
+        //}
 
-        private int PartitionIterative(int[] arr, int low, int high)
-        {
-            int pivot = arr[high];
-            int i = (low - 1);
-            for (int j = low; j < high; j++)
-            {
-                if (arr[j] <= pivot)
-                {
-                    i++;
-                    Swap(ref arr[i], ref arr[j]);
-                }
-            }
-            Swap(ref arr[i + 1], ref arr[high]);
-            return i + 1;
-        }
+        //private int PartitionIterative(int[] arr, int low, int high)
+        //{
+        //    int pivot = arr[high];
+        //    int i = (low - 1);
+        //    for (int j = low; j < high; j++)
+        //    {
+        //        if (arr[j] <= pivot)
+        //        {
+        //            i++;
+        //            Swap(ref arr[i], ref arr[j]);
+        //        }
+        //    }
+        //    Swap(ref arr[i + 1], ref arr[high]);
+        //    return i + 1;
+        //}
     }
 }
