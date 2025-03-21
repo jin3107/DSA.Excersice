@@ -16,6 +16,8 @@
 
 [Bài tập bổ sung 1](#bs1)
 
+[Bài tập bổ sung 2](#bs2)
+
 <a name="1"></a>
 ### Bài 1 - trang 8
 Viết chương trình "Displaynums", nhập n phân tử vào dãy số (n = 10.000; 100.000). Mỗi phần tử là số nguyên phát sinh ngẫu nhiên. Đo thời gian chạy của việc hiển thị dãy số, dùng Stopwatch của thư viện .NET
@@ -58,3 +60,7 @@ Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bìn
     + Theo điềm trung bình (Dùng thuật toán Quick Sort).
 - c) Đo thời gian chạy của các thuật toán ở câu b).
 - d) Đếm số lượng sinh viên theo tường ngành học.
+
+<a name="bs2"></a>
+### Bài tập bổ sung 2
+Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quick Sort để sắp xếp Điểm trung bình của sinh viên trong danh sách sinh viên

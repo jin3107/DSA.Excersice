@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sort
+namespace BT_BS2
 {
     public class Student
     {
