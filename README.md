@@ -12,6 +12,8 @@
 
 [3. Bài 3 - trang 9](#3)
 
+[4. Bài 4 - trang 9](#4)
+
 <a name="1"></a>
 ### Bài 1 - trang 8
 Viết chương trình "Displaynums", nhập n phân tử vào dãy số (n = 10.000; 100.000). Mỗi phần tử là số nguyên phát sinh ngẫu nhiên. Đo thời gian chạy của việc hiển thị dãy số, dùng Stopwatch của thư viện .NET
@@ -38,3 +40,6 @@ Viết chương trình hoán vị 2 đối tượng dùng kiểu Generic T:
 - Xây dựng struc NhanVien gồm HoTen, MaNhanVien, HeSoLuong. Dùng phương thức trên hoán vị cặp đối tượng NhanVien.
 - Xây dựng class SinhVien gồm HoTen, MaSinhVien, DiemTrungBinh. Dùng phương thức trên hoán vị cặp đối tượng SinhVien.
 
+<a name="4"></a>
+### Bài 4 - trang 9 
+Giải bài 2 - trang 8 nhưng dùng cấu trúc dữ liệu Generic List để lưu danh sách sinh viên. So sánh thời gian chạy khi dùng Array đối với mỗi trường hợp: số lượng sinh viên nhỏ, số lượng sinh viên lớn.

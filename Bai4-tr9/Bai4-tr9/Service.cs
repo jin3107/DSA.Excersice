@@ -1,13 +1,15 @@
 ﻿using OfficeOpenXml;
-using StudentManagement_Generic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
-namespace StudentManagement
+namespace Bai4_tr9
 {
     public class Service
     {
@@ -37,9 +39,9 @@ namespace StudentManagement
                 while (true)
                 {
                     Console.Write($"Nhập mã sinh viên thứ {i + 1}: ");
-                    int maSinhVien = int.Parse(Console.ReadLine()!);
+                    int maSinhVien = int.Parse(Console.ReadLine());
                     Console.Write($"Nhập điểm sinh viên thứ {i + 1} (M1 M2 M3): ");
-                    string[] nhapDiem = Console.ReadLine()!.Split();
+                    string[] nhapDiem = Console.ReadLine().Split();
                     if (nhapDiem.Length != 3 || !double.TryParse(nhapDiem[0], out double m1)
                         || !double.TryParse(nhapDiem[1], out double m2) || !double.TryParse(nhapDiem[2], out double m3))
                     {
@@ -204,7 +206,7 @@ namespace StudentManagement
         {
             double sum = 0;
             foreach (var student in Students)
-            { 
+            {
                 if (student != null)
                     sum += student.Average;
             }
