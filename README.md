@@ -33,8 +33,8 @@ Với danh sách có n sinh viên thì mỗi cách tính thực hiện bao nhiê
 <a name="3"></a>
 ### Bài 3 - trang 9 
 Viết chương trình hoán vị 2 đối tượng dùng kiểu Generic T:
-    + Viết phương thức hoán vị 2 đối tượng kiểu Generic T.
-    + Dùng phương thức trên hoán vị từng cặp đối tượng có kiểu dữ liệu sau: int, double, string.
-    + Xây dựng struc NhanVien gồm HoTen, MaNhanVien, HeSoLuong. Dùng phương thức trên hoán vị cặp đối tượng NhanVien.
-    + Xây dựng class SinhVien gồm HoTen, MaSinhVien, DiemTrungBinh. Dùng phương thức trên hoán vị cặp đối tượng SinhVien.
+- Viết phương thức hoán vị 2 đối tượng kiểu Generic T.
+- Dùng phương thức trên hoán vị từng cặp đối tượng có kiểu dữ liệu sau: int, double, string.
+- Xây dựng struc NhanVien gồm HoTen, MaNhanVien, HeSoLuong. Dùng phương thức trên hoán vị cặp đối tượng NhanVien.
+- Xây dựng class SinhVien gồm HoTen, MaSinhVien, DiemTrungBinh. Dùng phương thức trên hoán vị cặp đối tượng SinhVien.
 
