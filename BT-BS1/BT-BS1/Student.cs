@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sort_Student
+namespace BT_BS1
 {
     public class Student
     {
@@ -24,16 +24,16 @@ namespace Sort_Student
         public void Nhap()
         {
             Console.Write("Nhập mã sinh viên: ");
-            MaSinhVien = Console.ReadLine()!;
+            MaSinhVien = Console.ReadLine();
 
             Console.Write("Nhập họ tên: ");
-            HoTen = Console.ReadLine()!;
+            HoTen = Console.ReadLine();
 
             Console.Write("Nhập điểm trung bình: ");
-            DiemTrungBinh = double.Parse(Console.ReadLine()!);
+            DiemTrungBinh = double.Parse(Console.ReadLine());
 
             Console.Write("Nhập ngành học: ");
-            NganhHoc = Console.ReadLine()!;
+            NganhHoc = Console.ReadLine();
         }
 
         public void Xuat()

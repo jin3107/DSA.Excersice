@@ -14,6 +14,8 @@
 
 [4. Bài 4 - trang 9](#4)
 
+[Bài tập bổ sung 1](#bs1)
+
 <a name="1"></a>
 ### Bài 1 - trang 8
 Viết chương trình "Displaynums", nhập n phân tử vào dãy số (n = 10.000; 100.000). Mỗi phần tử là số nguyên phát sinh ngẫu nhiên. Đo thời gian chạy của việc hiển thị dãy số, dùng Stopwatch của thư viện .NET
@@ -43,3 +45,16 @@ Viết chương trình hoán vị 2 đối tượng dùng kiểu Generic T:
 <a name="4"></a>
 ### Bài 4 - trang 9 
 Giải bài 2 - trang 8 nhưng dùng cấu trúc dữ liệu Generic List để lưu danh sách sinh viên. So sánh thời gian chạy khi dùng Array đối với mỗi trường hợp: số lượng sinh viên nhỏ, số lượng sinh viên lớn.
+
+
+
+<a name="bs1"></a>
+### Bài tập bổ sung 1
+Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bình, Ngành học. Yêu cầu viết các phương thức sau:
+a) Nhập danh sách sinh viên từ bàn phím và in ra màn hình
+b) Sắp xếp danh sách sinh viên tăng dần theo một trong các tiêu chí sau:
+- Theo Mã sinh viên (Dùng thuật toán Bubble Sort).
+- Theo Họ tên (Dùng thuật toán Selection Sort).
+- Theo điềm trung bình (Dùng thuật toán Quick Sort).
+c) Đo thời gian chạy của các thuật toán ở câu b).
+d) Đếm số lượng sinh viên theo tường ngành học.

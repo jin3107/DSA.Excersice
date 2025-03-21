@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Sort_Student
+namespace BT_BS1
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -26,7 +28,7 @@ namespace Sort_Student
                 Console.WriteLine("5. Xuất danh sách sinh viên");
                 Console.WriteLine("0. Thoát");
                 Console.Write("Chọn chức năng: ");
-                string choice = Console.ReadLine()!;
+                string choice = Console.ReadLine();
 
                 Console.Clear();
                 switch (choice)
