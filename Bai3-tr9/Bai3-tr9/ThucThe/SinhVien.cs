@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwapGeneric.Entities
+namespace Bai3_tr9.ThucThe
 {
     public class SinhVien
     {
@@ -23,6 +23,5 @@ namespace SwapGeneric.Entities
         {
             return $"Mã sinh viên: {MaSinhVien}, Họ tên: {HoTen}, DTB: {DiemTrungBinh}";
         }
-
     }
 }

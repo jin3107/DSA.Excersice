@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwapGeneric.Handlers
+namespace Bai3_tr9.ThaoTac
 {
-    public static class Input
+    public static class Nhap
     {
         public static T GetInput<T>(string message) where T : IConvertible
         {
             while (true)
             {
                 Console.Write(message);
-                string? input = Console.ReadLine();
+                string input = Console.ReadLine();
 
                 try
                 {
-                    T value = (T)Convert.ChangeType(input, typeof(T))!;
+                    T value = (T)Convert.ChangeType(input, typeof(T));
                     if (typeof(T) == typeof(int) && Convert.ToInt32(value) < 0)
                     {
                         Console.WriteLine("❌ Lỗi: Giá trị phải là số nguyên dương!");

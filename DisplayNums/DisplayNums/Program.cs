@@ -1,3 +1,0 @@
-﻿using DisplayNums;
-
-App.Run();

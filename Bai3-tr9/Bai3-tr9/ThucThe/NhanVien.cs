@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwapGeneric.Entities
+namespace Bai3_tr9.ThucThe
 {
     public struct NhanVien
     {
