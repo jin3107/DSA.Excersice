@@ -56,5 +56,5 @@ Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bìn
     + Theo Mã sinh viên (Dùng thuật toán Bubble Sort).
     + Theo Họ tên (Dùng thuật toán Selection Sort).
     + Theo điềm trung bình (Dùng thuật toán Quick Sort).
-c) Đo thời gian chạy của các thuật toán ở câu b).
-d) Đếm số lượng sinh viên theo tường ngành học.
+- c) Đo thời gian chạy của các thuật toán ở câu b).
+- d) Đếm số lượng sinh viên theo tường ngành học.
