@@ -51,10 +51,10 @@ Giải bài 2 - trang 8 nhưng dùng cấu trúc dữ liệu Generic List để 
 <a name="bs1"></a>
 ### Bài tập bổ sung 1
 Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bình, Ngành học. Yêu cầu viết các phương thức sau:
-a) Nhập danh sách sinh viên từ bàn phím và in ra màn hình
-b) Sắp xếp danh sách sinh viên tăng dần theo một trong các tiêu chí sau:
-- Theo Mã sinh viên (Dùng thuật toán Bubble Sort).
-- Theo Họ tên (Dùng thuật toán Selection Sort).
-- Theo điềm trung bình (Dùng thuật toán Quick Sort).
+- a) Nhập danh sách sinh viên từ bàn phím và in ra màn hình
+- b) Sắp xếp danh sách sinh viên tăng dần theo một trong các tiêu chí sau:
+    + Theo Mã sinh viên (Dùng thuật toán Bubble Sort).
+    + Theo Họ tên (Dùng thuật toán Selection Sort).
+    + Theo điềm trung bình (Dùng thuật toán Quick Sort).
 c) Đo thời gian chạy của các thuật toán ở câu b).
 d) Đếm số lượng sinh viên theo tường ngành học.
