@@ -7,19 +7,12 @@
 ### Mực lục
 
 [Bài 1 - trang 8](#1-8)
-
 [Bài 2 - trang 8](#2-8)
-
 [Bài 3 - trang 9](#3-9)
-
 [Bài 4 - trang 9](#4-9)
-
 [Bài 1 - trang 24](#1-24)
-
 [Bài 3 - trang 24](#3-24)
-
 [Bài tập bổ sung 1](#bs1)
-
 [Bài tập bổ sung 2](#bs2)
 
 <a name="1-8"></a>
