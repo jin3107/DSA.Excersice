@@ -35,18 +35,18 @@ namespace BT_BS1
                 {
                     case "1":
                         if (CheckEmpty(sorter.students)) break;
-                        MeasureTime("Sắp xếp theo Họ tên", sorter.SelectionSortHoTen);
                         XuatDanhSachSinhVien(sorter.students);
+                        MeasureTime("Sắp xếp theo Họ tên", sorter.SelectionSortHoTen);
                         break;
                     case "2":
                         if (CheckEmpty(sorter.students)) break;
-                        MeasureTime("Sắp xếp theo Mã sinh viên", sorter.BubbleSortMaSV);
                         XuatDanhSachSinhVien(sorter.students);
+                        MeasureTime("Sắp xếp theo Mã sinh viên", sorter.BubbleSortMaSV);
                         break;
                     case "3":
                         if (CheckEmpty(sorter.students)) break;
-                        MeasureTime("Sắp xếp theo Điểm trung bình", () => sorter.QuickSortRecursiveDTB(0, sorter.students.Count - 1));
                         XuatDanhSachSinhVien(sorter.students);
+                        MeasureTime("Sắp xếp theo Điểm trung bình", () => sorter.QuickSortRecursiveDTB(0, sorter.students.Count - 1));
                         break;
                     case "4":
                         if (CheckEmpty(sorter.students)) break;
@@ -111,7 +111,6 @@ namespace BT_BS1
         static void CountStudentsByField(List<Student> students)
         {
             var counts = new Dictionary<string, int>();
-
             foreach (var student in students)
             {
                 if (counts.ContainsKey(student.NganhHoc))

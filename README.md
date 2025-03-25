@@ -14,6 +14,8 @@
 
 [Bài 4 - trang 9](#4-9)
 
+[Bài 1 - trang 24](#1-24)
+
 [Bài 3 - trang 24](#3-24)
 
 [Bài tập bổ sung 1](#bs1)
@@ -49,6 +51,27 @@ Viết chương trình hoán vị 2 đối tượng dùng kiểu Generic T:
 <a name="4-9"></a>
 ### Bài 4 - trang 9 
 Giải bài 2 - trang 8 nhưng dùng cấu trúc dữ liệu Generic List để lưu danh sách sinh viên. So sánh thời gian chạy khi dùng Array đối với mỗi trường hợp: số lượng sinh viên nhỏ, số lượng sinh viên lớn.
+
+
+
+
+
+<a name="1-24"></a>
+### Bài 1 - trang 24
+Viết class Search gồm các phương thức tìm kiếm tuần tự trong mảng, cho biết vị trí và số lượng (nếu yêu cầu tìm tất cả phần tử thỏa điều kiện):
+- Tìm kiếm tuần tự:
+    + 1.1. Tìm phần từ có giá trị X đầu tiên.
+    + 1.2. *Tìm phần tử có giá trị X sau cùng.
+    + 1.3. *Tìm tất cả phần tử có giá trị X.
+    + 1.4. *Tìm phần tử nhỏ nhất đầu tiên. 
+    + 1.5. *Tìm phần tử lớn nhất sau cùng.
+    + 1.6. *Tìm ttấ cả các số nhỏ nhất trong mảng.
+    + 1.7. Tìm phần tử là số lẻ lớn nhất đầu tiên trong mảng.
+    + 1.8. *Tìm phần tử là số chẵn lớn nhất sau cùng trong mảng.
+- Tìm kiếm nhị phân:
+    + 1.9. Tìm kiếm nhị phân phần tử có giá trị X, cài đặt dùng phương thức lặp.
+    + 1.10. Tìm kiếm nhị phân phần tử X, cài đặt dùng phương thức đệ quy.
+
 
 <a name="3-24"></a>
 ### Bài 3 - trang 24 
