@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,7 +26,9 @@ namespace BT_BS1
                 Console.WriteLine("2. Sắp xếp theo mã sinh viên (Bubble Sort)");
                 Console.WriteLine("3. Sắp xếp theo điểm trung bình (Quick Sort)");
                 Console.WriteLine("4. Đếm số lượng sinh viên theo ngành");
-                Console.WriteLine("5. Xuất danh sách sinh viên");
+                Console.WriteLine("5. Tất cả các sinh viên có điểm trung bình cao nhất và thấp nhất");
+                Console.WriteLine("6. Đếm số lượng sinh viên theo ngành (BinSearch có sẵn của C#)");
+                Console.WriteLine("7. Xuất danh sách sinh viên");
                 Console.WriteLine("0. Thoát");
                 Console.Write("Chọn chức năng: ");
                 string choice = Console.ReadLine();
@@ -35,32 +38,50 @@ namespace BT_BS1
                 {
                     case "1":
                         if (CheckEmpty(sorter.students)) break;
-                        XuatDanhSachSinhVien(sorter.students);
                         MeasureTime("Sắp xếp theo Họ tên", sorter.SelectionSortHoTen);
+                        XuatDanhSachSinhVien(sorter.students);
                         break;
+
                     case "2":
                         if (CheckEmpty(sorter.students)) break;
-                        XuatDanhSachSinhVien(sorter.students);
                         MeasureTime("Sắp xếp theo Mã sinh viên", sorter.BubbleSortMaSV);
+                        XuatDanhSachSinhVien(sorter.students);
                         break;
+
                     case "3":
                         if (CheckEmpty(sorter.students)) break;
-                        XuatDanhSachSinhVien(sorter.students);
                         MeasureTime("Sắp xếp theo Điểm trung bình", () => sorter.QuickSortRecursiveDTB(0, sorter.students.Count - 1));
+                        XuatDanhSachSinhVien(sorter.students);
                         break;
+
                     case "4":
                         if (CheckEmpty(sorter.students)) break;
                         CountStudentsByField(sorter.students);
                         break;
+
                     case "5":
+                        if (CheckEmpty(sorter.students)) break;
+                        sorter.BinSearchMaxDTB();
+                        sorter.BinSearchMinDTB();
+                        break;
+
+                    case "6":
+                        if (CheckEmpty(sorter.students)) break;
+                        CountStudentsByField_BinSearchAvailable(sorter.students);
+                        break;
+
+                    case "7":
                         if (CheckEmpty(sorter.students)) break;
                         XuatDanhSachSinhVien(sorter.students);
                         break;
+
                     case "0":
                         return;
+
                     default:
                         Console.WriteLine("❌ Lựa chọn không hợp lệ! Vui lòng nhập lại.");
                         break;
+
                 }
                 Console.Write("\nNhấn phím bất kỳ để tiếp tục...");
                 Console.ReadKey();
@@ -123,6 +144,36 @@ namespace BT_BS1
             foreach (var kvp in counts)
             {
                 Console.WriteLine($"{kvp.Key}: {kvp.Value} sinh viên");
+            }
+        }
+
+        static void CountStudentsByField_BinSearchAvailable(List<Student> students)
+        {
+            students.Sort((a, b) => string.Compare(a.NganhHoc, b.NganhHoc));
+            Console.WriteLine("\n===== SỐ LƯỢNG SINH VIÊN THEO NGÀNH =====");
+            int i = 0;
+            while (i < students.Count)
+            {
+                string currentField = students[i].NganhHoc;
+                int index = students.BinarySearch(students[i], new StudentComparer());
+                if (index < 0) continue;
+                while (index > 0 && students[index - 1].NganhHoc == currentField) index--;
+                int count = 0;
+                while (index < students.Count && students[index].NganhHoc == currentField)
+                {
+                    count++;
+                    index++;
+                }
+                Console.WriteLine($"{currentField}: {count} sinh viên");
+                i = index;
+            }
+        }
+
+        internal class StudentComparer : IComparer<Student>
+        {
+            public int Compare(Student x, Student y)
+            {
+                return string.Compare(x.NganhHoc, y.NganhHoc);
             }
         }
 

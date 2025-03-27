@@ -49,12 +49,10 @@ namespace BT_BS1
             {
                 double pivot = students[left].DiemTrungBinh;
                 int i = left, j = right;
-
                 while (i <= j)
                 {
                     while (students[i].DiemTrungBinh < pivot) i++;
                     while (students[j].DiemTrungBinh > pivot) j--;
-
                     if (i <= j)
                     {
                         (students[i], students[j]) = (students[j], students[i]);
@@ -62,9 +60,48 @@ namespace BT_BS1
                         j--;
                     }
                 }
-
                 QuickSortRecursiveDTB(left, j);
                 QuickSortRecursiveDTB(i, right);
+            }
+        }
+
+        public void BinSearchMaxDTB()
+        {
+            double max = students.Max(s => s.DiemTrungBinh);
+            int left = 0, right = students.Count - 1;
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                if (students[mid].DiemTrungBinh == max)
+                {
+                    Console.WriteLine("Sinh viên có điểm trung bình cao nhất:");
+                    students[mid].Xuat();
+                    return;
+                }
+                else if (students[mid].DiemTrungBinh < max)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+        }
+
+        public void BinSearchMinDTB()
+        {
+            double min = students.Min(s => s.DiemTrungBinh);
+            int left = 0, right = students.Count - 1;
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                if (students[mid].DiemTrungBinh == min)
+                {
+                    Console.WriteLine("Sinh viên có điểm trung bình thấp nhất:");
+                    students[mid].Xuat();
+                    return;
+                }
+                else if (students[mid].DiemTrungBinh < min)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
             }
         }
     }

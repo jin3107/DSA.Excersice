@@ -38,10 +38,11 @@ namespace BT_BS1
 
         public void Xuat()
         {
-            Console.WriteLine($"Mã sinh viên: {MaSinhVien}");
-            Console.WriteLine($"Họ tên: {HoTen}");
-            Console.WriteLine($"Điểm trung bình: {DiemTrungBinh}");
-            Console.WriteLine($"Ngành học: {NganhHoc}\n");
+            Console.WriteLine("+------------+----------------------+---------+------------+");
+            Console.WriteLine("| Mã SV      | Họ tên               | Điểm TB | Ngành học  |");
+            Console.WriteLine("+------------+----------------------+---------+------------+");
+            Console.WriteLine($"| {MaSinhVien,-10} | {HoTen,-20} | {DiemTrungBinh,-7:F2} | {NganhHoc,-10} |");
+            Console.WriteLine("+------------+----------------------+---------+------------+\n");
         }
     }
 }
