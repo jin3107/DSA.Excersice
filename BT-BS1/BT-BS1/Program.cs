@@ -29,6 +29,7 @@ namespace BT_BS1
                 Console.WriteLine("5. Tất cả các sinh viên có điểm trung bình cao nhất và thấp nhất");
                 Console.WriteLine("6. Đếm số lượng sinh viên theo ngành (BinSearch có sẵn của C#)");
                 Console.WriteLine("7. Xuất danh sách sinh viên");
+                Console.WriteLine("8. Tìm tất cả sinh viên có Họ phổ biến nhất trong danh sách");
                 Console.WriteLine("0. Thoát");
                 Console.Write("Chọn chức năng: ");
                 string choice = Console.ReadLine();
@@ -73,6 +74,10 @@ namespace BT_BS1
                     case "7":
                         if (CheckEmpty(sorter.students)) break;
                         XuatDanhSachSinhVien(sorter.students);
+                        break;
+
+                    case "8":
+                        sorter.SearchSurnamePopularity(sorter.students);
                         break;
 
                     case "0":

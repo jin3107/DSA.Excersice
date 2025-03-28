@@ -101,6 +101,9 @@ Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bìn
     + Theo điềm trung bình (Dùng thuật toán Quick Sort).
 - c) Đo thời gian chạy của các thuật toán ở câu b).
 - d) Đếm số lượng sinh viên theo tường ngành học.
+- e) Cho biết điểm trung bình cao nhất và thấp nhất. In ra tất cả sinh viên có điểm trung bình cao nhất và thất nhất (Dùng BinarySearch).
+- f) Thực hiên lại câu d) nhưng dùng BinarySearch có sẵn của C#.
+- g) Tìm tất cả sinh viên có họ phổ biến nhất trong danh sách.
 
 <a name="bs2"></a>
 ### Bài tập bổ sung 2

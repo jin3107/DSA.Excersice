@@ -104,5 +104,44 @@ namespace BT_BS1
                     right = mid - 1;
             }
         }
+
+        public void SearchSurnamePopularity(List<Student> students)
+        {
+            if (students == null || students.Count == 0)
+            {
+                Console.WriteLine("Danh sách sinh viên rỗng");
+                return;
+            }
+
+            Dictionary<string, int> surnameCount = new Dictionary<string, int>();
+            foreach (var student in students)
+            {
+                string surname = GetSurname(student.HoTen);
+                if (surnameCount.ContainsKey(surname))
+                    surnameCount[surname]++;
+                else
+                    surnameCount[surname] = 1;
+            }
+
+            int maxCount = surnameCount.Values.Max();
+            List<string> mostSurnames = surnameCount.Where(h => h.Value == maxCount).Select(h => h.Key).ToList();
+
+            Console.WriteLine("\n===== HỌ PHỔ BIẾN NHẤT =====");
+            foreach (var surname in mostSurnames)
+            {
+                Console.WriteLine($"Họ '{surname}' xuất hiện {maxCount} lần.");
+
+                var studentsWithSurname = students.Where(s => GetSurname(s.HoTen) == surname);
+                foreach (var s in studentsWithSurname)
+                {
+                    Console.WriteLine($"- {s.HoTen} (Ngành: {s.NganhHoc})");
+                }
+            }
+        }
+
+        private string GetSurname(string fullname)
+        {
+            return fullname.Split(' ')[0];
+        }
     }
 }
