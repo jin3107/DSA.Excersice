@@ -22,6 +22,10 @@
 
 [Bài tập bổ sung 2](#bs2)
 
+[Bài tập bổ sung 3](#bs3)
+
+[Bài tập bổ sung 4](#bs4)
+
 <a name="1-8"></a>
 ### Bài 1 - trang 8
 Viết chương trình "Displaynums", nhập n phân tử vào dãy số (n = 10.000; 100.000). Mỗi phần tử là số nguyên phát sinh ngẫu nhiên. Đo thời gian chạy của việc hiển thị dãy số, dùng Stopwatch của thư viện .NET
@@ -65,7 +69,7 @@ Viết class Search gồm các phương thức tìm kiếm tuần tự trong m�
     + 1.3. *Tìm tất cả phần tử có giá trị X.
     + 1.4. *Tìm phần tử nhỏ nhất đầu tiên. 
     + 1.5. *Tìm phần tử lớn nhất sau cùng.
-    + 1.6. *Tìm ttấ cả các số nhỏ nhất trong mảng.
+    + 1.6. *Tìm tất cả các số nhỏ nhất trong mảng.
     + 1.7. Tìm phần tử là số lẻ lớn nhất đầu tiên trong mảng.
     + 1.8. *Tìm phần tử là số chẵn lớn nhất sau cùng trong mảng.
 - Tìm kiếm nhị phân:
@@ -108,3 +112,18 @@ Cho danh sách n sinh viên gồm: Mã sinh viên, Họ tên, Điểm trung bìn
 <a name="bs2"></a>
 ### Bài tập bổ sung 2
 Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quick Sort để sắp xếp Điểm trung bình của sinh viên trong danh sách sinh viên.
+
+<a name="bs3"></a>
+### Bài tập bổ sung 3
+- Cho mảng A gồm n số nguyên dương { 45, 23, 78, 67, 12, 88, 34, 56, 92, 34 }
+- a) Kiểm tra dãy có tăng dần hay không? Nếu không hãy sắp xếp tăng dần theo HeapSort.
+- b) Chèn phần tử x vào vị trí k của dãy tăng dần.
+
+<a name="bs4"></a>
+### Bài tập bổ sung 4
+- Danh sách liên kết đơn (LinkedList):
+    + In mảng danh sách liên kết
+    + 1. Thêm X vào trước V.
+    + 2. Thêm X vào sau V.
+    + 3. Thêm X vào đầu danh sách liên kết.
+    + 4. Thêm X vào cuối danh sách liên kết.

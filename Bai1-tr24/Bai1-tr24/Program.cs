@@ -13,25 +13,25 @@ namespace Bai1_tr24
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
 
-            int[] mang = new int[0];
+            int[] mang = { 16, 82, 6, 76, 4, 6, 76, 4, 82, 2 };
+            //int[] mang = { 9, 28, 2, 2, 16, 17, 28, 2, 17, 10 };
             Search search = new Search();
 
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("\n\t\t===== MENU =====");
-                Console.WriteLine("1. Nhập mảng");
-                Console.WriteLine("2. Tìm phần tử có giá trị X đầu tiên");
-                Console.WriteLine("3. Tìm phần tử có giá trị X cuối cùng");
-                Console.WriteLine("4. Tìm tất cả phần tử có giá trị X");
-                Console.WriteLine("5. Tìm phần tử nhỏ nhất đầu tiên");
-                Console.WriteLine("6. Tìm phần tử lớn nhất sau cùng");
-                Console.WriteLine("7. Tìm tất cả các số nhỏ nhất trong mảng");
-                Console.WriteLine("8. Tìm phần tử là số lẻ lớn nhất đầu tiên");
-                Console.WriteLine("9. Tìm kiếm phần tử là số chẵn lớn nhất sau cùng");
-                Console.WriteLine("10. Tìm kiếm nhị phân phần tử có giá trị X (phương pháp lặp)");
-                Console.WriteLine("11. Tìm kiếm nhị phân phần tử có giá trị X (phương pháp đệ quy)");
-                Console.WriteLine("12. Hiển thị mảng");
+                Console.WriteLine("1. Tìm phần tử có giá trị X đầu tiên");
+                Console.WriteLine("2. Tìm phần tử có giá trị X cuối cùng");
+                Console.WriteLine("3. Tìm tất cả phần tử có giá trị X");
+                Console.WriteLine("4. Tìm phần tử nhỏ nhất đầu tiên");
+                Console.WriteLine("5. Tìm phần tử lớn nhất sau cùng");
+                Console.WriteLine("6. Tìm tất cả các số nhỏ nhất trong mảng");
+                Console.WriteLine("7. Tìm phần tử là số lẻ lớn nhất đầu tiên");
+                Console.WriteLine("8. Tìm kiếm phần tử là số chẵn lớn nhất sau cùng");
+                Console.WriteLine("9. Tìm kiếm nhị phân phần tử có giá trị X (phương pháp lặp)");
+                Console.WriteLine("10. Tìm kiếm nhị phân phần tử có giá trị X (phương pháp đệ quy)");
+                Console.WriteLine("11. Hiển thị mảng");
                 Console.WriteLine("0. Thoát");
                 Console.Write("Chọn chức năng: ");
 
@@ -45,18 +45,13 @@ namespace Bai1_tr24
                 switch (choice)
                 {
                     case 1:
-                        mang = NhapMang();
-                        break;
-
-                    // 1.1
-                    case 2:
                         Console.Write("Nhập giá trị X cần tìm: ");
                         if (!int.TryParse(Console.ReadLine(), out int x2))
                         {
                             Console.WriteLine("❌ Giá trị không hợp lệ!");
                             continue;
                         }
-                        int i2 = search.FindFirst(mang, mang.Length, x2);
+                        int i2 = search.FindFirst(mang, x2);
                         if (i2 != -1)
                             Console.WriteLine($"✅ Phần tử có giá trị {x2} đầu tiên ở vị trí {i2}");
                         else
@@ -64,14 +59,14 @@ namespace Bai1_tr24
                         break;
 
                     // 1.2
-                    case 3:
+                    case 2:
                         Console.Write("Nhập giá trị X cần tìm: ");
                         if (!int.TryParse(Console.ReadLine(), out int x3))
                         {
                             Console.WriteLine("❌ Giá trị không hợp lệ!");
                             continue;
                         }
-                        int i3 = search.FindLast(mang, mang.Length, x3);
+                        int i3 = search.FindLast(mang, x3);
                         if (i3 != -1)
                             Console.WriteLine($"✅ Phần tử có giá trị {x3} sau cùng ở vị trí {i3}");
                         else
@@ -79,32 +74,67 @@ namespace Bai1_tr24
                         break;
 
                     // 1.3
-                    case 4:
+                    case 3:
                         Console.Write("Nhập giá trị X cần tìm: ");
                         if (!int.TryParse(Console.ReadLine(), out int x4))
                         {
                             Console.WriteLine("❌ Giá trị không hợp lệ!");
                             continue;
                         }
-                        List<int> i4 = search.FindAll(mang, mang.Length, x4);
-                        if (i4.Count > 0)
-                            Console.WriteLine($"✅ Các phần tử có giá trị {x4} ở vị trí: {string.Join(", ", i4)}");
+                        // List
+                        Console.WriteLine("--- *** List *** ---");
+                        List<int> i4list = search.FindAllList(mang, x4);
+                        if (i4list.Count > 0)
+                            Console.WriteLine($"✅ Các phần tử có giá trị {x4} ở vị trí: {string.Join(", ", i4list)}");
+                        else
+                            Console.WriteLine($"❌ Không tìm thấy phần tử có giá trị {x4}");
+
+                        // Array
+                        Console.WriteLine("\n--- *** Array *** ---");
+                        int i4arr = search.FindAllArray(mang, x4);
+                        if (i4arr > 0)
+                            Console.WriteLine($"✅ Số lần xuất hiện phần tử có giá trị {x4} là: {i4arr}");
                         else
                             Console.WriteLine($"❌ Không tìm thấy phần tử có giá trị {x4}");
                         break;
 
                     // 1.4
-                    case 5:
-                        int i5 = search.FindMinFirst(mang, mang.Length);
-                        if (i5 != -1)
-                            Console.WriteLine($"✅ Phần tử có giá trị nhỏ nhất đầu tiên ở vị trí {i5}");
+                    case 4:
+                        int i5MinFirst = search.FindMinFirst141(mang);
+                        if (i5MinFirst != -1)
+                            Console.WriteLine($"✅ Phần tử có giá trị nhỏ nhất đầu tiên trong mảng ở vị trí {i5MinFirst}");
                         else
                             Console.WriteLine($"❌ Không tìm thấy phần tử nhỏ nhất đầu tiên");
+
+                        int i5MinLast = search.FindMinLast142(mang);
+                        if (i5MinLast != -1)
+                            Console.WriteLine($"✅ Phần tử có giá trị nhỏ nhất sau cùng trong mảng ở vị trí {i5MinLast}");
+                        else
+                            Console.WriteLine($"❌ Không tìm thấy phần tử nhỏ nhất sau cùng");
+
+                        int i5MaxFirst = search.FindMaxFirst143(mang);
+                        if (i5MaxFirst != -1)
+                            Console.WriteLine($"✅ Phần tử có giá trị lớn nhất đầu tiên trong mảng ở vị trí {i5MaxFirst}");
+                        else
+                            Console.WriteLine($"❌ Không tìm thấy phần tử lớn nhất đầu tiên");
+
+                        int i5MaxLast = search.FindMaxLast144(mang);
+                        if (i5MaxLast != -1)
+                            Console.WriteLine($"✅ Phần tử có giá trị lớn nhất sau cùng trong mảng ở vị trí {i5MaxLast}");
+                        else
+                            Console.WriteLine($"❌ Không tìm thấy phần tử lớn nhất sau cùng");
+
+                        int i5MinFirst2 = search.FindMinFirst145(mang);
+                        if (i5MinFirst2 != -1)
+                            Console.WriteLine($"✅ Phần tử có giá trị nhỏ nhất đầu tiên ở vị trí {i5MinFirst2}");
+                        else
+                            Console.WriteLine($"❌ Không tìm thấy phần tử nhỏ nhất đầu tiên");
+
                         break;
 
                     // 1.5
-                    case 6:
-                        int i6 = search.FindMaxLast(mang, mang.Length);
+                    case 5:
+                        int i6 = search.FindMaxLast(mang);
                         if (i6 != -1)
                             Console.WriteLine($"✅ Phần tử có giá trị lớn nhất sau cùng ở vị trí {i6}");
                         else
@@ -112,17 +142,15 @@ namespace Bai1_tr24
                         break;
 
                     // 1.6
-                    case 7:
-                        List<int> i7 = search.FindAllMin(mang, mang.Length);
-                        if (i7.Count > 0)
-                            Console.WriteLine($"✅ Các phần tử nhỏ nhất ở vị trí: {string.Join(", ", i7)}");
-                        else
-                            Console.WriteLine($"❌ Không tìm thấy phần tử nhỏ nhất");
+                    case 6:
+                        search.FindAllMinList(mang);
+                        search.FindAllMinArray(mang);
+                        search.FindAllX(mang, 6);
                         break;
 
                     // 1.7
-                    case 8:
-                        int i8 = search.FindFirstMaxOdd(mang, mang.Length);
+                    case 7:
+                        int i8 = search.FindFirstMaxOdd(mang);
                         if (i8 != -1)
                             Console.WriteLine($"✅ Phần tử là số lẻ lớn nhất đầu tiên ở vị trí: {string.Join(", ", i8)}");
                         else
@@ -130,8 +158,8 @@ namespace Bai1_tr24
                         break;
 
                     // 1.8
-                    case 9:
-                        int i9 = search.FindLastMaxEven(mang, mang.Length);
+                    case 8:
+                        int i9 = search.FindLastMaxEven(mang);
                         if (i9 != -1)
                             Console.WriteLine($"✅ Phần tử là số chẵn lớn nhất sau cùng ở vị trí: {string.Join(", ", i9)}");
                         else
@@ -139,37 +167,34 @@ namespace Bai1_tr24
                         break;
 
                     // 1.9
-                    case 10:
+                    case 9:
                         Console.Write("Nhập giá trị X cần tìm: ");
                         if (!int.TryParse(Console.ReadLine(), out int x10))
                         {
                             Console.WriteLine("❌ Giá trị không hợp lệ!");
                             continue;
                         }
-                        int i10 = search.BinarySearchInterative(mang, mang.Length, x10);
-                        if (i10 != -1)
-                            Console.WriteLine($"✅ Phần tử có giá trị {x10} ở vị trí {i10}");
-                        else
-                            Console.WriteLine($"❌ Không tìm thấy phần tử có giá trị {x10}");
+                        
+                        Array.Sort(mang);
+                        Console.WriteLine("Mảng sau khi sắp xếp: ");
+                        XuatMang(mang);
+                        search.BinarySearchInterativeWrapper(mang, x10);
                         break;
 
                     // 1.10
-                    case 11:
+                    case 10:
                         Console.Write("Nhập giá trị X cần tìm: ");
                         if (!int.TryParse(Console.ReadLine(), out int x11))
                         {
                             Console.WriteLine("❌ Giá trị không hợp lệ!");
                             continue;
                         }
-                        int i11 = search.BinarySearchRecursive(mang, 0, mang.Length - 1, x11);
-                        if (i11 != -1)
-                            Console.WriteLine($"✅ Phần tử có giá trị {x11} ở vị trí {i11}");
-                        else
-                            Console.WriteLine($"❌ Không tìm thấy phần tử có giá trị {x11}");
+                        XuatMang(mang);
+                        search.BinarySearchRecursiveWrapper(mang, x11);
                         break;
 
-                    case 12:
-                        Console.WriteLine("✅ Mảng đã nhập: " + (mang.Length > 0 ? string.Join(", ", mang) : "(Chưa có dữ liệu)"));
+                    case 11:
+                        XuatMang(mang);
                         break;
 
                     case 0:
@@ -205,6 +230,11 @@ namespace Bai1_tr24
                 }
             }
             return arr;
+        }
+
+        public static void XuatMang(int[] arr)
+        {
+            Console.WriteLine("Mảng đã nhập: " + (arr.Length > 0 ? string.Join(", ", arr) : "(Chưa có dữ liệu)"));
         }
     }
 }
