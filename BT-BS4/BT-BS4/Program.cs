@@ -26,8 +26,10 @@ namespace BT_BS4
                 Console.WriteLine("\t--- MENU ---");
                 Console.WriteLine("1. Thêm X vào sau V");
                 Console.WriteLine("2. Thêm X vào trước V");
-                Console.WriteLine("3. Thêm X vào đầu dslk");
-                Console.WriteLine("4. Thêm X vào cuối dslk");
+                Console.WriteLine("3. Thêm X vào đầu trong dslk");
+                Console.WriteLine("4. Thêm X vào cuối trong dslk");
+                Console.WriteLine("5. Thêm X vào giữa trong dslk");
+                Console.WriteLine("6. Thêm X vào trước giá trị chẵn sau cùng trong dslk");
                 Console.WriteLine("P. In danh sách liên kết");
                 Console.WriteLine("0. Thoát");
 
@@ -75,41 +77,61 @@ namespace BT_BS4
                             break;
                         }
                         Console.Write("Nhập giá trị X: ");
-                        if (!int.TryParse(Console.ReadLine(), out int x))
+                        if (!int.TryParse(Console.ReadLine(), out int x2))
                         {
                             Console.WriteLine("Giá trị X không hợp lệ!");
                             break;
                         }
-                        if (list.AddBefore(v2, x) == null)
+                        if (list.AddBefore(v2, x2) == null)
                             Console.WriteLine("Không tìm thấy giá trị V trong danh sách.");
                         else
                         {
-                            Console.WriteLine($"Đã thêm {x} vào trước {v2}.");
+                            Console.WriteLine($"Đã thêm {x2} vào trước {v2}.");
                             list.PrintList();
                         }
                         break;
 
                     case "3":
                         Console.Write("Nhập giá trị X: ");
-                        if (!int.TryParse(Console.ReadLine(), out int x2))
-                        {
-                            Console.WriteLine("Giá trị X không hợp lệ!");
-                            break;
-                        }
-                        list.AddFirst(x2);
-                        Console.WriteLine($"Đã thêm {x2} vào đầu danh sách.");
-                        list.PrintList();
-                        break;
-
-                    case "4":
-                        Console.Write("Nhập giá trị X: ");
                         if (!int.TryParse(Console.ReadLine(), out int x3))
                         {
                             Console.WriteLine("Giá trị X không hợp lệ!");
                             break;
                         }
-                        list.AddLast(x3);
-                        Console.WriteLine($"Đã thêm {x3} vào cuối danh sách.");
+                        list.AddFirst(x3);
+                        list.PrintList();
+                        break;
+
+                    case "4":
+                        Console.Write("Nhập giá trị X: ");
+                        if (!int.TryParse(Console.ReadLine(), out int x4))
+                        {
+                            Console.WriteLine("Giá trị X không hợp lệ!");
+                            break;
+                        }
+                        list.AddLast(x4);
+                        list.PrintList();
+                        break;
+
+                    case "5":
+                        Console.Write("Nhập giá trị X: ");
+                        if (!int.TryParse(Console.ReadLine(), out int x5))
+                        {
+                            Console.WriteLine("Giá trị X không hợp lệ!");
+                            break;
+                        }
+                        list.AddCenter(x5);
+                        list.PrintList();
+                        break;
+
+                    case "6":
+                        Console.Write("Nhập giá trị X: ");
+                        if (!int.TryParse(Console.ReadLine(), out int x6))
+                        {
+                            Console.WriteLine("Giá trị X không hợp lệ!");
+                            break;
+                        }
+                        list.AddBeforeEvenLast(x6);
                         list.PrintList();
                         break;
 
