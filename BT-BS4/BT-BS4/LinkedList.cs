@@ -117,10 +117,6 @@ namespace BT_BS4
         }
 
         // 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị chẵn sau cùng.</param>
         public void AddBeforeEvenLast(T X)
         {
             if (X == null) return;
@@ -156,10 +152,6 @@ namespace BT_BS4
         }
 
         // 7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị chẵn sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị chẵn sau cùng.</param>
         public void AddAfterEvenLast(T X)
         {
             if (X == null) return;
@@ -189,10 +181,6 @@ namespace BT_BS4
         }
 
         // 8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị chẵn đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị chẵn đầu tiên.</param>
         public void AddBeforeEvenFirst(T X)
         {
             if (X == null) return;
@@ -225,10 +213,6 @@ namespace BT_BS4
         }
 
         // 9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị chẵn đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị chẵn đầu tiên.</param>
         public void AddAfterEvenFirst(T X)
         {
             if (X == null) return;
@@ -256,10 +240,6 @@ namespace BT_BS4
         }
 
         // 10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị lẻ sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị lẻ sau cùng.</param>
         public void AddBeforeOddLast(T X)
         {
             if (X == null) return;
@@ -295,10 +275,6 @@ namespace BT_BS4
         }
 
         // 11. Thêm giá trị X vào sau giá trị lẻ sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị lẻ sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị lẻ sau cùng.</param>
         public void AddAfterOddLast(T X)
         {
             if (X == null) return;
@@ -328,10 +304,6 @@ namespace BT_BS4
         }
 
         // 12. Thêm giá trị X vào trước giá trị lẻ đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị lẻ đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị lẻ đầu tiên.</param>
         public void AddBeforeOddFirst(T X)
         {
             if (X == null) return;
@@ -364,10 +336,6 @@ namespace BT_BS4
         }
 
         // 13. Thêm giá trị X vào sau giá trị lẻ đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị lẻ đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị lẻ đầu tiên.</param>
         public void AddAfterOddFirst(T X)
         {
             if (X == null) return;
@@ -395,10 +363,6 @@ namespace BT_BS4
         }
 
         // 14. Thêm X vào trước giá trị nhỏ nhất sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị nhỏ nhất sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị nhỏ nhất sau cùng.</param>
         public void AddBeforeMinLast(T X)
         {
             if (X == null) return;
@@ -433,10 +397,6 @@ namespace BT_BS4
         }
 
         // 15. Thêm X vào sau giá trị nhỏ nhất sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị nhỏ nhất sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị nhỏ nhất sau cùng.</param>
         public void AddAfterMinLast(T X)
         {
             if (X == null) return;
@@ -465,10 +425,6 @@ namespace BT_BS4
         }
 
         // 16. Thêm X vào trước giá trị nhỏ nhất đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị nhỏ nhất đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị nhỏ nhất đầu tiên.</param>
         public void AddBeforeMinFirst(T X)
         {
             if (X == null) return;
@@ -501,10 +457,6 @@ namespace BT_BS4
         }
 
         // 17. Thêm X vào sau giá trị nhỏ nhất đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị nhỏ nhất đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị nhỏ nhất đầu tiên.</param>
         public void AddAfterMinFirst(T X)
         {
             if (X == null) return;
@@ -532,10 +484,6 @@ namespace BT_BS4
         }
 
         // 18. Thêm X vào trước giá trị lớn nhất sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị lớn nhất sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị lớn nhất sau cùng.</param>
         public void AddBeforeMaxLast(T X)
         {
             if (X == null) return;
@@ -570,10 +518,6 @@ namespace BT_BS4
         }
 
         // 19. Thêm X vào sau giá trị lớn nhất sau cùng trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị lớn nhất sau cùng.</param>
         public void AddAfterMaxLast(T X)
         {
             if (X == null) return;
@@ -602,10 +546,6 @@ namespace BT_BS4
         }
 
         // 20. Thêm X vào trước giá trị lớn nhất đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách trước giá trị lớn nhất đầu tiên.</param>
         public void AddBeforeMaxFirst(T X)
         {
             if (X == null) return;
@@ -638,10 +578,6 @@ namespace BT_BS4
         }
 
         // 21. Thêm X vào sau giá trị lớn nhất đầu tiên trong dslk
-        /// <summary>
-        /// Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong danh sách liên kết.
-        /// </summary>
-        /// <param name="X">Giá trị cần thêm vào danh sách sau giá trị lớn nhất đầu tiên.</param>
         public void AddAfterMaxFirst(T X)
         {
             if (X == null) return;
@@ -668,9 +604,90 @@ namespace BT_BS4
                 Console.WriteLine("Không có số trong danh sách liên kết.");
         }
 
+        // 22. Xóa phần tử X trong dslk
+        public void Remove(T X)
+        {
+            if ((First == null || (X == null)))
+                return;
+            if (First.Value.Equals(X))
+            {
+                First = First.Next;
+                return;
+            }
 
+            Node<T> curNode = First;
+            while ((curNode.Next != null) && !curNode.Next.Value.Equals(X))
+                curNode = curNode.Next;
+            if (curNode.Next != null)
+                curNode.Next = curNode.Next.Next;
+        }
 
+        // 23. Xóa tất cả các phần tử trong dslk
+        public void RemoveAll()
+        {
+            First = null;
+            Console.WriteLine("Đã xóa tất cả các phần tử trong danh sách.");
+        }
 
+        // 24. Xóa phần tử kề sau phần tử Q trong dslk
+        public void RemoveAfter(T Q)
+        {
+            if (First == null || Q == null)
+                return;
+            Node<T> curNode = First;
+            while (curNode != null && !curNode.Value.Equals(Q))
+                curNode = curNode.Next;
+            if (curNode != null && curNode.Next != null)
+                curNode.Next = curNode.Next.Next;
+        }
+
+        // 25. Xóa phần tử kề trước phần tử Q trong dslk
+        public void RemoveBefore(T Q)
+        {
+            if (First == null || Q == null)
+                return;
+            if (First.Value.Equals(Q))
+            {
+                First = First.Next;
+                return;
+            }
+            Node<T> curNode = First;
+            Node<T> prevNode = null;
+            while (curNode != null && !curNode.Value.Equals(Q))
+            {
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (prevNode != null && prevNode != First)
+                prevNode.Next = curNode;
+        }
+
+        // 26. Xóa phần tử đầu tiên trong dslk
+        public void RemoveFirst()
+        {
+            if (First == null)
+                return;
+            First = First.Next;
+            Console.WriteLine("Đã xóa phần tử đầu tiên trong danh sách.");
+        }
+
+        // 27. Xóa phần tử cuối cùng trong dslk
+        public void RemoveLast()
+        {
+            if (First == null)
+                return;
+            if (First.Next == null)
+            {
+                First = null;
+                Console.WriteLine("Đã xóa phần tử cuối cùng trong danh sách.");
+                return;
+            }
+            Node<T> curNode = First;
+            while (curNode.Next.Next != null)
+                curNode = curNode.Next;
+            curNode.Next = null;
+            Console.WriteLine("Đã xóa phần tử cuối cùng trong danh sách.");
+        }
 
 
 

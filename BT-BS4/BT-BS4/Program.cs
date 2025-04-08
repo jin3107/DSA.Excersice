@@ -45,6 +45,12 @@ namespace BT_BS4
                 Console.WriteLine("19. Thêm X vào sau giá trị lớn nhất sau cùng trong danh sách liên kết");
                 Console.WriteLine("20. Thêm X vào trước giá trị lớn nhất đầu tiên trong danh sách liên kết");
                 Console.WriteLine("21. Thêm X vào sau giá trị lớn nhất đầu tiên trong danh sách liên kết");
+                Console.WriteLine("22. Xóa X trong danh sách liên kết");
+                Console.WriteLine("23. Xóa hết tất cả các phần tử trong danh sách liên kết");
+                Console.WriteLine("24. Xóa phần tử kề sau phần tử Q trong danh sách liên kết");
+                Console.WriteLine("25. Xóa phần tử kề trước phần tử Q trong danh sách liên kết");
+                Console.WriteLine("26. Xóa phần tử đầu tiên trong danh sách liên kết");
+                Console.WriteLine("27. Xóa phần tử cuối cùng trong danh sách liên kết");
                 Console.WriteLine("P. In danh sách liên kết");
                 Console.WriteLine("0. Thoát");
 
@@ -312,6 +318,54 @@ namespace BT_BS4
                             break;
                         }
                         list.AddAfterMaxFirst(x21);
+                        list.PrintList();
+                        break;
+
+                    case "22":
+                        Console.Write("Nhập giá trị X: ");
+                        if (!int.TryParse(Console.ReadLine(), out int x22))
+                        {
+                            Console.WriteLine("Giá trị X không hợp lệ!");
+                            break;
+                        }
+                        list.Remove(x22);
+                        list.PrintList();
+                        break;
+
+                    case "23":
+                        list.RemoveAll();
+                        list.PrintList();
+                        break;
+
+                    case "24":
+                        Console.Write("Nhập giá trị Q: ");
+                        if (!int.TryParse(Console.ReadLine(), out int q1))
+                        {
+                            Console.WriteLine("Giá trị Q không hợp lệ!");
+                            break;
+                        }
+                        list.RemoveAfter(q1);
+                        list.PrintList();
+                        break;
+
+                    case "25":
+                        Console.Write("Nhập giá trị Q: ");
+                        if (!int.TryParse(Console.ReadLine(), out int q2))
+                        {
+                            Console.WriteLine("Giá trị Q không hợp lệ!");
+                            break;
+                        }
+                        list.RemoveBefore(q2);
+                        list.PrintList();
+                        break;
+
+                    case "26":
+                        list.RemoveFirst();
+                        list.PrintList();
+                        break;
+
+                    case "27":
+                        list.RemoveLast();
                         list.PrintList();
                         break;
 
