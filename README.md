@@ -129,3 +129,35 @@ Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quic
     + 4. Thêm X vào cuối trong danh sách liên kết.
     + 5. Thêm X vào giữa trong danh sách liên kết.
     + 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách liên kết.
+    + 7. Thêm X vào sau giá trị chẵn sau cùng trong danh sách liên kết.
+    + 8. Thêm X vào trước giá trị chẵn đầu tiên trong danh sách liên kết.
+    + 9. Thêm X vào sau giá trị chẵn đầu tiên trong danh sách liên kết.
+    + 10. Thêm X vào trước giá trị lẻ sau cùng trong danh sách liên kết.
+    + 11. Thêm X vào sau giá trị lẻ sau cùng trong danh sách liên kết.
+    + 12. Thêm X vào trước giá trị lẻ đầu tiên trong danh sách liên kết.
+    + 13. Thêm X vào sau giá trị lẻ đầu tiên trong danh sách liên kết.
+    + 14. Thêm X vào trước giá trị nhỏ nhất sau cùng trong danh sách liên kết.
+    + 15. Thêm X vào sau giá trị nhỏ nhất sau cùng trong danh sách liên kết.
+    + 16. Thêm X vào trước giá trị nhỏ nhất đầu tiên trong danh sách liên kết.
+    + 17. Thêm X vào sau giá trị nhỏ nhất đầu tiên trong danh sách liên kết.
+    + 18. Thêm X vào trước giá trị lớn nhất sau cùng trong danh sách liên kết.
+    + 19. Thêm X vào sau giá trị lớn nhất sau cùng trong danh sách liên kết.
+    + 20. Thêm X vào trước giá trị lớn nhất đầu tiên trong danh sách liên kết.
+    + 21. Thêm X vào sau giá trị lớn nhất đầu tiên trong danh sách liên kết.
+    + 22. Xóa X trong danh sách liên kết.
+    + 23. Xóa hết tất cả các phần tử trong danh sách liên kết.
+    + 24. Xóa phần tử kề sau phần tử Q trong danh sách liên kết.
+    + 25. Xóa phần tử kề trước phần tử Q trong danh sách liên kết.
+    + 26. Xóa phần tử đầu tiên trong danh sách liên kết.
+    + 27. Xóa phần tử cuối cùng trong danh sách liên kết.
+    + 28. Xóa phần tử ỡ giữa trong danh sách liên kết.
+    + 29. Xóa phần tử chẵn đầu tiên trong danh sách liên kết.
+    + 30. Xóa phần tử chẵn cuồi cùng trong danh sách liên kết.
+    + 31. Xóa phần tử lẻ đầu tiên trong danh sách liên kết.
+    + 32. Xóa phần tử lẻ cuồi cùng trong danh sách liên kết.
+    + 33. Xóa phần tử nhỏ nhất trong danh sách liên kết.
+    + 34. Xóa phần tử nhỏ nhất đầu tiên trong danh sách liên kết.
+    + 35. Xóa phần tử nhỏ nhất sau cùng trong danh sách liên kết.
+    + 36. Xóa phần tử lớn nhất trong danh sách liên kết.
+    + 37. Xóa phần tử lớn nhất đầu tiên trong danh sách liên kết.
+    + 38. Xóa phần tử lớn nhất sau cùng trong danh sách liên kết.
