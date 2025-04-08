@@ -23,7 +23,7 @@ namespace BT_BS4
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\t--- MENU ---");
+                Console.WriteLine("\t\t--- *** MENU *** ---");
                 Console.WriteLine("1. Thêm X vào sau V");
                 Console.WriteLine("2. Thêm X vào trước V");
                 Console.WriteLine("3. Thêm X vào đầu trong danh sách liên kết");
@@ -45,12 +45,25 @@ namespace BT_BS4
                 Console.WriteLine("19. Thêm X vào sau giá trị lớn nhất sau cùng trong danh sách liên kết");
                 Console.WriteLine("20. Thêm X vào trước giá trị lớn nhất đầu tiên trong danh sách liên kết");
                 Console.WriteLine("21. Thêm X vào sau giá trị lớn nhất đầu tiên trong danh sách liên kết");
+                Console.WriteLine("-------------------------------------------------------------------------");
                 Console.WriteLine("22. Xóa X trong danh sách liên kết");
                 Console.WriteLine("23. Xóa hết tất cả các phần tử trong danh sách liên kết");
                 Console.WriteLine("24. Xóa phần tử kề sau phần tử Q trong danh sách liên kết");
                 Console.WriteLine("25. Xóa phần tử kề trước phần tử Q trong danh sách liên kết");
                 Console.WriteLine("26. Xóa phần tử đầu tiên trong danh sách liên kết");
                 Console.WriteLine("27. Xóa phần tử cuối cùng trong danh sách liên kết");
+                Console.WriteLine("28. Xóa phần tử ỡ giữa trong danh sách liên kết");
+                Console.WriteLine("29. Xóa phần tử chẵn đầu tiên trong danh sách liên kết");
+                Console.WriteLine("30. Xóa phần tử chẵn cuồi cùng trong danh sách liên kết");
+                Console.WriteLine("31. Xóa phần tử lẻ đầu tiên trong danh sách liên kết");
+                Console.WriteLine("32. Xóa phần tử lẻ cuồi cùng trong danh sách liên kết");
+                Console.WriteLine("33. Xóa phần tử nhỏ nhất trong danh sách liên kết");
+                Console.WriteLine("34. Xóa phần tử nhỏ nhất đầu tiên trong danh sách liên kết");
+                Console.WriteLine("35. Xóa phần tử nhỏ nhất sau cùng trong danh sách liên kết");
+                Console.WriteLine("36. Xóa phần tử lớn nhất trong danh sách liên kết");
+                Console.WriteLine("37. Xóa phần tử lớn nhất đầu tiên trong danh sách liên kết");
+                Console.WriteLine("38. Xóa phần tử lớn nhất sau cùng trong danh sách liên kết");
+                Console.WriteLine("-------------------------------------------------------------------------");
                 Console.WriteLine("P. In danh sách liên kết");
                 Console.WriteLine("0. Thoát");
 
@@ -366,6 +379,61 @@ namespace BT_BS4
 
                     case "27":
                         list.RemoveLast();
+                        list.PrintList();
+                        break;
+
+                    case "28":
+                        list.RemoveCenter();
+                        list.PrintList();
+                        break;
+
+                    case "29":
+                        list.RemoveEvenFirst();
+                        list.PrintList();
+                        break;
+
+                    case "30":
+                        list.RemoveEvenLast();
+                        list.PrintList();
+                        break;
+
+                    case "31":
+                        list.RemoveOddFirst();
+                        list.PrintList();
+                        break;
+
+                    case "32":
+                        list.RemoveOddLast();
+                        list.PrintList();
+                        break;
+
+                    case "33":
+                        list.RemoveMin();
+                        list.PrintList();
+                        break;
+
+                    case "34":
+                        list.RemoveMinFirst();
+                        list.PrintList();
+                        break;
+
+                    case "35":
+                        list.RemoveMinLast();
+                        list.PrintList();
+                        break;
+
+                    case "36":
+                        list.RemoveMax();
+                        list.PrintList();
+                        break;
+
+                    case "37":
+                        list.RemoveMaxFirst();
+                        list.PrintList();
+                        break;
+
+                    case "38":
+                        list.RemoveMaxLast();
                         list.PrintList();
                         break;
 
