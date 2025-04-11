@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Bai2_tr36
 {
@@ -59,22 +60,32 @@ namespace Bai2_tr36
         // Xem danh sách sinh viên (theo thứ tự nhập và theo thứ tự tăng của mã sinh viên)
         public void XemDanhSachSinhVien()
         {
-            Console.WriteLine("Danh sách sinh viên:");
-            foreach (var sv in dsSinhVien)
+            if (dsSinhVien.Count == 0)
+                Console.WriteLine("Danh sách rỗng");
+            else
             {
-                Console.WriteLine(sv.ToString());
+                Console.WriteLine("Danh sách sinh viên:");
+                foreach (var sv in dsSinhVien)
+                {
+                    Console.WriteLine(sv.ToString());
+                }
             }
         }
 
         // Xem danh sách sinh viên (theo thứ tự tăng của mã sinh viên)
         public void XemDanhSachSinhVienTheoMa()
         {
-            Console.WriteLine("Danh sách sinh viên theo thứ tự tăng dần của mã sinh viên:");
-            var sortedList = new List<SinhVien>(dsSinhVien);
-            sortedList.Sort((x, y) => x.maSinhVien.CompareTo(y.maSinhVien));
-            foreach (var sv in sortedList)
+            if (dsSinhVien.Count == 0)
+                Console.WriteLine("Danh sách rỗng");
+            else
             {
-                Console.WriteLine(sv.ToString());
+                Console.WriteLine("Danh sách sinh viên theo thứ tự tăng dần của mã sinh viên:");
+                var sortedList = new List<SinhVien>(dsSinhVien);
+                sortedList.Sort((x, y) => x.maSinhVien.CompareTo(y.maSinhVien));
+                foreach (var sv in sortedList)
+                {
+                    Console.WriteLine(sv.ToString());
+                }
             }
         }
 
