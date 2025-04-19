@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A2BF258-D66F-42B9-856B-305EFAA13C25}</ProjectGuid>
+    <ProjectGuid>{4602C404-58A5-42BF-8061-92DE61769684}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LinkedList_1</RootNamespace>
-    <AssemblyName>LinkedList_1</AssemblyName>
+    <RootNamespace>nsStack</RootNamespace>
+    <AssemblyName>nsStack</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cstack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

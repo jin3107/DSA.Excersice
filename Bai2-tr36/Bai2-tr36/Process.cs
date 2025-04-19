@@ -57,7 +57,7 @@ namespace Bai2_tr36
             }
         }
 
-        // Xem danh sách sinh viên (theo thứ tự nhập và theo thứ tự tăng của mã sinh viên)
+        // Xem danh sách sinh viên (theo thứ tự nhập)
         public void XemDanhSachSinhVien()
         {
             if (dsSinhVien.Count == 0)
