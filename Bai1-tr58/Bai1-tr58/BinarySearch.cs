@@ -102,7 +102,7 @@ namespace Bai1_tr58
         {
             if (aRoot != null)
             {
-                Process(aRoot.Left);
+                InOrder(aRoot.Left);
                 Process(aRoot);
                 InOrder(aRoot.Right);
             }
@@ -124,8 +124,8 @@ namespace Bai1_tr58
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                //Add_Lap(arr[i]);
-                Add_DeQuy(root, arr[i]);
+                Add_Lap(arr[i]);
+                //Add_DeQuy(root, arr[i]);
             }
         }
 
@@ -135,9 +135,11 @@ namespace Bai1_tr58
             Console.Write("Nhập số lượng nút: ");
             int n = int.Parse(Console.ReadLine());
             int[] arr = new int[n];
-            Console.WriteLine("Nhập các giá trị nút:");
             for (int i = 0; i < n; i++)
+            {
+                Console.Write($"Nhập giá trị khóa thứ {i + 1}: ");
                 arr[i] = int.Parse(Console.ReadLine());
+            }
             CreateTree(arr);
         }
 
@@ -188,6 +190,155 @@ namespace Bai1_tr58
                 return Min;
             else
                 return FindMin(aRoot.Left);
+        }
+
+        // 1.2.13 Tìm nút lớn hơn và gần bằng nhất với nút khóa X
+        public Node FindMinGreaterThanOrEqualX(Node aRoot, int X)
+        {
+            if (aRoot == null)
+                return null;
+            if (aRoot.Key < X)
+                return FindMinGreaterThanOrEqualX(aRoot.Right, X);
+            Node leftNode = FindMinGreaterThanOrEqualX(aRoot.Left, X);
+            return leftNode ?? aRoot;
+        }
+
+        // 1.2.14 Tìm nút nhỏ hơn và gần bằng nhất với nút khóa X
+        public Node FindMaxLessThanOrEquals(Node aRoot, int X)
+        {
+            if (aRoot == null)
+                return null;
+            if (aRoot.Key > X)
+                return FindMaxLessThanOrEquals(aRoot.Left, X);
+            Node rightNode = FindMaxLessThanOrEquals(aRoot.Right, X);
+            return rightNode ?? aRoot;
+        }
+
+        // 1.2.15 Đếm số nút trong cây
+        public int CountNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            return 1 + CountNodes(aRoot.Left) + CountNodes(aRoot.Right);
+        }
+
+        // 1.2.16 Đếm số nút lá
+        public int CountLeafNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            if (aRoot.Right == null && aRoot.Left == null) return -1;
+            return CountLeafNodes(aRoot.Left) + CountLeafNodes(aRoot.Right);
+        }
+
+        // 1.2.17 Đếm số nút lẻ
+        public int CountOddNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = (aRoot.Key % 2 != 0) ? 1 : 0;
+            return CountOddNodes(aRoot.Left) + CountOddNodes(aRoot.Right);
+        }
+
+        // 1.2.18 Đếm số nút dương
+        public int CountPositiveNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = (aRoot.Key > 0) ? 1 : 0;
+            return CountPositiveNodes(aRoot.Left) + CountPositiveNodes(aRoot.Right);
+        }
+
+        // 1.2.19 Đếm số nút có đúng 1 nút con
+        public int CountNodesWithOneChild(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = ((aRoot.Left == null) ^ (aRoot.Right == null)) ? 1 : 0;
+            return count + CountNodesWithOneChild(aRoot.Left) + CountNodesWithOneChild(aRoot.Right);
+        }
+
+        // 1.2.20 Tính giá trị khóa các nút trong cây
+        public int SumAllNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            return aRoot.Key + SumAllNodes(aRoot.Left) + SumAllNodes(aRoot.Right);
+        }
+
+        // 1.2.21 Tính tổng giá trị khóa các nút lá
+        public int SumLeafNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            if (aRoot.Left == null && aRoot.Right == null) return aRoot.Key;
+            return SumLeafNodes(aRoot.Left) + SumLeafNodes(aRoot.Right);
+        }
+
+        // 1.2.22 Xác định mức của một nút trong cây
+        public int GetLevel(Node aRoot, int X, int level = 0)
+        {
+            if (aRoot == null) return -1;
+            if (aRoot.Key == X) return level;
+            int leftLevel = GetLevel(aRoot.Left, X, level + 1);
+            if (leftLevel != -1) return leftLevel;
+            return GetLevel(aRoot.Right, X, level + 1);
+        }
+
+        // 1.2.23 Xác định chiều cao của cây
+        public int Height(Node aRoot)
+        {
+            if (aRoot == null) return -1;
+            return 1 + Math.Max(Height(aRoot.Left), Height(aRoot.Right));
+        }
+
+        // 1.2.24 Xóa nút có giá trị X trong cây dùng phương pháp đệ quy
+        public Node DeleteNode_Recursion(Node aRoot, int X)
+        {
+            if (aRoot == null) return null;
+            if (X < aRoot.Key)
+                aRoot.Left = DeleteNode_Recursion(aRoot.Left, X);
+            else if (X > aRoot.Key)
+                aRoot.Right = DeleteNode_Recursion(aRoot.Right, X);
+            else
+            {
+                if (aRoot.Left == null) return aRoot.Right;
+                if (aRoot.Right == null) return aRoot.Left;
+                aRoot.Key = FindMin(aRoot.Right);
+                aRoot.Right = DeleteNode_Recursion(aRoot.Right, aRoot.Key);
+            }
+            return aRoot;
+        }
+
+        // 1.2.25 Xóa nút có giá trị X trong cây dùng phương pháp lặp
+        public void DeleteNode_Iteration(int X)
+        {
+            Node parent = null, current = root;
+            while (current != null && current.Key != X)
+            {
+                parent = current;
+                current = (X < current.Key) ? current.Left : current.Right;
+            }
+            if (current == null) return;
+
+            // TH1: Không có con hoặc chỉ có 1 con
+            Node child = (current.Left != null) ? current.Left : current.Right;
+            if (parent == null)
+                root = child;
+            else if (parent.Left == current)
+                parent.Left = child;
+            else
+                parent.Right = child;
+
+            // TH2: Có 2 con
+            if (current.Left != null && current.Right != null)
+            {
+                Node minParent = current;
+                Node min = current.Right;
+                while (min.Left != null)
+                {
+                    minParent = min;
+                    min = min.Left;
+                }
+                current.Key = min.Key;
+                if (minParent.Left == min)
+                    minParent.Left = min.Right;
+                else
+                    minParent.Right = min.Right;
+            }
         }
     }
 }
