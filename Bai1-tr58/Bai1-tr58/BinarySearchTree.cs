@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Bai1_tr58
 {
-    public class BinarySearch
+    public class BinarySearchTree
     {
         public Node root;
 
-        public BinarySearch()
+        public BinarySearchTree()
         {
             root = null;
         }
@@ -18,7 +18,7 @@ namespace Bai1_tr58
         // 1.2.1 Hiển thị lên màn hình Khóa giá trị của 1 nút
         public void Display(Node node)
         {
-            if (root != null)
+            if (node != null)
                 Console.Write($"{node.Key.ToString()} ");
             else
                 Console.Write("null ");
@@ -39,13 +39,13 @@ namespace Bai1_tr58
             }
             else if (X < aRoot.Key)
                 return Add_DeQuy(aRoot.Left, X);
-            else if (X > aRoot.Key)
+            else if (X >= aRoot.Key) // cho phép trùng lặp vào cây con phải, ko trùng thì bỏ dấu = 
                 return Add_DeQuy(aRoot.Right, X);
             else
                 return false;
         }
 
-        // 1.2.3 Thêm nút có giá trị khóa X vào cây dùng phương pháp đệ quy
+        // 1.2.3 Thêm nút có giá trị khóa X vào cây dùng phương pháp lặp
         public bool Add_Lap(int X)
         {
             bool result = true;
@@ -80,8 +80,17 @@ namespace Bai1_tr58
                 }
                 else
                 {
-                    result = false;
-                    return result;
+                    // Không thêm giá trị trùng lặp (nếu đề bài ko có giá trị trùng thì xài cái này)
+                    //result = false;
+                    //return result;
+
+                    // Thêm giá trị trùng lặp vào cây con phải (hoặc cây con trái tùy ý)
+                    curNode = curNode.Right;
+                    if (curNode == null)
+                    {
+                        parentNode.Right = newNode;
+                        return result;
+                    }
                 }
             }
         }
@@ -193,17 +202,20 @@ namespace Bai1_tr58
         }
 
         // 1.2.13 Tìm nút lớn hơn và gần bằng nhất với nút khóa X
-        public Node FindMinGreaterThanOrEqualX(Node aRoot, int X)
+        public Node FindMinGreaterThanOrEquals(Node aRoot, int X)
         {
             if (aRoot == null)
                 return null;
             if (aRoot.Key < X)
-                return FindMinGreaterThanOrEqualX(aRoot.Right, X);
-            Node leftNode = FindMinGreaterThanOrEqualX(aRoot.Left, X);
-            return leftNode ?? aRoot;
+                return FindMinGreaterThanOrEquals(aRoot.Right, X);
+            Node leftNode = FindMinGreaterThanOrEquals(aRoot.Left, X);
+            if (leftNode != null)
+                return leftNode;
+            else
+                return aRoot;
         }
 
-        // 1.2.14 Tìm nút nhỏ hơn và gần bằng nhất với nút khóa X
+        // 1.2.14.1 Tìm nút nhỏ hơn và gần bằng nhất với nút khóa X
         public Node FindMaxLessThanOrEquals(Node aRoot, int X)
         {
             if (aRoot == null)
@@ -211,7 +223,41 @@ namespace Bai1_tr58
             if (aRoot.Key > X)
                 return FindMaxLessThanOrEquals(aRoot.Left, X);
             Node rightNode = FindMaxLessThanOrEquals(aRoot.Right, X);
-            return rightNode ?? aRoot;
+            if (rightNode != null)
+                return rightNode;
+            else
+                return aRoot;
+        }
+
+        // 1.2.14.2 Tìm nút là số nguyên tố 
+        public Node FindPrimeNode(Node aRoot)
+        {
+            if (aRoot == null) return null;
+            if (IsPrime(aRoot.Key)) return aRoot;
+            Node leftNode = FindPrimeNode(aRoot.Left);
+            if (leftNode != null) return leftNode;
+            return FindPrimeNode(aRoot.Right);
+        }
+
+        // 1.2.14.3 Tìm kiếm nút cha có giá trị X (FindParent)
+        public Node FindParent(Node aRoot, int X)
+        {
+            if (aRoot == null || (aRoot.Left == null && aRoot.Right == null)) return null;
+            if ((aRoot.Left != null && aRoot.Left.Key == X) || (aRoot.Right != null && aRoot.Right.Key == X))
+                return aRoot;
+            Node leftParent = FindParent(aRoot.Left, X);
+            if (leftParent != null) return leftParent;
+            return FindParent(aRoot.Right, X);
+        }
+
+        // 1.2.14.4 Tìm kiếm nút con có giá trị X (FindChild)
+        public Node FindChild(Node aRoot, int X)
+        {
+            if (aRoot == null) return null;
+            if (aRoot.Key == X) return aRoot;
+            Node leftChild = FindChild(aRoot.Left, X);
+            if (leftChild != null) return leftChild;
+            return FindChild(aRoot.Right, X);
         }
 
         // 1.2.15 Đếm số nút trong cây
@@ -221,36 +267,94 @@ namespace Bai1_tr58
             return 1 + CountNodes(aRoot.Left) + CountNodes(aRoot.Right);
         }
 
-        // 1.2.16 Đếm số nút lá
+        // 1.2.16.1 Đếm số nút lá
         public int CountLeafNodes(Node aRoot)
         {
             if (aRoot == null) return 0;
-            if (aRoot.Right == null && aRoot.Left == null) return -1;
+            if (aRoot.Right == null && aRoot.Left == null) return 1;
             return CountLeafNodes(aRoot.Left) + CountLeafNodes(aRoot.Right);
         }
 
-        // 1.2.17 Đếm số nút lẻ
+        // 1.2.16.2 Đếm số lần xuất hiện của các giá trị khóa trong cây
+        public int CountOccurrences(Node aRoot, int X)
+        {
+            if (aRoot == null) return 0;
+            int count = 0;
+            if (aRoot.Key == X)
+                count = 1;
+            return count + CountOccurrences(aRoot.Left, X) + CountOccurrences(aRoot.Right, X);
+        }
+
+        // 1.2.17.1 Đếm số nút lẻ
         public int CountOddNodes(Node aRoot)
         {
             if (aRoot == null) return 0;
-            int count = (aRoot.Key % 2 != 0) ? 1 : 0;
-            return CountOddNodes(aRoot.Left) + CountOddNodes(aRoot.Right);
+            int count = 0;
+            if (aRoot.Key % 2 != 0)
+                count = 1;
+            return count + CountOddNodes(aRoot.Left) + CountOddNodes(aRoot.Right);
         }
 
-        // 1.2.18 Đếm số nút dương
+        // 1.2.17.2 Đếm số nút chẵn
+        public int CountEvenNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = 0;
+            if (aRoot.Key % 2 == 0)
+                count = 1;
+            return count + CountEvenNodes(aRoot.Left) + CountEvenNodes(aRoot.Right);
+        }
+
+        // 1.2.18.1 Đếm số nút dương
         public int CountPositiveNodes(Node aRoot)
         {
             if (aRoot == null) return 0;
-            int count = (aRoot.Key > 0) ? 1 : 0;
-            return CountPositiveNodes(aRoot.Left) + CountPositiveNodes(aRoot.Right);
+            int count = 0;
+            if (aRoot.Key > 0)
+                count = 1;
+            return count + CountPositiveNodes(aRoot.Left) + CountPositiveNodes(aRoot.Right);
         }
 
-        // 1.2.19 Đếm số nút có đúng 1 nút con
+        // 1.2.18.2 Đếm số nút âm
+        public int CountNegativeNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = 0;
+            if (aRoot.Key < 0)
+                count = 1;
+            return count + CountNegativeNodes(aRoot.Left) + CountNegativeNodes(aRoot.Right);
+        }
+
+        // 1.2.19.1 Đếm số nút có đúng 1 nút con
         public int CountNodesWithOneChild(Node aRoot)
         {
             if (aRoot == null) return 0;
-            int count = ((aRoot.Left == null) ^ (aRoot.Right == null)) ? 1 : 0;
+            int count = 0;
+            if (aRoot.Left == null && aRoot.Right != null)
+                count = 1;
+            else if (aRoot.Left != null && aRoot.Right == null)
+                count = 1;
             return count + CountNodesWithOneChild(aRoot.Left) + CountNodesWithOneChild(aRoot.Right);
+        }
+
+        // 1.2.19.2 Đếm số nút có đúng 2 con
+        public int CountNodesWithTwoChildren(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = 0;
+            if (aRoot.Left != null && aRoot.Right != null)
+                count = 1;
+            return count + CountNodesWithTwoChildren(aRoot.Left) + CountNodesWithTwoChildren(aRoot.Right);
+        }
+
+        // 1.2.19.3 Đếm số nút có đúng 1 con và nút có đúng 2 con
+        public int CountNodesWithOneOrTwoChildren(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int count = 0;
+            if ((aRoot.Left == null && aRoot.Right != null) || (aRoot.Left != null && aRoot.Right == null) || (aRoot.Left != null && aRoot.Right != null))
+                count = 1;
+            return count + CountNodesWithOneOrTwoChildren(aRoot.Left) + CountNodesWithOneOrTwoChildren(aRoot.Right);
         }
 
         // 1.2.20 Tính giá trị khóa các nút trong cây
@@ -260,12 +364,52 @@ namespace Bai1_tr58
             return aRoot.Key + SumAllNodes(aRoot.Left) + SumAllNodes(aRoot.Right);
         }
 
-        // 1.2.21 Tính tổng giá trị khóa các nút lá
+        // 1.2.21.1 Tính tổng giá trị khóa các nút lá
         public int SumLeafNodes(Node aRoot)
         {
             if (aRoot == null) return 0;
             if (aRoot.Left == null && aRoot.Right == null) return aRoot.Key;
             return SumLeafNodes(aRoot.Left) + SumLeafNodes(aRoot.Right);
+        }
+
+        // 1.2.21.2 Tính tổng giá trị khóa các nút chẵn
+        public int SumEvenNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int sum = 0;
+            if (aRoot.Key % 2 == 0)
+                sum = aRoot.Key;
+            return sum + SumEvenNodes(aRoot.Left) + SumEvenNodes(aRoot.Right);
+        }
+
+        // 1.2.21.3 Tính tổng giá trị khóa các nút lẻ
+        public int SumOddNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int sum = 0;
+            if (aRoot.Key % 2 != 0)
+                sum = aRoot.Key;
+            return sum + SumOddNodes(aRoot.Left) + SumOddNodes(aRoot.Right);
+        }
+
+        // 1.2.21.4 Tính tổng giá trị khóa các nút là số nguyên tố
+        public int SumPrimeNodes(Node aRoot)
+        {
+            if (aRoot == null) return 0;
+            int sum = 0;
+            if (IsPrime(aRoot.Key))
+                sum = aRoot.Key;
+            return sum + SumPrimeNodes(aRoot.Left) + SumPrimeNodes(aRoot.Right);
+        }
+
+        private bool IsPrime(int number)
+        {
+            if (number < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
         }
 
         // 1.2.22 Xác định mức của một nút trong cây
@@ -303,19 +447,27 @@ namespace Bai1_tr58
             return aRoot;
         }
 
-        // 1.2.25 Xóa nút có giá trị X trong cây dùng phương pháp lặp
+        // 1.2.25.1 Xóa nút có giá trị X trong cây dùng phương pháp lặp
         public void DeleteNode_Iteration(int X)
         {
             Node parent = null, current = root;
             while (current != null && current.Key != X)
             {
                 parent = current;
-                current = (X < current.Key) ? current.Left : current.Right;
+                if (X < current.Key)
+                    current = current.Left;
+                else
+                    current = current.Right;
             }
             if (current == null) return;
 
             // TH1: Không có con hoặc chỉ có 1 con
-            Node child = (current.Left != null) ? current.Left : current.Right;
+            Node child;
+            if (current.Left != null)
+                child = current.Left;
+            else
+                child = current.Right;
+
             if (parent == null)
                 root = child;
             else if (parent.Left == current)
@@ -339,6 +491,40 @@ namespace Bai1_tr58
                 else
                     minParent.Right = min.Right;
             }
+        }
+
+        // 1.2.25.2 Xóa tất cả các nút có giá trị khóa là số nguyên tố
+        public void DeletePrimeNodes(Node aRoot)
+        {
+            if (aRoot == null) return;
+            if (IsPrime(aRoot.Key))
+                aRoot = DeleteNode_Recursion(aRoot, aRoot.Key);
+            else
+            {
+                DeletePrimeNodes(aRoot.Left);
+                DeletePrimeNodes(aRoot.Right);
+            }
+        }
+
+        // 1.2.26 Tìm nút trung gian có trong cây
+        public Node FindMiddleNode(Node aRoot)
+        {
+            if (aRoot == null) return null;
+            int count = CountNodes(aRoot);
+            if (count % 2 == 0)
+                return null; // Không có nút trung gian
+            int middleIndex = count / 2;
+            return FindMiddleNodeHelper(aRoot, ref middleIndex);
+        }
+
+        public Node FindMiddleNodeHelper(Node aRoot, ref int index)
+        {
+            if (aRoot == null) return null;
+            Node left = FindMiddleNodeHelper(aRoot.Left, ref index);
+            if (left != null) return left;
+            if (index == 0) return aRoot;
+            index--;
+            return FindMiddleNodeHelper(aRoot.Right, ref index);
         }
     }
 }
