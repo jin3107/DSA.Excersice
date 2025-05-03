@@ -117,7 +117,7 @@ Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quic
 ### Bài tập bổ sung 3
 - Cho mảng A gồm n số nguyên dương { 45, 23, 78, 67, 12, 88, 34, 56, 92, 34 }
 - a) Kiểm tra dãy có tăng dần hay không? Nếu không hãy sắp xếp tăng dần theo HeapSort.
-- b) Chèn phần tử x vào vị trí k của dãy tăng dần.
+- b) Chèn phần tử x vào vị trí k của dãy tăng dần. 
 
 <a name="bs4"></a>
 ### Bài tập bổ sung 4 
