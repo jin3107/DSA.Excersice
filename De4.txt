@@ -1,0 +1,521 @@
+----- Câu 1
+public class Search
+{
+    // Tìm kiếm tuần tự
+    public int SeqSearch(int[] arr, int X)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == X)
+                return i;
+        }
+        return -1;
+    }
+
+    // Tìm kiếm tuần tự với chỉ số phần tử số chẵn lớn nhất đầu tiên
+    public void SeqEvenMaxFirstSearch(int[] arr)
+    {
+        int max = int.MinValue, index = -1;
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] % 2 == 0 && arr[i] > max)
+            {
+                max = arr[i];
+                index = i;
+            }
+        }
+        if (index != -1)
+            Console.WriteLine($"EvenMaxFirst theo tuần tự là: {arr[index]} tại chỉ số {index}");
+        else
+            Console.WriteLine("Không tìm thấy.");
+    }
+
+    // Tìm kiếm nhị phân với chỉ số phần tử số chẵn lớn nhất đầu tiên
+    public void BinarySearchInterative(int[] arr)
+    {
+        int low = 0, up = arr.Length - 1, max = int.MinValue;
+        foreach (var item in arr)
+        {
+            if (item % 2 == 0 && item > max)
+                max = item;
+        }
+        if (max == int.MinValue)
+        {
+            Console.WriteLine("Không tìm thấy.");
+            return;
+        }
+
+        while (low <= up)
+        {
+            int mid = (low + up) / 2;
+            if (arr[mid] == max)
+            { 
+                Console.WriteLine($"EvenMaxFirst theo nhị phân là: {arr[mid]} tại chỉ số {mid}"); 
+                return;
+            }
+            else if (max > arr[mid])
+                low = mid + 1;
+            else
+                up = mid - 1;
+        }
+        Console.WriteLine("Không tìm thấy.");
+    }
+}
+
+
+public class Sort
+{
+    // Sắp xếp trực tiếp
+    public void InterchangeSort(int[] arr)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            for (int j = i + 1; j < arr.Length; j++)
+            {
+                if (arr[i] > arr[j])
+                    (arr[i], arr[j]) = (arr[j], arr[i]);
+            }
+        }
+    }
+}
+
+----- Câu 2
+public class Node
+{
+    public object Value;
+    public Node Next;
+
+    public Node()
+    {
+        Value = null;
+        Next = null;
+    }
+
+    public Node(object value)
+    {
+        Value = value;
+        Next = null;
+    }
+}
+
+
+public class LinkedList
+{
+    protected Node First;
+
+    // In ra dslk
+    public void DisplayLinkedList()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng.");
+            return;
+        }
+
+        Node curNode = First;
+        while (curNode != null)
+        {
+            Console.Write(curNode.Value);
+            if (curNode.Next != null)
+                Console.Write(" -> ");
+            curNode = curNode.Next;
+        }
+        Console.WriteLine();
+    }
+
+    // Tìm nút có giá trị chẵn lớn nhất sau cùng
+    public void FindMaxEvenLast()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng.");
+            return;
+        }
+        Node curNode = First;
+        int max = int.MinValue;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value % 2 == 0 && (int)curNode.Value > max)
+                max = (int)curNode.Value;
+            curNode = curNode.Next;
+        }
+        if (max != int.MinValue)
+            Console.WriteLine($"Giá trị chẵn lớn nhất sau cùng là: {max}");
+        else
+            Console.WriteLine("Không có giá trị chẵn nào trong danh sách.");
+    }
+
+    // Thêm X vào cuối dslk
+    public void AddLast(object X)
+    {
+        if (X == null) return;
+        Node newNode = new Node(X);
+        if (First == null) 
+            First = newNode;
+        else
+        {
+            Node curNode = First;
+            while (curNode.Next != null)
+                curNode = curNode.Next;
+            curNode.Next = newNode;
+        }
+    }
+}
+
+----- Câu 3
+public class SinhVien
+{
+    public string MaSo { get; set; }
+    public string HoTen { get; set; }
+    public int GioiTinh { get; set; }
+    public int NgaySinh { get; set; }
+    public int DiemTB { get; set; }
+
+    public void Nhap()
+    {
+        Console.Write("Nhập mã số sinh viên: ");
+        MaSo = Console.ReadLine();
+
+        Console.Write("Nhập họ tên: ");
+        HoTen = Console.ReadLine();
+
+        Console.Write("Nhập giới tính (1: Nam, 2: Nữ): ");
+        GioiTinh = int.Parse(Console.ReadLine());
+
+        Console.Write("Nhập ngày sinh: ");
+        NgaySinh = int.Parse(Console.ReadLine());
+
+        Console.Write("Nhập điểm trung bình: ");
+        DiemTB = int.Parse(Console.ReadLine());
+    }
+
+    public override string ToString()
+    {
+        string gt = GioiTinh == 1 ? "Nam" : "Nữ";
+        return $"Mã số sinh viên: {MaSo}\n" +
+                $"Họ tên: {HoTen}\n" +
+                $"Giới tính: {gt}\n" +
+                $"Ngày sinh: {NgaySinh}\n" +
+                $"Điểm TB: {DiemTB}\n";
+    }
+}
+
+
+public class QuanLySinhVien
+{
+    public LinkedList<SinhVien> danhSach = new LinkedList<SinhVien>();
+
+    // a. Nhập danh sách sinh viên
+    public void NhapXuatDSSV()
+    {
+        Console.Write("Nhập số lượng sinh viên: ");
+        int n = int.Parse(Console.ReadLine());
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nSinh viên thứ {i + 1}: ");
+            SinhVien sv = new SinhVien();
+            sv.Nhap();
+            danhSach.AddLast(sv);
+        }
+        Console.WriteLine("\nDanh sách sinh viên vừa nhập:");
+        XuatDanhSach(danhSach);
+    }
+
+    public void XuatDanhSach(LinkedList<SinhVien> ds)
+    {
+        foreach (var sv in ds)
+            Console.WriteLine(sv);
+    }
+
+    // b. Sắp xếp giảm dần theo mã số sinh viên (bubble sort)
+    public void BubbleSortDescending()
+    {
+        if (danhSach.First == null) return;
+        int count = danhSach.Count;
+        for (int i = 0; i < count - 1; i++)
+        {
+            var node1 = danhSach.First;
+            for (int j = 0; j < count - 1; j++)
+            {
+                var node2 = node1.Next;
+                if (string.Compare(node1.Value.MaSo, node2.Value.MaSo) < 0)
+                {
+                    var temp = node1.Value;
+                    node1.Value = node2.Value;
+                    node2.Value = temp;
+                }
+                node1 = node1.Next;
+            }
+        }
+        XuatDanhSach(danhSach);
+    }
+
+    // c. Tìm tất cả sinh viên có dtb nhỏ nhất
+    public void MinDTB()
+    {
+        if (danhSach.Count == 0)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+
+        int min = danhSach.First.Value.DiemTB;
+        foreach (var sv in danhSach)
+        {
+            if (sv.DiemTB < min)
+                min = sv.DiemTB;
+        }
+        foreach (var sv in danhSach)
+        {
+            if (sv.DiemTB == min)
+                Console.WriteLine(sv);
+        }
+    }
+}
+
+----- Câu 4
+public class Node
+{
+    public int Key;
+    public Node Left;
+    public Node Right;
+
+    public Node(int key)
+    {
+        Key = key;
+        Left = null;
+        Right = null;
+    }
+
+    public Node()
+    {
+        Left = null;
+        Right = null;
+    }
+}
+
+
+public class BinarySearchTree
+{
+    public Node root;
+
+    public BinarySearchTree()
+    {
+        root = null;
+    }
+
+    public void Display(Node node)
+    {
+        if (node != null)
+            Console.Write($"{node.Key.ToString()} ");
+        else
+            Console.Write("null" + " ");
+    }
+
+    public void Process(Node node)
+    {
+        Display(node);
+    }
+
+    // NLR
+    public void PreOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            Process(aRoot);
+            PreOrder(aRoot.Left);
+            PreOrder(aRoot.Right);
+        }
+    }
+
+    // LNR
+    public void InOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            InOrder(aRoot.Left);
+            Process(aRoot);
+            InOrder(aRoot.Right);
+        }
+    }
+
+    // LRN
+    public void PostOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            PostOrder(aRoot.Left);
+            PostOrder(aRoot.Right);
+            Process(aRoot);
+        }
+    }
+
+    // Thêm nút bằng pp đệ quy
+    public bool AddRecursive(Node aRoot, int X)
+    {
+        if (aRoot == null)
+        {
+            aRoot = new Node(X);
+            return true;
+        }
+        else if (X < aRoot.Key)
+            return AddRecursive(aRoot.Left, X);
+        else if (X >= aRoot.Key)
+            return AddRecursive(aRoot.Right, X);
+        else
+            return false;
+    }
+
+    // Thêm nút bằng pp lặp
+    public bool AddInterative(int X)
+    {
+        bool result = true;
+        Node newNode = new Node(X);
+        if (root == null)
+        {
+            root = newNode;
+            return result;
+        }
+        Node curNode = root;
+        Node parNode;
+        while (true)
+        {
+            parNode = curNode;
+            if (X < curNode.Key)
+            {
+                curNode = curNode.Left;
+                if (curNode == null)
+                {
+                    parNode.Left = newNode;
+                    return result;
+                }
+            }
+            else if (X > curNode.Key)
+            {
+                curNode = curNode.Right;
+                if (curNode == null)
+                {
+                    parNode.Right = newNode;
+                    return result;
+                }
+            }
+            else
+            {
+                //result = false;
+                //return result;
+
+                curNode = curNode.Right;
+                if (curNode == null)
+                {
+                    parNode.Right = newNode;
+                    return result;
+                }
+            }
+        }
+    }
+
+    // Tạo cây từ các số lấy từ mảng số nguyên
+    public void CreateTreeArray(int[] arr)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            AddInterative(arr[i]);
+        }
+    }
+
+    // Tạo cây từ việc nhập từ bàn phím
+    public void Createtree()
+    {
+        Console.Write("Nhập số lượng nút: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Nhập giá trị khóa thứ {i + 1}: ");
+            arr[i] = int.Parse(Console.ReadLine());
+        }
+        CreateTreeArray(arr);
+    }
+
+    // Đếm số nút lá trong cây
+    public int SumLeafNodes(Node aRoot)
+    {
+        if (aRoot == null) return 0;
+        if (aRoot.Left == null && aRoot.Right == null)
+            return 1;
+        return SumLeafNodes(aRoot.Left) + SumLeafNodes(aRoot.Right);
+    }
+
+    // Hàm in các node lá
+    public void PrintLeafNodes(Node aRoot)
+    {
+        if (aRoot == null) return;
+        if (aRoot.Left == null && aRoot.Right == null)
+        {
+            Console.Write($"{aRoot.Key} ");
+            return;
+        }
+        PrintLeafNodes(aRoot.Left);
+        PrintLeafNodes(aRoot.Right);
+    }
+}
+
+
+----- Program.cs
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+        Search search = new Search();
+        Sort sort = new Sort();
+
+        Console.Write("Nhập số lượng phần tử: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr1 = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Nhập phần tử arr[{i}]: ");
+            arr1[i] = int.Parse(Console.ReadLine());
+        }
+
+        Console.Write("\nCâu 1:\na) ");
+        search.SeqEvenMaxFirstSearch(arr1);
+
+        Array.Sort(arr1);
+        Console.Write("b) ");
+        search.BinarySearchInterative(arr1);
+
+        QuanLySinhVien qlsv = new QuanLySinhVien();
+        Console.Write("\n\nCâu 2:\na) ");
+        qlsv.NhapXuatDSSV();
+
+        Console.Write("b) ");
+        qlsv.BubbleSortDescending();
+
+        Console.Write("c) ");
+        qlsv.MinDTB();
+
+        int[] arr2 = { 10, 6, 15, 12, 9, 12, 26, 14, 56, 35 };
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.CreateTreeArray(arr2);
+
+        Console.Write("Node-Left-Right: ");
+        tree.PreOrder(tree.root);
+        Console.WriteLine();
+
+        Console.Write("Left-Node-Right: ");
+        tree.InOrder(tree.root);
+        Console.WriteLine();
+
+        Console.Write("Left-Right-Node: ");
+        tree.PostOrder(tree.root);
+        Console.WriteLine();
+
+        Console.Write($"\nSố nút lá trong cây là {tree.SumLeafNodes(tree.root)} gồm các nút lá: ");
+        tree.PrintLeafNodes(tree.root);
+    }
+}
+
