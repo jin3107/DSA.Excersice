@@ -125,7 +125,7 @@ Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quic
     + In mảng danh sách liên kết
     + 1. Thêm X vào trước V.
     + 2. Thêm X vào sau V.
-    + 3. Thêm X vào đầu trong danh sách liên kết.
+    + 3. Thêm X vào đầu trong danh sách liên kết. 
     + 4. Thêm X vào cuối trong danh sách liên kết.
     + 5. Thêm X vào giữa trong danh sách liên kết.
     + 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách liên kết.
