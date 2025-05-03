@@ -120,7 +120,7 @@ Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quic
 - b) Chèn phần tử x vào vị trí k của dãy tăng dần.
 
 <a name="bs4"></a>
-### Bài tập bổ sung 4
+### Bài tập bổ sung 4 
 - Danh sách liên kết đơn (LinkedList):
     + In mảng danh sách liên kết
     + 1. Thêm X vào trước V.
