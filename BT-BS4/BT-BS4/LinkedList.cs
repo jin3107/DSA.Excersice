@@ -567,5 +567,394 @@ namespace BT_BS4
             newNode.Next = maxNode.Next;
             maxNode.Next = newNode;
         }
+
+        // 22. Xóa giá trị X trong dslk
+        public void Remove(object X)
+        {
+            if ((First == null || (X == null))) return;
+            if (First.Value.Equals(X))
+            {
+                First = First.Next;
+                return;
+            }
+
+            Node curNode = First;
+            while ((curNode.Next != null) && !curNode.Next.Value.Equals(X))
+                curNode = curNode.Next;
+            if (curNode.Next != null)
+                curNode.Next = curNode.Next.Next;
+            Console.WriteLine($"Đã xóa thành công {X}");
+        }
+
+        // 23. Xóa hết tất cả các phần tử trong dslk
+        public void RemoveAll()
+        {
+            First = null;
+            Console.WriteLine("Đã xóa tất cả các phần tử trong danh sách.");
+        }
+
+        // 24. Xóa phần tử kề sau phần tử Q trong dslk
+        public void RemoveAfter(object Q)
+        {
+            if (First == null || Q == null) return;
+            Node curNode = First;
+            while (curNode != null && (int)curNode.Value != (int)Q)
+                curNode = curNode.Next;
+            if (curNode != null && curNode.Next != null)
+                curNode.Next = curNode.Next.Next;
+        }
+
+        // 25. Xóa phần tử kề trước phần tử Q trong dslk
+        public void RemoveBefore(object Q)
+        {
+            if (First == null || Q == null || (int)First.Value == (int)Q) return;
+            Node cur = First;
+            Node prev = null;
+            Node prePrev = null;
+            while (cur != null && (int)cur.Value != (int)Q)
+            {
+                prePrev = prev;
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (prev == null) return;
+            if (prePrev == null)
+                First = cur;
+            else
+                prePrev.Next = cur;
+        }
+
+        // 26. Xóa phần tử đầu tiên trong dslk
+        public void RemoveFirst()
+        {
+            if (First == null)
+                return;
+            First = First.Next;
+            Console.WriteLine("Đã xóa phần tử đầu tiên trong danh sách.");
+        }
+
+        // 27. Xóa phần tử cuối cùng trong dslk
+        public void RemoveLast()
+        {
+            if (First == null) return;
+            if (First.Next == null)
+            {
+                First = null;
+                Console.WriteLine("Đã xóa phần tử cuối cùng trong danh sách.");
+                return;
+            }
+            Node curNode = First;
+            while (curNode.Next.Next != null)
+                curNode = curNode.Next;
+            curNode.Next = null;
+            Console.WriteLine("Đã xóa phần tử cuối cùng trong danh sách.");
+        }
+
+        // 28. Xóa phần tử ở giữa trong dslk
+        public void RemoveCenter()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node prevNode = null;
+            int count = 0;
+            while (curNode != null)
+            {
+                count++;
+                curNode = curNode.Next;
+            }
+            curNode = First;
+            int mid = count / 2;
+            for (int i = 0; i < mid; i++)
+            {
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (prevNode != null)
+                prevNode.Next = curNode.Next;
+        }
+
+        // 29. Xóa phần tử chẵn đầu tiên trong dslk
+        public void RemoveEvenFirst()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node prevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 == 0)
+                    break;
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (curNode != null)
+            {
+                if (prevNode != null)
+                    prevNode.Next = curNode.Next;
+                else
+                    First = curNode.Next;
+                Console.WriteLine($"Đã xóa {curNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
+        }
+
+        // 30. Xóa phần tử chẵn cuồi cùng trong dslk
+        public void RemoveEvenLast()
+        {
+            if (First == null) return;
+            Node cur = First, prev = null;
+            Node even = null, evenPrev = null;
+            while (cur != null)
+            {
+                if ((int)cur.Value % 2 == 0)
+                {
+                    even = cur;
+                    evenPrev = prev;
+                }
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (even == null)
+            {
+                Console.WriteLine("Không có số chẵn.");
+                return;
+            }
+            if (evenPrev == null)
+                First = First.Next;
+            else
+                evenPrev.Next = even.Next;
+            Console.WriteLine($"Đã xóa {even.Value}.");
+        }
+
+        // 31. Xóa phần tử lẻ đầu tiên trong dslk
+        public void RemoveOddFirst()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node prevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 != 0)
+                    break;
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (curNode != null)
+            {
+                if (prevNode != null)
+                    prevNode.Next = curNode.Next;
+                else
+                    First = curNode.Next;
+                Console.WriteLine($"Đã xóa {curNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+        }
+
+        // 32. Xóa phần tử lẻ cuồi cùng trong dslk
+        public void RemoveOddLast()
+        {
+            if (First == null) return;
+            Node cur = First, prev = null;
+            Node odd = null, oddPrev = null;
+            while (cur != null)
+            {
+                if ((int)cur.Value % 2 != 0)
+                {
+                    odd = cur;
+                    oddPrev = prev;
+                }
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (odd == null)
+            {
+                Console.WriteLine("Không có số lẻ.");
+                return;
+            }
+            if (oddPrev == null)
+                First = First.Next;
+            else
+                oddPrev.Next = odd.Next;
+            Console.WriteLine($"Đã xóa {odd.Value}.");
+        }
+
+        // 33. Xóa phần tử nhỏ nhất trong dslk
+        public void RemoveMin()
+        {
+            if (First == null) return;
+            Node cur = First;
+            Node minNode = First;
+            Node minPrev = null;
+            Node prev = null;
+            while (cur != null)
+            {
+                if ((int)cur.Value < (int)minNode.Value)
+                {
+                    minNode = cur;
+                    minPrev = prev;
+                }
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (minPrev == null)
+                First = First.Next;
+            else
+                minPrev.Next = minNode.Next;
+            Console.WriteLine($"Đã xóa {minNode.Value}.");
+        }
+
+        // 34. Xóa phần tử nhỏ nhất đầu tiên trong dslk
+        public void RemoveMinFirst()
+        {
+            if (First == null) return;
+            Node cur = First;
+            Node minNode = First;
+            Node minPrev = null;
+            Node prev = null;
+            while (cur != null)
+            {
+                if ((int)cur.Value < (int)minNode.Value)
+                {
+                    minNode = cur;
+                    minPrev = prev;
+                }
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (minPrev == null)
+                First = First.Next;
+            else
+                minPrev.Next = minNode.Next;
+            Console.WriteLine($"Đã xóa {minNode.Value}.");
+        }
+
+        // 35. Xóa phần tử nhỏ nhất sau cùng trong dslk
+        public void RemoveMinLast()
+        {
+            if (First == null) return;
+            Node cur = First;
+            Node minNode = null;
+            Node minPrev = null;
+            Node prev = null;
+            while (cur != null)
+            {
+                if (minNode == null || (int)cur.Value < (int)minNode.Value)
+                {
+                    minNode = cur;
+                    minPrev = prev;
+                }
+                prev = cur;
+                cur = cur.Next;
+            }
+            if (minNode != null)
+            {
+                if (minPrev == null)
+                    First = First.Next;
+                else
+                    minPrev.Next = minNode.Next;
+
+                Console.WriteLine($"Đã xóa {minNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có giá trị trong danh sách.");
+        }
+
+        // 36. Xóa phần tử lớn nhất trong dslk
+        public void RemoveMax()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node maxNode = First;
+            Node maxPrev = null;
+            Node prev = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrev = prev;
+                }
+                prev = curNode;
+                curNode = curNode.Next;
+            }
+            if (maxNode != null)
+            {
+                if (maxPrev == null) 
+                    First = First.Next;
+                else
+                    maxPrev.Next = maxNode.Next;
+                Console.WriteLine($"Đã xóa {maxNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có giá trị trong danh sách.");
+        }
+
+        // 37. Xóa phần tử lớn nhất đầu tiên trong dslk
+        public void RemoveMaxFirst()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node prevNode = null;
+            Node maxNode = First;
+            Node maxPrev = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrev = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (maxNode != null)
+            {
+                if (maxPrev == null)
+                    First = maxNode.Next;
+                else
+                    maxPrev.Next = maxNode.Next;
+
+                Console.WriteLine($"Đã xóa {maxNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có giá trị trong danh sách.");
+        }
+
+        // 38. Xóa phần tử lớn nhất sau cùng trong dslk
+        public void RemoveMaxLast()
+        {
+            if (First == null) return;
+            Node curNode = First;
+            Node prevNode = null;
+            Node maxNode = null;
+            Node maxPrev = null;
+            while (curNode != null)
+            {
+                if (maxNode == null || (int)curNode.Value > (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrev = prevNode;
+                }
+                else if ((int)curNode.Value == (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrev = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (maxNode != null)
+            {
+                if (maxPrev == null)
+                    First = maxNode.Next;
+                else
+                    maxPrev.Next = maxNode.Next;
+
+                Console.WriteLine($"Đã xóa {maxNode.Value}.");
+            }
+            else
+                Console.WriteLine("Không có giá trị trong danh sách.");
+        }
     }
 }

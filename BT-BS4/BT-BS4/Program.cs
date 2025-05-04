@@ -13,7 +13,7 @@ namespace BT_BS4
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
 
-            int choice, X, V;
+            int choice, X, V, Q;
             LinkedList linkedList = new LinkedList();
             int[] arr = { 15, 81, 4, 76, 4, 5, 90 };
             //int[] arr = { 1, 3, 5, 7 };
@@ -26,7 +26,7 @@ namespace BT_BS4
             while (true)
             {
                 Console.Clear();
-                Console.Write("Mảng hiện tại: ");
+                Console.Write("\n\nMảng hiện tại: ");
                 linkedList.PrintList();
 
                 Console.WriteLine("\n\n");
@@ -52,7 +52,23 @@ namespace BT_BS4
                 Console.WriteLine("19. Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong danh sách");
                 Console.WriteLine("20. Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong danh sách");
                 Console.WriteLine("21. Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong danh sách");
-
+                Console.WriteLine("22. Xóa giá trị X trong danh sách");
+                Console.WriteLine("23. Xóa hết tất cả các phần tử trong danh sách");
+                Console.WriteLine("24. Xóa phần tử kề sau phần tử Q trong danh sách");
+                Console.WriteLine("25. Xóa phần tử kề trước phần tử Q trong danh sách");
+                Console.WriteLine("26. Xóa phần tử đầu tiên trong danh sách");
+                Console.WriteLine("27. Xóa phần tử cuối cùng trong danh sách");
+                Console.WriteLine("28. Xóa phần tử ở giữa trong danh sách");
+                Console.WriteLine("29. Xóa phần tử chẵn đầu tiên trong danh sách");
+                Console.WriteLine("30. Xóa phần tử chẵn cuối cùng trong danh sách");
+                Console.WriteLine("31. Xóa phần tử lẻ đầu tiên trong danh sách");
+                Console.WriteLine("32. Xóa phần tử lẻ cuối cùng trong danh sách");
+                Console.WriteLine("33. Xóa phần tử nhỏ nhất trong danh sách");
+                Console.WriteLine("34. Xóa phần tử nhỏ nhất đầu tiên trong danh sách");
+                Console.WriteLine("35. Xóa phần tử nhỏ nhất sau cùng trong danh sách");
+                Console.WriteLine("36. Xóa phần tử lớn nhất trong danh sách");
+                Console.WriteLine("37. Xóa phần tử lớn nhất đầu tiên trong danh sách");
+                Console.WriteLine("38. Xóa phần tử lớn nhất sau cùng trong danh sách");
 
 
                 Console.WriteLine("0. Thoát chương trình");
@@ -249,9 +265,96 @@ namespace BT_BS4
                         linkedList.PrintList();
                         break;
 
+                    case 22:
+                        Console.Write("Nhập giá trị X cần xóa: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.Remove(X);
+                        linkedList.PrintList();
+                        break;
 
+                    case 23:
+                        linkedList.RemoveAll();
+                        linkedList.PrintList(); 
+                        break;
 
+                    case 24:
+                        Console.Write("Nhập giá trị Q để xóa các phần tử kề sau: ");
+                        Q = int.Parse(Console.ReadLine());
+                        linkedList.RemoveAfter(Q);
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 25:
+                        Console.Write("Nhập giá trị Q để xóa các phần tử kề trước: ");
+                        Q = int.Parse(Console.ReadLine());
+                        linkedList.RemoveBefore(Q);
+                        linkedList.PrintList();
+                        break;
 
+                    case 26:
+                        linkedList.RemoveFirst(); 
+                        linkedList.PrintList(); 
+                        break;
+
+                    case 27:
+                        linkedList.RemoveLast();
+                        linkedList.PrintList();
+                        break;
+
+                    case 28:
+                        linkedList.RemoveCenter();
+                        linkedList.PrintList();
+                        break;
+
+                    case 29:
+                        linkedList.RemoveEvenFirst();
+                        linkedList.PrintList();
+                        break;
+
+                    case 30:
+                        linkedList.RemoveEvenLast();
+                        linkedList.PrintList();
+                        break;
+
+                    case 31:
+                        linkedList.RemoveOddFirst();
+                        linkedList.PrintList();
+                        break;
+
+                    case 32:
+                        linkedList.RemoveOddLast();
+                        linkedList.PrintList();
+                        break;
+
+                    case 33:
+                        linkedList.RemoveMin();
+                        linkedList.PrintList();
+                        break;
+
+                    case 34: 
+                        linkedList.RemoveMinFirst();
+                        linkedList.PrintList();
+                        break;
+
+                    case 35: 
+                        linkedList.RemoveMinLast();
+                        linkedList.PrintList();
+                        break;
+
+                    case 36:
+                        linkedList.RemoveMax();
+                        linkedList.PrintList();
+                        break;
+
+                    case 37: 
+                        linkedList.RemoveMaxFirst();
+                        linkedList.PrintList();
+                        break;
+
+                    case 38: 
+                        linkedList.RemoveMaxLast();
+                        linkedList.PrintList();
+                        break;
 
                     default:
                         Console.WriteLine("Không hợp lệ.");
