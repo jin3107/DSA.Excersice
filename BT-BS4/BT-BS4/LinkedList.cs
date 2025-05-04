@@ -150,7 +150,6 @@ namespace BT_BS4
                 Console.WriteLine("Danh sách rỗng");
                 return;
             }
-
             Node curNode = First;
             Node lastEvenNode = null;
             while (curNode != null)
@@ -194,7 +193,10 @@ namespace BT_BS4
             }
             Node newNode = new Node(X);
             newNode.Next = curNode;
-            prevNode.Next = newNode;
+            if (prevNode == null)
+                First = newNode;
+            else
+                prevNode.Next = newNode;
         }
 
         // 9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong dslk
@@ -221,6 +223,349 @@ namespace BT_BS4
             }
             newNode.Next = curNode.Next;
             curNode.Next = newNode;
+        }
+
+        // 10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong dslk
+        public void AddXBeforeOddLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node lastOddNode = null;
+            Node lastOddPrevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 != 0)
+                {
+                    lastOddNode = curNode;
+                    lastOddPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (lastOddNode == null)
+            {
+                Console.WriteLine("Không có giá trị lẻ trong danh sách");
+                return;
+            }
+            Node newNode = new Node(X);
+            if (lastOddPrevNode == null)
+            {
+                newNode.Next = First;
+                First = newNode;
+            }
+            else
+            {
+                newNode.Next = lastOddNode;
+                lastOddPrevNode.Next = newNode;
+            }
+        }
+
+        // 11. Thêm giá trị X vào sau giá trị lẻ sau cùng trong dslk
+        public void AddXAfterOddLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node lastOddNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 != 0)
+                    lastOddNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (lastOddNode == null)
+            {
+                Console.WriteLine("Không có giá trị lẻ trong danh sách");
+                return;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = lastOddNode.Next;
+            lastOddNode.Next = newNode;
+        }
+
+        // 12. Thêm giá trị X vào trước giá trị lẻ đầu tiên trong dslk
+        public void AddXBeforeOddFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 != 0)
+                    break;
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (curNode == null)
+            {
+                Console.WriteLine("Không có giá trị lẻ trong danh sách");
+                return;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = curNode;
+            if (prevNode == null)
+                First = newNode;
+            else
+                prevNode.Next = newNode;
+        }
+
+        // 13. Thêm giá trị X vào sau giá trị lẻ đầu tiên trong dslk
+        public void AddXAfterOddFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 != 0)
+                    break;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            if (curNode == null)
+            {
+                Console.WriteLine("Không có giá trị lẻ trong danh sách");
+                return;
+            }
+            newNode.Next = curNode.Next;
+            curNode.Next = newNode;
+        }
+
+        // 14. Thêm giá trị X vào trước giá trị nhỏ nhất sau cùng trong dslk
+        public void AddXBeforeMinLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node minNode = First;
+            Node minPrevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value <= (int)minNode.Value)
+                {
+                    minNode = curNode;
+                    minPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = minNode;
+            if (minPrevNode == null)
+                First = newNode;
+            else
+                minPrevNode.Next = newNode;
+        }
+
+        // 15. Thêm giá trị X vào sau giá trị nhỏ nhất sau cùng trong dslk
+        public void AddXAfterMinLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node minNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value <= (int)minNode.Value)
+                    minNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = minNode.Next;
+            minNode.Next = newNode;
+        }
+
+        // 16. Thêm giá trị X vào trước giá trị nhỏ nhất đầu tiên trong dslk
+        public void AddXBeforeMinFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node minNode = First;
+            Node minPrevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value < (int)minNode.Value)
+                {
+                    minNode = curNode;
+                    minPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = minNode;
+            if (minPrevNode == null)
+                First = newNode;
+            else
+                minPrevNode.Next = newNode;
+        }
+
+        // 17. Thêm giá trị X vào sau giá trị nhỏ nhất đầu tiên trong dslk
+        public void AddXAfterMinFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+
+            Node curNode = First;
+            Node prevNode = null;
+            Node minNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value < (int)minNode.Value)
+                    minNode = curNode;
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = minNode.Next;
+            minNode.Next = newNode;
+        }
+
+        // 18. Thêm giá trị X vào trước giá trị lớn nhất sau cùng trong dslk
+        public void AddXBeforeMaxLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node maxNode = First;
+            Node maxPrevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value >= (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = maxNode;
+            if (maxPrevNode == null)
+                First = newNode;
+            else
+                maxPrevNode.Next = newNode;
+        }
+
+        // 19. Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong dslk
+        public void AddXAfterMaxLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node maxNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value >= (int)maxNode.Value)
+                    maxNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = maxNode.Next;
+            maxNode.Next = newNode;
+        }
+
+        // 20. Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong dslk
+        public void AddXBeforeMaxFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node maxNode = First;
+            Node maxPrevNode = null;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                {
+                    maxNode = curNode;
+                    maxPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = maxNode;
+            if (maxPrevNode == null)
+                First = newNode;
+            else
+                maxPrevNode.Next = newNode;
+        }
+
+        // 21. Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong dslk
+        public void AddXAfterMaxFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+
+            Node curNode = First;
+            Node prevNode = null;
+            Node maxNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                    maxNode = curNode;
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            newNode.Next = maxNode.Next;
+            maxNode.Next = newNode;
         }
     }
 }

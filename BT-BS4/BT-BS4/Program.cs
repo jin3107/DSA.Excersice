@@ -40,6 +40,18 @@ namespace BT_BS4
                 Console.WriteLine("7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong danh sách");
                 Console.WriteLine("8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong danh sách");
                 Console.WriteLine("9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong danh sách");
+                Console.WriteLine("10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong danh sách");
+                Console.WriteLine("11. Thêm giá trị X vào sau giá trị lẻ sau cùng trong danh sách");
+                Console.WriteLine("12. Thêm giá trị X vào trước giá trị lẻ đầu tiên trong danh sách");
+                Console.WriteLine("13. Thêm giá trị X vào sau giá trị lẻ đầu tiên trong danh sách");
+                Console.WriteLine("14. Thêm giá trị X vào trước giá trị nhỏ nhất sau cùng trong danh sách");
+                Console.WriteLine("15. Thêm giá trị X vào sau giá trị nhỏ nhất sau cùng trong danh sách");
+                Console.WriteLine("16. Thêm giá trị X vào trước giá trị nhỏ nhất đầu tiên trong danh sách");
+                Console.WriteLine("17. Thêm giá trị X vào sau giá trị nhỏ nhất đầu tiên trong danh sách");
+                Console.WriteLine("18. Thêm giá trị X vào trước giá trị lớn nhất sau cùng trong danh sách");
+                Console.WriteLine("19. Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong danh sách");
+                Console.WriteLine("20. Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong danh sách");
+                Console.WriteLine("21. Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong danh sách");
 
 
 
@@ -140,6 +152,105 @@ namespace BT_BS4
                         Console.WriteLine($"\nĐã thêm {X} vào sau giá trị chẵn đầu tiên trong danh sách");
                         linkedList.PrintList();
                         break;
+                    
+                    case 10:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeOddLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lẻ sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 11:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterOddLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lẻ sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 12:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeOddFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lẻ đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 13:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterOddFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lẻ đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 14:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeMinLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị nhỏ nhất sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 15:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterMinLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị nhỏ nhất sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 16:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterMinLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị nhỏ nhất đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 17:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterMinFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị nhỏ nhất đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 18:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeMaxLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lớn nhất sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 19:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterMaxLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lớn nhất sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 20:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeMaxFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lớn nhất đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 21:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterMaxFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lớn nhất đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+
+
+
 
 
                     default:

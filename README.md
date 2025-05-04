@@ -150,7 +150,7 @@ Kết hợp bài 2 và 4 - trang 8,9. Dùng Interchange, Bubble, Selection, Quic
     + 25. Xóa phần tử kề trước phần tử Q trong danh sách liên kết.
     + 26. Xóa phần tử đầu tiên trong danh sách liên kết.
     + 27. Xóa phần tử cuối cùng trong danh sách liên kết.
-    + 28. Xóa phần tử ỡ giữa trong danh sách liên kết.
+    + 28. Xóa phần tử ở giữa trong danh sách liên kết.
     + 29. Xóa phần tử chẵn đầu tiên trong danh sách liên kết.
     + 30. Xóa phần tử chẵn cuồi cùng trong danh sách liên kết.
     + 31. Xóa phần tử lẻ đầu tiên trong danh sách liên kết.
