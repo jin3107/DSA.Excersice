@@ -91,10 +91,13 @@ namespace BT_BS4
             if (X == null) return;
             if (First == null) 
                 First = newNode;
-            Node curNode = First;
-            while (curNode.Next != null)
-                curNode = curNode.Next;
-            curNode.Next = newNode;
+            else
+            {
+                Node curNode = First;
+                while (curNode.Next != null)
+                    curNode = curNode.Next;
+                curNode.Next = newNode;
+            }
         }
 
         // 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong dslk
@@ -175,30 +178,49 @@ namespace BT_BS4
                 Console.WriteLine("Danh sách rỗng");
                 return;
             }
-
             Node curNode = First;
             Node prevNode = null;
-            Node firstEven = null;
             while (curNode != null)
             {
                 if ((int)curNode.Value % 2 == 0)
-                { 
-                    firstEven = curNode;
                     break;
-                }
                 prevNode = curNode;
                 curNode = curNode.Next;
             }
-            Node newNode = new Node(X);
-            if (firstEven == null)
+            if (curNode == null)
             {
                 Console.WriteLine("Không có giá trị chẵn trong danh sách");
                 return;
             }
+            Node newNode = new Node(X);
             newNode.Next = curNode;
-            if (firstEven == null)
-                First = newNode;
-            prevNode = newNode;
+            prevNode.Next = newNode;
+        }
+
+        // 9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong dslk
+        public void AddXAfterEvenFirst(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value % 2 == 0)
+                    break;
+                curNode = curNode.Next;
+            }
+            Node newNode = new Node(X);
+            if (curNode == null)
+            {
+                Console.WriteLine("Không có giá trị chẵn trong danh sách");
+                return;
+            }
+            newNode.Next = curNode.Next;
+            curNode.Next = newNode;
         }
     }
 }

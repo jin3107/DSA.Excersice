@@ -39,6 +39,7 @@ namespace BT_BS4
                 Console.WriteLine("6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách");
                 Console.WriteLine("7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong danh sách");
                 Console.WriteLine("8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong danh sách");
+                Console.WriteLine("9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong danh sách");
 
 
 
@@ -129,6 +130,14 @@ namespace BT_BS4
                         X = int.Parse(Console.ReadLine());
                         linkedList.AddXBeforeEvenFirst(X);
                         Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn đầu tiên trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 9:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterEvenFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị chẵn đầu tiên trong danh sách");
                         linkedList.PrintList();
                         break;
 
