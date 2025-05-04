@@ -100,6 +100,7 @@ namespace BT_BS4
                         Console.Write("Nhập giá trị X cần thêm: ");
                         X = int.Parse(Console.ReadLine());
                         linkedList.AddXBeforeEvenLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn sau cùng trong danh sách");
                         linkedList.PrintList();
                         break;
 
