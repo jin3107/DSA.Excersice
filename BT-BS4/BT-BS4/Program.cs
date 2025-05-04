@@ -16,6 +16,8 @@ namespace BT_BS4
             int choice, X, V;
             LinkedList linkedList = new LinkedList();
             int[] arr = { 15, 81, 4, 76, 4, 5, 90 };
+            //int[] arr = { 1, 3, 5, 7 };
+            //int[] arr = { };
             foreach (var item in arr)
             {
                 linkedList.AddXLast(item);
@@ -35,13 +37,23 @@ namespace BT_BS4
                 Console.WriteLine("4. Thêm giá trị X vào đầu danh sách");
                 Console.WriteLine("5. Thêm giá trị X vào cuối danh sách");
                 Console.WriteLine("6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách");
+                Console.WriteLine("7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong danh sách");
+                Console.WriteLine("8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong danh sách");
 
 
 
                 Console.WriteLine("0. Thoát chương trình");
-
-                Console.Write("Lựa chọn: ");
-                choice = int.Parse(Console.ReadLine());
+                try
+                {
+                    Console.Write("Lựa chọn: ");
+                    choice = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Lỗi nhập dữ liệu. Nhấn phím bất kỳ để thử lại...");
+                    Console.ReadKey();
+                    continue;
+                }
                 Console.Clear();
                 switch (choice)
                 {
@@ -101,6 +113,22 @@ namespace BT_BS4
                         X = int.Parse(Console.ReadLine());
                         linkedList.AddXBeforeEvenLast(X);
                         Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 7:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXAfterEvenLast(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào sau giá trị chẵn sau cùng trong danh sách");
+                        linkedList.PrintList();
+                        break;
+                    
+                    case 8:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeEvenFirst(X);
+                        Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn đầu tiên trong danh sách");
                         linkedList.PrintList();
                         break;
 
