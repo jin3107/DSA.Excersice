@@ -30,10 +30,11 @@ namespace BT_BS4
                 Console.WriteLine("\n\n");
                 Console.WriteLine("\t\t--- *** MENU *** ---");
                 Console.WriteLine("1. Duyệt và xuất các nút của ds ra màn hình");
-                Console.WriteLine("2. Thêm nút X vào sau nút V");
-                Console.WriteLine("3. Thêm nút X vào trước nút V");
-                Console.WriteLine("4. Thêm nút X vào đầu danh sách");
-                Console.WriteLine("5. Thêm nút X vào cuối danh sách");
+                Console.WriteLine("2. Thêm giá trị X vào sau giá V");
+                Console.WriteLine("3. Thêm giá trị X vào trước nút V");
+                Console.WriteLine("4. Thêm giá trị X vào đầu danh sách");
+                Console.WriteLine("5. Thêm giá trị X vào cuối danh sách");
+                Console.WriteLine("6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách");
 
 
 
@@ -52,9 +53,9 @@ namespace BT_BS4
                         break;
 
                     case 2:
-                        Console.Write("Nhập nút X cần thêm: ");
+                        Console.Write("Nhập giá trị X cần thêm: ");
                         X = int.Parse(Console.ReadLine());
-                        Console.Write("Nhập nút V cần tìm: ");
+                        Console.Write("Nhập giá trị V cần tìm: ");
                         V = int.Parse(Console.ReadLine());
                         if (linkedList.AddXAfterV(X, V) == null)
                             Console.WriteLine($"Không tìm thấy nút {V} trong ds");
@@ -66,9 +67,9 @@ namespace BT_BS4
                         break;
                     
                     case 3:
-                        Console.Write("Nhập nút X cần thêm: ");
+                        Console.Write("Nhập giá trị X cần thêm: ");
                         X = int.Parse(Console.ReadLine());
-                        Console.Write("Nhập nút V cần tìm: ");
+                        Console.Write("Nhập giá V cần tìm: ");
                         V = int.Parse(Console.ReadLine());
                         if (linkedList.AddXBeforeV(X, V) == null)
                             Console.WriteLine($"Không tìm thấy nút {V} trong ds");
@@ -80,7 +81,7 @@ namespace BT_BS4
                         break;
 
                     case 4:
-                        Console.Write("Nhập nút X cần thêm: ");
+                        Console.Write("Nhập giá trị X cần thêm: ");
                         X = int.Parse(Console.ReadLine());
                         linkedList.AddXFirst(X);
                         Console.WriteLine($"\nĐã thêm {X} vào đầu danh sách");
@@ -88,10 +89,17 @@ namespace BT_BS4
                         break;
 
                     case 5:
-                        Console.Write("Nhập nút X cần thêm: ");
+                        Console.Write("Nhập giá trị X cần thêm: ");
                         X = int.Parse(Console.ReadLine());
                         linkedList.AddXLast(X);
                         Console.WriteLine($"\nĐã thêm {X} vào cuối danh sách");
+                        linkedList.PrintList();
+                        break;
+
+                    case 6:
+                        Console.Write("Nhập giá trị X cần thêm: ");
+                        X = int.Parse(Console.ReadLine());
+                        linkedList.AddXBeforeEvenLast(X);
                         linkedList.PrintList();
                         break;
 

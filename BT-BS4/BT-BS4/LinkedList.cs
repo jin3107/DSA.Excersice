@@ -99,5 +99,46 @@ namespace BT_BS4
                 curNode.Next = newNode;
             }
         }
+
+        // 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong dslk
+        public void AddXBeforeEvenLast(object X)
+        {
+            if (X == null) return;
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node prevNode = null;
+            Node lastEvenNode = null;
+            Node lastEvenPrevNode = null;
+            while (curNode != null) 
+            {
+                if ((int)curNode.Value % 2 == 0)
+                {
+                    lastEvenNode = curNode;
+                    lastEvenPrevNode = prevNode;
+                }
+                prevNode = curNode;
+                curNode = curNode.Next;
+            }
+            if (lastEvenNode == null)
+            {
+                Console.WriteLine("Không có giá trị chẵn trong danh sách");
+                return;
+            }
+            Node newNode = new Node(X);
+            if (lastEvenPrevNode == null)
+            {
+                newNode.Next = First;
+                First = newNode;
+            }
+            else
+            {
+                newNode.Next = lastEvenNode;
+                lastEvenPrevNode.Next = newNode;
+            }
+        }
     }
 }
