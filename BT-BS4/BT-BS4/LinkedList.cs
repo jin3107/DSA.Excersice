@@ -75,7 +75,7 @@ namespace BT_BS4
             return newNode;
         }
 
-        // 4. Thêm X vào đầu trong dslk
+        // 4. Thêm giá trị X vào đầu trong dslk
         public void AddXFirst(object X)
         {
             if (X == null) return;
@@ -84,7 +84,7 @@ namespace BT_BS4
             First = newNode;
         }
 
-        // 5. Thêm X vào cuối trong dslk
+        // 5. Thêm giá trị X vào cuối trong dslk
         public void AddXLast(object X)
         {
             Node newNode = new Node(X);
@@ -598,6 +598,11 @@ namespace BT_BS4
         {
             if (First == null || Q == null) return;
             Node curNode = First;
+            if (First == Q)
+            {
+                First = First.Next;
+                return;
+            }
             while (curNode != null && (int)curNode.Value != (int)Q)
                 curNode = curNode.Next;
             if (curNode != null && curNode.Next != null)
@@ -853,7 +858,6 @@ namespace BT_BS4
                     First = First.Next;
                 else
                     minPrev.Next = minNode.Next;
-
                 Console.WriteLine($"Đã xóa {minNode.Value}.");
             }
             else
@@ -914,7 +918,6 @@ namespace BT_BS4
                     First = maxNode.Next;
                 else
                     maxPrev.Next = maxNode.Next;
-
                 Console.WriteLine($"Đã xóa {maxNode.Value}.");
             }
             else
@@ -950,11 +953,162 @@ namespace BT_BS4
                     First = maxNode.Next;
                 else
                     maxPrev.Next = maxNode.Next;
-
                 Console.WriteLine($"Đã xóa {maxNode.Value}.");
             }
             else
                 Console.WriteLine("Không có giá trị trong danh sách.");
         }
+
+        // 39. Tìm phần tử min trong ds
+        public void FindMin()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node minNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value < (int)minNode.Value)
+                    minNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử nhỏ nhất trong danh sách là: {minNode.Value}");
+        }
+
+        // 40. Tìm phần tử min sau cùng. Dùng cho ds các int
+        public void FindLastMin()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node minNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value <= (int)minNode.Value)
+                    minNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử nhỏ nhất sau cùng là: {minNode.Value}");
+        }
+
+        // 41. Tìm phần tử min đầu tiên. Dùng cho ds các int
+        public void FindFirstMin()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node minNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value < (int)minNode.Value)
+                    minNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử nhỏ nhất đầu tiên là: {minNode.Value}");
+        }
+
+        // 42. Tìm phần tử max trong ds
+        public void FindMax()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node maxNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                    maxNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử lớn nhất trong danh sách là: {maxNode.Value}");
+        }
+
+        // 43. Tìm phần tử max sau cùng. Dùng cho ds các int
+        public void FindLastMax()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node maxNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value >= (int)maxNode.Value)
+                    maxNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử lớn nhất sau cùng là: {maxNode.Value}");
+        }
+
+        // 44. Tìm phần tử max đầu tiên. Dùng cho ds các int
+        public void FindFirstMax()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First.Next;
+            Node maxNode = First;
+            while (curNode != null)
+            {
+                if ((int)curNode.Value > (int)maxNode.Value)
+                    maxNode = curNode;
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Phần tử lớn nhất đầu tiên là: {maxNode.Value}");
+        }
+
+        // 45. Tìm phần tử là số nguyên số
+        public void FindPrime()
+        {
+            if (First == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = First;
+            Node primeNode = First;
+            List<int> soNguyenTo = new List<int>();
+            while (curNode != null)
+            {
+                if (IsPrime((int)curNode.Value))
+                {
+                    primeNode = curNode;
+                    soNguyenTo.Add((int)primeNode.Value);
+                }
+                curNode = curNode.Next;
+            }
+            Console.Write("Phần từ là số nguyên tố là: ");
+            foreach (var item in soNguyenTo)
+            {
+                Console.Write(item + " ");
+            }
+        }
+
+        private bool IsPrime(int number)
+        {
+            if (number < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
+        }
+
     }
 }

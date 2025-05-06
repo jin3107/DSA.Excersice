@@ -15,7 +15,7 @@ namespace BT_BS4
 
             int choice, X, V, Q;
             LinkedList linkedList = new LinkedList();
-            int[] arr = { 15, 81, 4, 76, 4, 5, 90 };
+            int[] arr = { 15, 81, 4, 76, 4, 5, 90, 3 };
             //int[] arr = { 1, 3, 5, 7 };
             //int[] arr = { };
             foreach (var item in arr)
@@ -69,6 +69,13 @@ namespace BT_BS4
                 Console.WriteLine("36. Xóa phần tử lớn nhất trong danh sách");
                 Console.WriteLine("37. Xóa phần tử lớn nhất đầu tiên trong danh sách");
                 Console.WriteLine("38. Xóa phần tử lớn nhất sau cùng trong danh sách");
+                Console.WriteLine("39. Tìm phần tử nhỏ nhất trong danh sách");
+                Console.WriteLine("40. Tìm phần tử nhỏ nhất sau cùng trong danh sách");
+                Console.WriteLine("41. Tìm phần tử nhỏ nhất đầu tiên trong danh sách");
+                Console.WriteLine("42. Tìm phần tử lớn nhất trong danh sách");
+                Console.WriteLine("43. Tìm phần tử lớn nhất sau cùng trong danh sách");
+                Console.WriteLine("44. Tìm phần tử lớn nhất đầu tiên trong danh sách");
+                Console.WriteLine("45. Tìm phần tử là số nguyên tố trong danh sách");
 
 
                 Console.WriteLine("0. Thoát chương trình");
@@ -354,6 +361,34 @@ namespace BT_BS4
                     case 38: 
                         linkedList.RemoveMaxLast();
                         linkedList.PrintList();
+                        break;
+
+                    case 39:
+                        linkedList.FindMin();
+                        break;
+
+                    case 40:
+                        linkedList.FindLastMin();
+                        break;
+
+                    case 41:
+                        linkedList.FindFirstMin();
+                        break;
+
+                    case 42:
+                        linkedList.FindMax();
+                        break;
+
+                    case 43:
+                        linkedList.FindLastMax();
+                        break;
+
+                    case 44: 
+                        linkedList.FindFirstMax();
+                        break;
+
+                    case 45:
+                        linkedList.FindPrime(); 
                         break;
 
                     default:
