@@ -33,31 +33,30 @@ namespace Bai1_tr58
                 Console.WriteLine("11. Tìm nút lớn nhất");
                 Console.WriteLine("12. Tìm nút nhỏ nhất");
                 Console.WriteLine("13. Tìm nút >= X gần nhất");
-                Console.WriteLine("141. Tìm nút <= X gần nhất");
-                Console.WriteLine("142. Tìm nút là số nguyên tố");
-                Console.WriteLine("143. Tìm nút cha");
-                Console.WriteLine("144. Tìm nút con");
-                Console.WriteLine("15. Đếm số nút");
-                Console.WriteLine("161. Đếm nút lá");
-                Console.WriteLine("162. Đếm số lần xuất hiện của các giá trị khóa trong cây");
-                Console.WriteLine("171. Đếm nút lẻ");
-                Console.WriteLine("172. Đếm nút chẵn");
-                Console.WriteLine("181. Đếm nút dương");
-                Console.WriteLine("182. Đếm nút âm");
-                Console.WriteLine("191. Đếm nút có đúng 1 con");
-                Console.WriteLine("192. Đếm nút có đúng 2 con");
-                Console.WriteLine("193. Đếm nút có đúng 1 con và đúng 2 con");
-                Console.WriteLine("20. Tổng tất cả nút");
-                Console.WriteLine("211. Tổng nút lá");
-                Console.WriteLine("212. Tổng nút chẵn");
-                Console.WriteLine("213. Tổng nút lẻ");
-                Console.WriteLine("214. Tổng nút là Số nguyên tố");
-                Console.WriteLine("22. Mức của nút X");
-                Console.WriteLine("23. Chiều cao của cây");
-                Console.WriteLine("24. Xóa nút X (đệ quy)");
-                Console.WriteLine("251. Xóa nút X (lặp)");
-                Console.WriteLine("252. Xóa tất cả các nút có giá trị khóa là số nguyên tố");
-                Console.WriteLine("26. Tìm nút trung gian có trong cây");
+                Console.WriteLine("14. Tìm nút <= X gần nhất");
+                Console.WriteLine("15. Tìm nút là số nguyên tố");
+                Console.WriteLine("16. Tìm nút cha");
+                Console.WriteLine("17. Tìm nút con");
+                Console.WriteLine("18. Đếm số nút");
+                Console.WriteLine("19. Đếm nút lá");
+                Console.WriteLine("20. Đếm số lần xuất hiện của các giá trị khóa trong cây");
+                Console.WriteLine("21. Đếm nút lẻ");
+                Console.WriteLine("22. Đếm nút chẵn");
+                Console.WriteLine("23. Đếm nút dương");
+                Console.WriteLine("24. Đếm nút âm");
+                Console.WriteLine("25. Đếm nút có đúng 1 con");
+                Console.WriteLine("26. Đếm nút có đúng 2 con");
+                Console.WriteLine("27. Đếm nút có đúng 1 con và đúng 2 con");
+                Console.WriteLine("28. Tổng tất cả nút");
+                Console.WriteLine("29. Tổng nút lá");
+                Console.WriteLine("30. Tổng nút chẵn");
+                Console.WriteLine("31. Tổng nút lẻ");
+                Console.WriteLine("32. Tổng nút là Số nguyên tố");
+                Console.WriteLine("33. Mức của nút X");
+                Console.WriteLine("34. Chiều cao của cây");
+                Console.WriteLine("35. Xóa nút X (đệ quy)");
+                Console.WriteLine("36. Xóa nút X (lặp)");
+                Console.WriteLine("37. Xóa tất cả các nút có giá trị khóa là số nguyên tố");
                 Console.WriteLine("0. Thoát");
                 Console.Write("\nChọn chức năng: ");
                 choice = int.Parse(Console.ReadLine());
@@ -75,7 +74,7 @@ namespace Bai1_tr58
                     case 2:
                         Console.Write("Nhập giá trị X để thêm (đệ quy): ");
                         x = int.Parse(Console.ReadLine());
-                        if (tree.Add_DeQuy(tree.root, x))
+                        if (tree.Add_DeQuy(ref tree.root, x))
                             Console.WriteLine("Đã thêm thành công.");
                         else
                             Console.WriteLine("Không thể thêm (giá trị đã tồn tại).");
@@ -145,26 +144,26 @@ namespace Bai1_tr58
                         tree.Display(node);
                         break;
 
-                    case 141:
+                    case 14:
                         Console.Write("Nhập giá trị X để tìm nút <= X gần nhất: ");
                         x = int.Parse(Console.ReadLine());
                         node = tree.FindMaxLessThanOrEquals(tree.root, x);
                         tree.Display(node);
                         break;
 
-                    case 142:
+                    case 15:
                         node = tree.FindPrimeNode(tree.root);
                         tree.Display(node);
                         break;
 
-                    case 143:
+                    case 16:
                         Console.Write("Nhập giá trị X để tìm nút cha: ");
                         x = int.Parse(Console.ReadLine());
                         node = tree.FindParent(tree.root, x);
                         tree.Display(node);
                         break;
 
-                    case 144:
+                    case 17:
                         Console.Write("Nhập giá trị X để tìm nút con: ");
                         x = int.Parse(Console.ReadLine());
                         node = tree.FindChild(tree.root, x);
@@ -185,105 +184,98 @@ namespace Bai1_tr58
                             Console.WriteLine("Không tìm thấy nút con có giá trị " + x);
                         break;
 
-                    case 15:
+                    case 18:
                         Console.WriteLine("Số nút trong cây: " + tree.CountNodes(tree.root));
                         break;
 
-                    case 161:
+                    case 19:
                         Console.WriteLine("Số nút lá trong cây: " + tree.CountLeafNodes(tree.root));
                         break;
 
-                    case 162:
+                    case 20:
                         Console.Write("Nhập giá trị khóa để đếm số lần xuất hiện: ");
                         x = int.Parse(Console.ReadLine());
                         int count = tree.CountOccurrences(tree.root, x);
                         Console.WriteLine("Số lần xuất hiện của " + x + ": " + count);
                         break;
 
-                    case 171:
+                    case 21:
                         Console.WriteLine("Số nút lẻ trong cây: " + tree.CountOddNodes(tree.root));
                         break;
 
-                    case 172:
+                    case 22:
                         Console.WriteLine("Số nút chẵn trong cây: " + tree.CountEvenNodes(tree.root));
                         break;
 
-                    case 181:
+                    case 23:
                         Console.WriteLine("Số nút dương trong cây: " + tree.CountPositiveNodes(tree.root));
                         break;
 
-                    case 182:
+                    case 24:
                         Console.WriteLine("Số nút âm trong cây: " + tree.CountNegativeNodes(tree.root));
                         break;
 
-                    case 191:
+                    case 25:
                         Console.WriteLine("Số nút có đúng một con: " + tree.CountNodesWithOneChild(tree.root));
                         break;
 
-                    case 192:
+                    case 26:
                         Console.WriteLine("Số nút có đúng hai con: " + tree.CountNodesWithTwoChildren(tree.root));
                         break;
 
-                    case 193:
+                    case 27:
                         Console.WriteLine("Số nút có đúng một con và đúng hai con: " + tree.CountNodesWithOneOrTwoChildren(tree.root));
                         break;
 
-                    case 20:
+                    case 28:
                         Console.WriteLine("Tổng giá trị khóa của tất cả nút: " + tree.SumAllNodes(tree.root));
                         break;
 
-                    case 211:
+                    case 29:
                         Console.WriteLine("Tổng giá trị khóa các nút lá: " + tree.SumLeafNodes(tree.root));
                         break;
 
-                    case 212:
+                    case 30:
                         Console.WriteLine("Tổng giá trị khóa các nút chẵn: " + tree.SumEvenNodes(tree.root));
                         break;
 
-                    case 213:
+                    case 31:
                         Console.WriteLine("Tổng giá trị khóa các nút lẻ: " + tree.SumOddNodes(tree.root));
                         break;
 
-                    case 214:
+                    case 32:
                         Console.WriteLine("Tổng giá trị khóa các nút là số nguyên tố: " + tree.SumPrimeNodes(tree.root));
                         break;
 
-                    case 22:
+                    case 33:
                         Console.Write("Nhập giá trị X để xác định mức: ");
                         x = int.Parse(Console.ReadLine());
                         int level = tree.GetLevel(tree.root, x);
                         Console.WriteLine("Mức của nút X: " + level);
                         break;
 
-                    case 23:
+                    case 34:
                         Console.WriteLine("Chiều cao của cây: " + tree.Height(tree.root));
                         break;
 
-                    case 24:
+                    case 35:
                         Console.Write("Nhập giá trị X để xóa (đệ quy): ");
                         x = int.Parse(Console.ReadLine());
                         tree.DeleteNode_Recursion(tree.root, x);
                         Console.WriteLine("Đã xóa thành công (đệ quy).");
                         break;
 
-                    case 251:
+                    case 36:
                         Console.Write("Nhập giá trị X để xóa (lặp): ");
                         x = int.Parse(Console.ReadLine());
                         tree.DeleteNode_Iteration(x);
                         Console.WriteLine("Đã xóa thành công (lặp).");
                         break;
 
-                    case 252:
+                    case 37:
                         Console.WriteLine("Xóa tất cả các nút có giá trị khóa là số nguyên tố.");
                         tree.DeletePrimeNodes(tree.root);
                         Console.WriteLine("Đã xóa thành công.");
-                        break;
-
-                    case 26:
-                        Console.Write("Nhập giá trị X để tìm nút trung gian: ");
-                        x = int.Parse(Console.ReadLine());
-                        node = tree.FindMiddleNodeHelper(tree.root, ref x);
-                        tree.Display(node);
                         break;
 
                     case 0:

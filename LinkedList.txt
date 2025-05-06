@@ -2,58 +2,74 @@ public class Node
 {
     public object Value;
     public Node Next;
-    
-    public Node() 
-    {
+
+    public Node()
+    { 
         Value = null;
         Next = null;
     }
-    
+
     public Node(object val)
-    { 
+    {
         Value = val;
         Next = null;
     }
 }
 
+
 public class LinkedList
 {
     protected Node First;
-    
+
+    // Nếu cây tknp cho chuỗi. Thay đỗi First -> FirstString để tránh bị chèn chuỗi vào First
+    protected Node FirstString;
+
     public LinkedList() 
     { 
-        First = null; 
+        First = null;
+
+        // Nếu cây tknp cho chuỗi
+        FirstString = null;
     }
 
-    // 1. Thêm X sau V
-    public Node AddAfter(object V, object X)
+    // 1. Duyệt và xuất giá trị các nút của ds ra màn hình
+    public void PrintList()
     {
-        if (First == null || V == null || X == null)
-            return null;
-
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
         Node curNode = First;
-        while (!curNode.Value.Equals(V) && curNode.Next != null)
+        while (curNode != null)
+        {
+            Console.Write(curNode.Value);
+            if (curNode.Next != null)
+                Console.Write(" -> ");
             curNode = curNode.Next;
+        }
+    }
 
+    // 2. Thêm X vào sau V
+    public Node AddXAfterV(object X, object V)
+    {
+        if (First == null || X == null || V == null)
+            return null;
+        Node curNode = First;
+        while (curNode != null && !curNode.Value.Equals(V))
+            curNode = curNode.Next;
         if (!curNode.Value.Equals(V))
             return null;
-
         Node newNode = new Node(X);
         newNode.Next = curNode.Next;
         curNode.Next = newNode;
         return newNode;
     }
 
-    // 2. Thêm X trước V
-    public Node AddBefore(object V, object X)
+    // 3. Thêm X vào trước V
+    public Node AddXBeforeV(object X, object V)
     {
-        if (First == null || V == null || X == null)
-            return null;
-        if (First.Value.Equals(V))
-        {
-            AddFirst(X);
-            return First;
-        }
+        if (First == null || X == null || V == null) return null;
         Node curNode = First;
         Node prevNode = null;
         while (curNode != null && !curNode.Value.Equals(V))
@@ -61,31 +77,36 @@ public class LinkedList
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (curNode == null)
-            return null;
+        if (curNode == null) return null;
         Node newNode = new Node(X);
-        prevNode.Next = newNode;
-        newNode.Next = curNode;
+        if (prevNode == null)
+        {
+            newNode.Next = First;
+            First = newNode;
+        }
+        else
+        {
+            prevNode.Next = newNode;
+            newNode.Next = curNode;
+        }
         return newNode;
     }
 
-    // 3. Thêm X vào đầu trong dslk
-    public void AddFirst(object X)
+    // 4. Thêm giá trị X vào đầu trong dslk
+    public void AddXFirst(object X)
     {
         if (X == null) return;
-
         Node newNode = new Node(X);
         newNode.Next = First;
         First = newNode;
-        Console.WriteLine($"Đã thêm {X} vào đầu danh sách.");
     }
 
-    // 4. Thêm X vào cuối trong dslk
-    public void AddLast(object X)
+    // 5. Thêm giá trị X vào cuối trong dslk
+    public void AddXLast(object X)
     {
-        if (X == null) return;
         Node newNode = new Node(X);
-        if (First == null)
+        if (X == null) return;
+        if (First == null) 
             First = newNode;
         else
         {
@@ -93,531 +114,481 @@ public class LinkedList
             while (curNode.Next != null)
                 curNode = curNode.Next;
             curNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào cuối danh sách.");
         }
-    }
-
-    // 5. Thêm X vào giữa trong dslk
-    public void AddCenter(object X)
-    {
-        if (X == null) return;
-        Node newNode = new Node(X);
-        if (First == null)
-        {
-            First = newNode;
-            return;
-        }
-
-        Node curNode = First;
-        int count = 0;
-        while (curNode != null)
-        {
-            count++;
-            curNode = curNode.Next;
-        }
-
-        curNode = First;
-        int mid = count / 2;
-        for (int i = 1; i < mid; i++)
-            curNode = curNode.Next;
-        newNode.Next = curNode.Next;
-        curNode.Next = newNode;
-        Console.WriteLine($"Đã thêm {X} vào giữa danh sách.");
     }
 
     // 6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong dslk
-    public void AddBeforeEvenLast(object X)
+    public void AddXBeforeEvenLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
-
         Node curNode = First;
-        Node evenNode = null;
         Node prevNode = null;
+        Node lastEvenNode = null;
         Node lastEvenPrevNode = null;
-        while (curNode != null)
+        while (curNode != null) 
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
+            if ((int)curNode.Value % 2 == 0)
             {
-                evenNode = curNode;
+                lastEvenNode = curNode;
                 lastEvenPrevNode = prevNode;
             }
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (evenNode != null && lastEvenPrevNode != null)
+        if (lastEvenNode == null)
         {
-            newNode.Next = evenNode;
-            lastEvenPrevNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {evenNode.Value}.");
+            Console.WriteLine("Không có giá trị chẵn trong danh sách");
+            return;
         }
-        else if (evenNode == null)
-            Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        if (lastEvenPrevNode == null)
+        {
+            newNode.Next = First;
+            First = newNode;
+        }
+        else
+        {
+            newNode.Next = lastEvenNode;
+            lastEvenPrevNode.Next = newNode;
+        }
     }
 
     // 7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong dslk
-    public void AddAfterEvenLast(object X)
+    public void AddXAfterEvenLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
-
         Node curNode = First;
-        Node evenNode = null;
+        Node lastEvenNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
-                evenNode = curNode;
+            if ((int)curNode.Value % 2 == 0)
+                lastEvenNode = curNode;
             curNode = curNode.Next;
         }
-        if (evenNode != null)
+        if (lastEvenNode == null)
         {
-            newNode.Next = evenNode.Next;
-            evenNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {evenNode.Value}.");
+            Console.WriteLine("Không có giá trị chẵn trong danh sách");
+            return;
         }
-        else
-            Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = lastEvenNode.Next;
+        lastEvenNode.Next = newNode;
     }
 
     // 8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong dslk
-    public void AddBeforeEvenFirst(object X)
+    public void AddXBeforeEvenFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         Node prevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
+            if ((int)curNode.Value % 2 == 0)
                 break;
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (curNode != null)
+        if (curNode == null)
         {
-            newNode.Next = curNode;
-            if (prevNode != null)
-                prevNode.Next = newNode;
-            else
-                First = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {curNode.Value}.");
+            Console.WriteLine("Không có giá trị chẵn trong danh sách");
+            return;
         }
+        Node newNode = new Node(X);
+        newNode.Next = curNode;
+        if (prevNode == null)
+            First = newNode;
         else
-            Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
+            prevNode.Next = newNode;
     }
 
     // 9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong dslk
-    public void AddAfterEvenFirst(object X)
+    public void AddXAfterEvenFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
+            if ((int)curNode.Value % 2 == 0)
                 break;
             curNode = curNode.Next;
         }
-        if (curNode != null)
-        {
-            newNode.Next = curNode.Next;
-            curNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {curNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
-    }
-
-    /// 10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong dslk
-    public void AddBeforeOddLast(object X)
-    {
-        if (X == null) return;
         Node newNode = new Node(X);
-        if (First == null)
+        if (curNode == null)
         {
-            First = newNode;
+            Console.WriteLine("Không có giá trị chẵn trong danh sách");
             return;
         }
+        newNode.Next = curNode.Next;
+        curNode.Next = newNode;
+    }
 
+    // 10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong dslk
+    public void AddXBeforeOddLast(object X)
+    {
+        if (X == null) return;
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
         Node curNode = First;
-        Node oddNode = null;
         Node prevNode = null;
+        Node lastOddNode = null;
         Node lastOddPrevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
+            if ((int)curNode.Value % 2 != 0)
             {
-                oddNode = curNode;
+                lastOddNode = curNode;
                 lastOddPrevNode = prevNode;
             }
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (oddNode != null && lastOddPrevNode != null)
+        if (lastOddNode == null)
         {
-            newNode.Next = oddNode;
-            lastOddPrevNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {oddNode.Value}.");
+            Console.WriteLine("Không có giá trị lẻ trong danh sách");
+            return;
         }
-        else if (oddNode == null)
-            Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        if (lastOddPrevNode == null)
+        {
+            newNode.Next = First;
+            First = newNode;
+        }
+        else
+        {
+            newNode.Next = lastOddNode;
+            lastOddPrevNode.Next = newNode;
+        }
     }
 
     // 11. Thêm giá trị X vào sau giá trị lẻ sau cùng trong dslk
-    public void AddAfterOddLast(object X)
+    public void AddXAfterOddLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
-
         Node curNode = First;
-        Node oddNode = null;
+        Node lastOddNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
-                oddNode = curNode;
+            if ((int)curNode.Value % 2 != 0)
+                lastOddNode = curNode;
             curNode = curNode.Next;
         }
-        if (oddNode != null)
+        if (lastOddNode == null)
         {
-            newNode.Next = oddNode.Next;
-            oddNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {oddNode.Value}.");
+            Console.WriteLine("Không có giá trị lẻ trong danh sách");
+            return;
         }
-        else
-            Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = lastOddNode.Next;
+        lastOddNode.Next = newNode;
     }
 
     // 12. Thêm giá trị X vào trước giá trị lẻ đầu tiên trong dslk
-    public void AddBeforeOddFirst(object X)
+    public void AddXBeforeOddFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         Node prevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
+            if ((int)curNode.Value % 2 != 0)
                 break;
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (curNode != null)
+        if (curNode == null)
         {
-            newNode.Next = curNode;
-            if (prevNode != null)
-                prevNode.Next = newNode;
-            else
-                First = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {curNode.Value}.");
+            Console.WriteLine("Không có giá trị lẻ trong danh sách");
+            return;
         }
+        Node newNode = new Node(X);
+        newNode.Next = curNode;
+        if (prevNode == null)
+            First = newNode;
         else
-            Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+            prevNode.Next = newNode;
     }
 
     // 13. Thêm giá trị X vào sau giá trị lẻ đầu tiên trong dslk
-    public void AddAfterOddFirst(object X)
+    public void AddXAfterOddFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
+            if ((int)curNode.Value % 2 != 0)
                 break;
             curNode = curNode.Next;
         }
-        if (curNode != null)
+        Node newNode = new Node(X);
+        if (curNode == null)
         {
-            newNode.Next = curNode.Next;
-            curNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {curNode.Value}.");
+            Console.WriteLine("Không có giá trị lẻ trong danh sách");
+            return;
         }
-        else
-            Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+        newNode.Next = curNode.Next;
+        curNode.Next = newNode;
     }
 
-    // 14. Thêm X vào trước giá trị nhỏ nhất sau cùng trong dslk
-    public void AddBeforeMinLast(object X)
+    // 14. Thêm giá trị X vào trước giá trị nhỏ nhất sau cùng trong dslk
+    public void AddXBeforeMinLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
-        Node minNode = null;
         Node prevNode = null;
-        Node lastMinPrevNode = null;
+        Node minNode = First;
+        Node minPrevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && (minNode == null || ((IComparable)curNode.Value).CompareTo(minNode.Value) < 0))
+            if ((int)curNode.Value <= (int)minNode.Value)
             {
                 minNode = curNode;
-                lastMinPrevNode = prevNode;
+                minPrevNode = prevNode;
             }
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (minNode != null && lastMinPrevNode != null)
-        {
-            newNode.Next = minNode;
-            lastMinPrevNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {minNode.Value}.");
-        }
-        else if (minNode == null)
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = minNode;
+        if (minPrevNode == null)
+            First = newNode;
+        else
+            minPrevNode.Next = newNode;
     }
 
-    // 15. Thêm X vào sau giá trị nhỏ nhất sau cùng trong dslk
-    public void AddAfterMinLast(object X)
+    // 15. Thêm giá trị X vào sau giá trị nhỏ nhất sau cùng trong dslk
+    public void AddXAfterMinLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
-        Node minNode = null;
+        Node minNode = First;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && (minNode == null || ((IComparable)curNode.Value).CompareTo(minNode.Value) < 0))
+            if ((int)curNode.Value <= (int)minNode.Value)
                 minNode = curNode;
             curNode = curNode.Next;
         }
-        if (minNode != null)
-        {
-            newNode.Next = minNode.Next;
-            minNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {minNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = minNode.Next;
+        minNode.Next = newNode;
     }
 
-    // 16. Thêm X vào trước giá trị nhỏ nhất đầu tiên trong dslk
-    public void AddBeforeMinFirst(object X)
+    // 16. Thêm giá trị X vào trước giá trị nhỏ nhất đầu tiên trong dslk
+    public void AddXBeforeMinFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         Node prevNode = null;
+        Node minNode = First;
+        Node minPrevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(newNode.Value) < 0)
-                break;
-            prevNode = curNode;
-            curNode = curNode.Next;
-        }
-        if (curNode != null)
-        {
-            newNode.Next = curNode;
-            if (prevNode != null)
-                prevNode.Next = newNode;
-            else
-                First = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {curNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
-    }
-
-    // 17. Thêm X vào sau giá trị nhỏ nhất đầu tiên trong dslk
-    public void AddAfterMinFirst(object X)
-    {
-        if (X == null) return;
-        Node newNode = new Node(X);
-        if (First == null)
-        {
-            First = newNode;
-            return;
-        }
-        Node curNode = First;
-        while (curNode != null)
-        {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(newNode.Value) < 0)
-                break;
-            curNode = curNode.Next;
-        }
-        if (curNode != null)
-        {
-            newNode.Next = curNode.Next;
-            curNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {curNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
-    }
-
-    // 18. Thêm X vào trước giá trị lớn nhất sau cùng trong dslk
-    public void AddBeforeMaxLast(object X)
-    {
-        if (X == null) return;
-        Node newNode = new Node(X);
-        if (First == null)
-        {
-            First = newNode;
-            return;
-        }
-        Node curNode = First;
-        Node maxNode = null;
-        Node prevNode = null;
-        Node lastMaxPrevNode = null;
-        while (curNode != null)
-        {
-            if (curNode.Value is IComparable && (maxNode == null || ((IComparable)curNode.Value).CompareTo(maxNode.Value) > 0))
+            if ((int)curNode.Value < (int)minNode.Value)
             {
-                maxNode = curNode;
-                lastMaxPrevNode = prevNode;
+                minNode = curNode;
+                minPrevNode = prevNode;
             }
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (maxNode != null && lastMaxPrevNode != null)
-        {
-            newNode.Next = maxNode;
-            lastMaxPrevNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {maxNode.Value}.");
-        }
-        else if (maxNode == null)
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = minNode;
+        if (minPrevNode == null)
+            First = newNode;
+        else
+            minPrevNode.Next = newNode;
     }
 
-    // 19. Thêm X vào sau giá trị lớn nhất sau cùng trong dslk
-    public void AddAfterMaxLast(object X)
+    // 17. Thêm giá trị X vào sau giá trị nhỏ nhất đầu tiên trong dslk
+    public void AddXAfterMinFirst(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
+
         Node curNode = First;
-        Node maxNode = null;
+        Node prevNode = null;
+        Node minNode = First;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && (maxNode == null || ((IComparable)curNode.Value).CompareTo(maxNode.Value) > 0))
-                maxNode = curNode;
+            if ((int)curNode.Value < (int)minNode.Value)
+                minNode = curNode;
+            prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (maxNode != null)
-        {
-            newNode.Next = maxNode.Next;
-            maxNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {maxNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = minNode.Next;
+        minNode.Next = newNode;
     }
 
-    // 20. Thêm X vào trước giá trị lớn nhất đầu tiên trong dslk
-    public void AddBeforeMaxFirst(object X)
+    // 18. Thêm giá trị X vào trước giá trị lớn nhất sau cùng trong dslk
+    public void AddXBeforeMaxLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
         Node prevNode = null;
+        Node maxNode = First;
+        Node maxPrevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(newNode.Value) > 0)
-                break;
+            if ((int)curNode.Value >= (int)maxNode.Value)
+            {
+                maxNode = curNode;
+                maxPrevNode = prevNode;
+            }
             prevNode = curNode;
             curNode = curNode.Next;
         }
-        if (curNode != null)
-        {
-            newNode.Next = curNode;
-            if (prevNode != null)
-                prevNode.Next = newNode;
-            else
-                First = newNode;
-            Console.WriteLine($"Đã thêm {X} vào trước {curNode.Value}.");
-        }
+        Node newNode = new Node(X);
+        newNode.Next = maxNode;
+        if (maxPrevNode == null)
+            First = newNode;
         else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+            maxPrevNode.Next = newNode;
     }
 
-    // 21. Thêm X vào sau giá trị lớn nhất đầu tiên trong dslk
-    public void AddAfterMaxFirst(object X)
+    // 19. Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong dslk
+    public void AddXAfterMaxLast(object X)
     {
         if (X == null) return;
-        Node newNode = new Node(X);
         if (First == null)
         {
-            First = newNode;
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
         Node curNode = First;
+        Node maxNode = First;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(newNode.Value) > 0)
-                break;
+            if ((int)curNode.Value >= (int)maxNode.Value)
+                maxNode = curNode;
             curNode = curNode.Next;
         }
-        if (curNode != null)
-        {
-            newNode.Next = curNode.Next;
-            curNode.Next = newNode;
-            Console.WriteLine($"Đã thêm {X} vào sau {curNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+        Node newNode = new Node(X);
+        newNode.Next = maxNode.Next;
+        maxNode.Next = newNode;
     }
 
-    // 22. Xóa phần tử X trong dslk
+    // 20. Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong dslk
+    public void AddXBeforeMaxFirst(object X)
+    {
+        if (X == null) return;
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First;
+        Node prevNode = null;
+        Node maxNode = First;
+        Node maxPrevNode = null;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value > (int)maxNode.Value)
+            {
+                maxNode = curNode;
+                maxPrevNode = prevNode;
+            }
+            prevNode = curNode;
+            curNode = curNode.Next;
+        }
+        Node newNode = new Node(X);
+        newNode.Next = maxNode;
+        if (maxPrevNode == null)
+            First = newNode;
+        else
+            maxPrevNode.Next = newNode;
+    }
+
+    // 21. Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong dslk
+    public void AddXAfterMaxFirst(object X)
+    {
+        if (X == null) return;
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+
+        Node curNode = First;
+        Node prevNode = null;
+        Node maxNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value > (int)maxNode.Value)
+                maxNode = curNode;
+            prevNode = curNode;
+            curNode = curNode.Next;
+        }
+        Node newNode = new Node(X);
+        newNode.Next = maxNode.Next;
+        maxNode.Next = newNode;
+    }
+
+    // 22. Xóa giá trị X trong dslk
     public void Remove(object X)
     {
-        if ((First == null || (X == null)))
-            return;
+        if ((First == null || (X == null))) return;
         if (First.Value.Equals(X))
         {
             First = First.Next;
@@ -629,9 +600,10 @@ public class LinkedList
             curNode = curNode.Next;
         if (curNode.Next != null)
             curNode.Next = curNode.Next.Next;
+        Console.WriteLine($"Đã xóa thành công {X}");
     }
 
-    // 23. Xóa tất cả các phần tử trong dslk
+    // 23. Xóa hết tất cả các phần tử trong dslk
     public void RemoveAll()
     {
         First = null;
@@ -641,10 +613,14 @@ public class LinkedList
     // 24. Xóa phần tử kề sau phần tử Q trong dslk
     public void RemoveAfter(object Q)
     {
-        if (First == null || Q == null)
-            return;
+        if (First == null || Q == null) return;
         Node curNode = First;
-        while (curNode != null && !curNode.Value.Equals(Q))
+        if (First == Q)
+        {
+            First = First.Next;
+            return;
+        }
+        while (curNode != null && (int)curNode.Value != (int)Q)
             curNode = curNode.Next;
         if (curNode != null && curNode.Next != null)
             curNode.Next = curNode.Next.Next;
@@ -653,22 +629,21 @@ public class LinkedList
     // 25. Xóa phần tử kề trước phần tử Q trong dslk
     public void RemoveBefore(object Q)
     {
-        if (First == null || Q == null)
-            return;
-        if (First.Value.Equals(Q))
+        if (First == null || Q == null || (int)First.Value == (int)Q) return;
+        Node cur = First;
+        Node prev = null;
+        Node prePrev = null;
+        while (cur != null && (int)cur.Value != (int)Q)
         {
-            First = First.Next;
-            return;
+            prePrev = prev;
+            prev = cur;
+            cur = cur.Next;
         }
-        Node curNode = First;
-        Node prevNode = null;
-        while (curNode != null && !curNode.Value.Equals(Q))
-        {
-            prevNode = curNode;
-            curNode = curNode.Next;
-        }
-        if (prevNode != null && prevNode != First)
-            prevNode.Next = curNode;
+        if (prev == null) return;
+        if (prePrev == null)
+            First = cur;
+        else
+            prePrev.Next = cur;
     }
 
     // 26. Xóa phần tử đầu tiên trong dslk
@@ -683,8 +658,7 @@ public class LinkedList
     // 27. Xóa phần tử cuối cùng trong dslk
     public void RemoveLast()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         if (First.Next == null)
         {
             First = null;
@@ -698,11 +672,10 @@ public class LinkedList
         Console.WriteLine("Đã xóa phần tử cuối cùng trong danh sách.");
     }
 
-    // 28. Xóa phần tử giữa trong dslk
+    // 28. Xóa phần tử ở giữa trong dslk
     public void RemoveCenter()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         Node curNode = First;
         Node prevNode = null;
         int count = 0;
@@ -725,13 +698,12 @@ public class LinkedList
     // 29. Xóa phần tử chẵn đầu tiên trong dslk
     public void RemoveEvenFirst()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         Node curNode = First;
         Node prevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
+            if ((int)curNode.Value % 2 == 0)
                 break;
             prevNode = curNode;
             curNode = curNode.Next;
@@ -748,47 +720,43 @@ public class LinkedList
             Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
     }
 
-    // 30. Xóa phần tử chẵn cuối cùng trong dslk
+    // 30. Xóa phần tử chẵn cuồi cùng trong dslk
     public void RemoveEvenLast()
     {
-        if (First == null)
-            return;
-        Node curNode = First;
-        Node prevNode = null;
-        Node evenNode = null;
-        Node prevEvenNode = null;
-        while (curNode != null)
+        if (First == null) return;
+        Node cur = First, prev = null;
+        Node even = null, evenPrev = null;
+        while (cur != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 == 0)
+            if ((int)cur.Value % 2 == 0)
             {
-                evenNode = curNode;
-                prevEvenNode = prevNode;
+                even = cur;
+                evenPrev = prev;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
+            prev = cur;
+            cur = cur.Next;
         }
-        if (evenNode != null)
+        if (even == null)
         {
-            if (prevEvenNode != null)
-                prevEvenNode.Next = evenNode.Next;
-            else
-                First = evenNode.Next;
-            Console.WriteLine($"Đã xóa {evenNode.Value}.");
+            Console.WriteLine("Không có số chẵn.");
+            return;
         }
+        if (evenPrev == null)
+            First = First.Next;
         else
-            Console.WriteLine("Không có số chẵn trong danh sách liên kết.");
+            evenPrev.Next = even.Next;
+        Console.WriteLine($"Đã xóa {even.Value}.");
     }
 
     // 31. Xóa phần tử lẻ đầu tiên trong dslk
     public void RemoveOddFirst()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         Node curNode = First;
         Node prevNode = null;
         while (curNode != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
+            if ((int)curNode.Value % 2 != 0)
                 break;
             prevNode = curNode;
             curNode = curNode.Next;
@@ -805,223 +773,394 @@ public class LinkedList
             Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
     }
 
-    // 32. Xóa phần tử lẻ cuối cùng trong dslk
+    // 32. Xóa phần tử lẻ cuồi cùng trong dslk
     public void RemoveOddLast()
     {
-        if (First == null)
-            return;
-        Node curNode = First;
-        Node prevNode = null;
-        Node oddNode = null;
-        Node prevOddNode = null;
-        while (curNode != null)
+        if (First == null) return;
+        Node cur = First, prev = null;
+        Node odd = null, oddPrev = null;
+        while (cur != null)
         {
-            if (curNode.Value is int && (int)curNode.Value % 2 != 0)
+            if ((int)cur.Value % 2 != 0)
             {
-                oddNode = curNode;
-                prevOddNode = prevNode;
+                odd = cur;
+                oddPrev = prev;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
+            prev = cur;
+            cur = cur.Next;
         }
-        if (oddNode != null)
+        if (odd == null)
         {
-            if (prevOddNode != null)
-                prevOddNode.Next = oddNode.Next;
-            else
-                First = oddNode.Next;
-            Console.WriteLine($"Đã xóa {oddNode.Value}.");
+            Console.WriteLine("Không có số lẻ.");
+            return;
         }
+        if (oddPrev == null)
+            First = First.Next;
         else
-            Console.WriteLine("Không có số lẻ trong danh sách liên kết.");
+            oddPrev.Next = odd.Next;
+        Console.WriteLine($"Đã xóa {odd.Value}.");
     }
 
     // 33. Xóa phần tử nhỏ nhất trong dslk
     public void RemoveMin()
     {
-        if (First == null)
-            return;
-        Node curNode = First;
-        Node prevNode = null;
+        if (First == null) return;
+        Node cur = First;
         Node minNode = First;
-        Node prevMinNode = null;
-        while (curNode != null)
+        Node minPrev = null;
+        Node prev = null;
+        while (cur != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(minNode.Value) < 0)
+            if ((int)cur.Value < (int)minNode.Value)
             {
-                minNode = curNode;
-                prevMinNode = prevNode;
+                minNode = cur;
+                minPrev = prev;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
+            prev = cur;
+            cur = cur.Next;
         }
-        if (minNode != null)
-        {
-            if (prevMinNode != null)
-                prevMinNode.Next = minNode.Next;
-            else
-                First = minNode.Next;
-            Console.WriteLine($"Đã xóa {minNode.Value}.");
-        }
+        if (minPrev == null)
+            First = First.Next;
+        else
+            minPrev.Next = minNode.Next;
+        Console.WriteLine($"Đã xóa {minNode.Value}.");
     }
 
     // 34. Xóa phần tử nhỏ nhất đầu tiên trong dslk
     public void RemoveMinFirst()
     {
-        if (First == null)
-            return;
-        Node curNode = First;
-        Node prevNode = null;
+        if (First == null) return;
+        Node cur = First;
         Node minNode = First;
-        Node prevMinNode = null;
-        while (curNode != null)
+        Node minPrev = null;
+        Node prev = null;
+        while (cur != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(minNode.Value) < 0)
+            if ((int)cur.Value < (int)minNode.Value)
             {
-                minNode = curNode;
-                prevMinNode = prevNode;
-                break;
+                minNode = cur;
+                minPrev = prev;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
+            prev = cur;
+            cur = cur.Next;
         }
-        if (minNode != null)
-        {
-            if (prevMinNode != null)
-                prevMinNode.Next = minNode.Next;
-            else
-                First = minNode.Next;
-            Console.WriteLine($"Đã xóa {minNode.Value}.");
-        }
+        if (minPrev == null)
+            First = First.Next;
+        else
+            minPrev.Next = minNode.Next;
+        Console.WriteLine($"Đã xóa {minNode.Value}.");
     }
 
     // 35. Xóa phần tử nhỏ nhất sau cùng trong dslk
     public void RemoveMinLast()
     {
-        if (First == null)
-            return;
-        Node curNode = First;
-        Node prevNode = null;
-        Node minNode = First;
-        Node prevMinNode = null;
-        while (curNode != null)
+        if (First == null) return;
+        Node cur = First;
+        Node minNode = null;
+        Node minPrev = null;
+        Node prev = null;
+        while (cur != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(minNode.Value) <= 0)
+            if (minNode == null || (int)cur.Value < (int)minNode.Value)
             {
-                minNode = curNode;
-                prevMinNode = prevNode;
+                minNode = cur;
+                minPrev = prev;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
+            prev = cur;
+            cur = cur.Next;
         }
         if (minNode != null)
         {
-            if (prevMinNode != null)
-                prevMinNode.Next = minNode.Next;
+            if (minPrev == null)
+                First = First.Next;
             else
-                First = minNode.Next;
+                minPrev.Next = minNode.Next;
             Console.WriteLine($"Đã xóa {minNode.Value}.");
         }
+        else
+            Console.WriteLine("Không có giá trị trong danh sách.");
     }
 
     // 36. Xóa phần tử lớn nhất trong dslk
     public void RemoveMax()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         Node curNode = First;
-        Node prevNode = null;
         Node maxNode = First;
-        Node prevMaxNode = null;
+        Node maxPrev = null;
+        Node prev = null;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(maxNode.Value) > 0)
+            if ((int)curNode.Value > (int)maxNode.Value)
             {
                 maxNode = curNode;
-                prevMaxNode = prevNode;
+                maxPrev = prev;
             }
-            prevNode = curNode;
+            prev = curNode;
             curNode = curNode.Next;
         }
         if (maxNode != null)
         {
-            if (prevMaxNode != null)
-                prevMaxNode.Next = maxNode.Next;
+            if (maxPrev == null) 
+                First = First.Next;
             else
-                First = maxNode.Next;
+                maxPrev.Next = maxNode.Next;
             Console.WriteLine($"Đã xóa {maxNode.Value}.");
         }
+        else
+            Console.WriteLine("Không có giá trị trong danh sách.");
     }
 
     // 37. Xóa phần tử lớn nhất đầu tiên trong dslk
     public void RemoveMaxFirst()
     {
-        if (First == null)
-            return;
+        if (First == null) return;
         Node curNode = First;
         Node prevNode = null;
         Node maxNode = First;
-        Node prevMaxNode = null;
+        Node maxPrev = null;
         while (curNode != null)
         {
-            if (curNode.Value is IComparable && ((IComparable)curNode.Value).CompareTo(maxNode.Value) > 0)
+            if ((int)curNode.Value > (int)maxNode.Value)
             {
                 maxNode = curNode;
-                prevMaxNode = prevNode;
-                break;
+                maxPrev = prevNode;
             }
-            prevNode = curNode;
-            curNode = curNode.Next;
-        }
-        if (curNode != null)
-        {
-            if (prevNode != null)
-                prevNode.Next = curNode.Next;
-            else
-                First = curNode.Next;
-            Console.WriteLine($"Đã xóa {curNode.Value}.");
-        }
-        else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
-    }
-
-    // 38. Xóa phần tử lớn nhất sau cùng trong dslk
-    public void RemoveMaxLast()
-    {
-        if (First == null)
-            return;
-        Node<T> curNode = First;
-        Node<T> prevNode = null;
-        Node<T> maxNode = null;
-        while (curNode != null)
-        {
-            if (curNode.Value is IComparable && (maxNode == null || ((IComparable)curNode.Value).CompareTo(maxNode.Value) > 0))
-                maxNode = curNode;
             prevNode = curNode;
             curNode = curNode.Next;
         }
         if (maxNode != null)
         {
-            if (prevNode != null)
-                prevNode.Next = maxNode.Next;
-            else
+            if (maxPrev == null)
                 First = maxNode.Next;
+            else
+                maxPrev.Next = maxNode.Next;
             Console.WriteLine($"Đã xóa {maxNode.Value}.");
         }
         else
-            Console.WriteLine("Không có số trong danh sách liên kết.");
+            Console.WriteLine("Không có giá trị trong danh sách.");
     }
 
-    // In dslk
-    public void PrintList()
+    // 38. Xóa phần tử lớn nhất sau cùng trong dslk
+    public void RemoveMaxLast()
+    {
+        if (First == null) return;
+        Node curNode = First;
+        Node prevNode = null;
+        Node maxNode = null;
+        Node maxPrev = null;
+        while (curNode != null)
+        {
+            if (maxNode == null || (int)curNode.Value > (int)maxNode.Value)
+            {
+                maxNode = curNode;
+                maxPrev = prevNode;
+            }
+            else if ((int)curNode.Value == (int)maxNode.Value)
+            {
+                maxNode = curNode;
+                maxPrev = prevNode;
+            }
+            prevNode = curNode;
+            curNode = curNode.Next;
+        }
+        if (maxNode != null)
+        {
+            if (maxPrev == null)
+                First = maxNode.Next;
+            else
+                maxPrev.Next = maxNode.Next;
+            Console.WriteLine($"Đã xóa {maxNode.Value}.");
+        }
+        else
+            Console.WriteLine("Không có giá trị trong danh sách.");
+    }
+
+    // 39. Tìm phần tử min trong ds
+    public void FindMin()
     {
         if (First == null)
         {
-            Console.WriteLine("Danh sách rỗng.");
+            Console.WriteLine("Danh sách rỗng");
             return;
         }
+        Node curNode = First.Next;
+        Node minNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value < (int)minNode.Value)
+                minNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử nhỏ nhất trong danh sách là: {minNode.Value}");
+    }
 
-        Node<T> curNode = First;
+    // 40. Tìm phần tử min sau cùng. Dùng cho ds các int
+    public void FindLastMin()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First.Next;
+        Node minNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value <= (int)minNode.Value)
+                minNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử nhỏ nhất sau cùng là: {minNode.Value}");
+    }
+
+    // 41. Tìm phần tử min đầu tiên. Dùng cho ds các int
+    public void FindFirstMin()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First.Next;
+        Node minNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value < (int)minNode.Value)
+                minNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử nhỏ nhất đầu tiên là: {minNode.Value}");
+    }
+
+    // 42. Tìm phần tử max trong ds
+    public void FindMax()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First.Next;
+        Node maxNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value > (int)maxNode.Value)
+                maxNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử lớn nhất trong danh sách là: {maxNode.Value}");
+    }
+
+    // 43. Tìm phần tử max sau cùng. Dùng cho ds các int
+    public void FindLastMax()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First.Next;
+        Node maxNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value >= (int)maxNode.Value)
+                maxNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử lớn nhất sau cùng là: {maxNode.Value}");
+    }
+
+    // 44. Tìm phần tử max đầu tiên. Dùng cho ds các int
+    public void FindFirstMax()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First.Next;
+        Node maxNode = First;
+        while (curNode != null)
+        {
+            if ((int)curNode.Value > (int)maxNode.Value)
+                maxNode = curNode;
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Phần tử lớn nhất đầu tiên là: {maxNode.Value}");
+    }
+
+    // 45. Tìm phần tử là số nguyên số
+    public void FindPrime()
+    {
+        if (First == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = First;
+        Node primeNode = First;
+        List<int> soNguyenTo = new List<int>();
+        while (curNode != null)
+        {
+            if (IsPrime((int)curNode.Value))
+            {
+                primeNode = curNode;
+                soNguyenTo.Add((int)primeNode.Value);
+            }
+            curNode = curNode.Next;
+        }
+        Console.Write("Phần từ là số nguyên tố là: ");
+        foreach (var item in soNguyenTo)
+        {
+            Console.Write(item + " ");
+        }
+    }
+
+    private bool IsPrime(int number)
+    {
+        if (number < 2) return false;
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    // 46. Thêm chuỗi X vào đầu trong dslk
+    public void AddStringFirst(object S)
+    {
+        if (S == null) return;
+        Node newNode = new Node(S);
+        newNode.Next = FirstString;
+        FirstString = newNode;
+    }
+
+    // 47. Thêm chuỗi X vào cuối trong dslk
+    public void AddStringLast(object S)
+    {
+        Node newNode = new Node(S);
+        if (S == null) return;
+        if (FirstString == null)
+            FirstString = newNode;
+        else
+        {
+            Node curNode = FirstString;
+            while (curNode.Next != null)
+                curNode = curNode.Next;
+            curNode.Next = newNode;
+        }
+    }
+
+    // 48. Duyệt và xuất các nút chuỗii của ds ra màn hình
+    public void PrintStringList()
+    {
+        if (FirstString == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = FirstString;
         while (curNode != null)
         {
             Console.Write(curNode.Value);
@@ -1029,6 +1168,486 @@ public class LinkedList
                 Console.Write(" -> ");
             curNode = curNode.Next;
         }
-        Console.WriteLine();
+    }
+
+    // 49. Tìm chuỗi dài nhất trong ds
+    public void FindMaxStringLength()
+    {
+        if (FirstString == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = FirstString.Next;
+        Node maxNode = FirstString;
+        while (curNode != null)
+        {
+            if (curNode.Value.ToString().Length > maxNode.Value.ToString().Length)
+                maxNode = curNode;
+
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Chuỗi dài nhất trong danh sách là: {maxNode.Value}");
+    }
+
+    // 50. Tìm chuỗi ngắn nhất trong ds
+    public void FindMinStringLength()
+    {
+        if (FirstString == null)
+        {
+            Console.WriteLine("Danh sách rỗng");
+            return;
+        }
+        Node curNode = FirstString.Next;
+        Node minNode = FirstString;
+        while (curNode != null)
+        {
+            if (curNode.Value.ToString().Length < minNode.Value.ToString().Length)
+                minNode = curNode;
+
+            curNode = curNode.Next;
+        }
+        Console.WriteLine($"Chuỗi ngắn nhất trong danh sách là: {minNode.Value}");
+    }
+}
+
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+        int choice, X, V, Q;
+        string S; // Nếu cây tìm kiếm nhị phân cho chuỗi 
+        LinkedList linkedList = new LinkedList();
+        int[] arr = { 15, 81, 4, 76, 4, 5, 90, 3 };
+        string[] arrString = { "Chương", "Như Võ", "Như Ngô", "Trang", "Duy Khang", "Phương", "Nguyên" };
+        //int[] arr = { 1, 3, 5, 7 };
+        //int[] arr = { };
+        foreach (var item in arr)
+        {
+            linkedList.AddXLast(item);
+        }
+
+        foreach (var item in arrString)
+        {
+            linkedList.AddStringLast(item);
+        }
+
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("\n\nMảng số hiện tại: ");
+            linkedList.PrintList();
+            
+            Console.Write("\n\nMảng chuỗi hiện tại: ");
+            linkedList.PrintStringList();
+
+
+            Console.WriteLine("\n\n");
+            Console.WriteLine("\t\t--- *** MENU *** ---");
+            Console.WriteLine("1. Duyệt và xuất các nút của ds ra màn hình");
+            Console.WriteLine("2. Thêm giá trị X vào sau giá V");
+            Console.WriteLine("3. Thêm giá trị X vào trước nút V");
+            Console.WriteLine("4. Thêm giá trị X vào đầu danh sách");
+            Console.WriteLine("5. Thêm giá trị X vào cuối danh sách");
+            Console.WriteLine("6. Thêm giá trị X vào trước giá trị chẵn sau cùng trong danh sách");
+            Console.WriteLine("7. Thêm giá trị X vào sau giá trị chẵn sau cùng trong danh sách");
+            Console.WriteLine("8. Thêm giá trị X vào trước giá trị chẵn đầu tiên trong danh sách");
+            Console.WriteLine("9. Thêm giá trị X vào sau giá trị chẵn đầu tiên trong danh sách");
+            Console.WriteLine("10. Thêm giá trị X vào trước giá trị lẻ sau cùng trong danh sách");
+            Console.WriteLine("11. Thêm giá trị X vào sau giá trị lẻ sau cùng trong danh sách");
+            Console.WriteLine("12. Thêm giá trị X vào trước giá trị lẻ đầu tiên trong danh sách");
+            Console.WriteLine("13. Thêm giá trị X vào sau giá trị lẻ đầu tiên trong danh sách");
+            Console.WriteLine("14. Thêm giá trị X vào trước giá trị nhỏ nhất sau cùng trong danh sách");
+            Console.WriteLine("15. Thêm giá trị X vào sau giá trị nhỏ nhất sau cùng trong danh sách");
+            Console.WriteLine("16. Thêm giá trị X vào trước giá trị nhỏ nhất đầu tiên trong danh sách");
+            Console.WriteLine("17. Thêm giá trị X vào sau giá trị nhỏ nhất đầu tiên trong danh sách");
+            Console.WriteLine("18. Thêm giá trị X vào trước giá trị lớn nhất sau cùng trong danh sách");
+            Console.WriteLine("19. Thêm giá trị X vào sau giá trị lớn nhất sau cùng trong danh sách");
+            Console.WriteLine("20. Thêm giá trị X vào trước giá trị lớn nhất đầu tiên trong danh sách");
+            Console.WriteLine("21. Thêm giá trị X vào sau giá trị lớn nhất đầu tiên trong danh sách");
+            Console.WriteLine("22. Xóa giá trị X trong danh sách");
+            Console.WriteLine("23. Xóa hết tất cả các phần tử trong danh sách");
+            Console.WriteLine("24. Xóa phần tử kề sau phần tử Q trong danh sách");
+            Console.WriteLine("25. Xóa phần tử kề trước phần tử Q trong danh sách");
+            Console.WriteLine("26. Xóa phần tử đầu tiên trong danh sách");
+            Console.WriteLine("27. Xóa phần tử cuối cùng trong danh sách");
+            Console.WriteLine("28. Xóa phần tử ở giữa trong danh sách");
+            Console.WriteLine("29. Xóa phần tử chẵn đầu tiên trong danh sách");
+            Console.WriteLine("30. Xóa phần tử chẵn cuối cùng trong danh sách");
+            Console.WriteLine("31. Xóa phần tử lẻ đầu tiên trong danh sách");
+            Console.WriteLine("32. Xóa phần tử lẻ cuối cùng trong danh sách");
+            Console.WriteLine("33. Xóa phần tử nhỏ nhất trong danh sách");
+            Console.WriteLine("34. Xóa phần tử nhỏ nhất đầu tiên trong danh sách");
+            Console.WriteLine("35. Xóa phần tử nhỏ nhất sau cùng trong danh sách");
+            Console.WriteLine("36. Xóa phần tử lớn nhất trong danh sách");
+            Console.WriteLine("37. Xóa phần tử lớn nhất đầu tiên trong danh sách");
+            Console.WriteLine("38. Xóa phần tử lớn nhất sau cùng trong danh sách");
+            Console.WriteLine("39. Tìm phần tử nhỏ nhất trong danh sách");
+            Console.WriteLine("40. Tìm phần tử nhỏ nhất sau cùng trong danh sách");
+            Console.WriteLine("41. Tìm phần tử nhỏ nhất đầu tiên trong danh sách");
+            Console.WriteLine("42. Tìm phần tử lớn nhất trong danh sách");
+            Console.WriteLine("43. Tìm phần tử lớn nhất sau cùng trong danh sách");
+            Console.WriteLine("44. Tìm phần tử lớn nhất đầu tiên trong danh sách");
+            Console.WriteLine("45. Tìm phần tử là số nguyên tố trong danh sách");
+            Console.WriteLine("46. Thêm chuỗi S vào đầu danh sách");
+            Console.WriteLine("47. Thêm chuỗi S vào cuối danh sách");
+            Console.WriteLine("48. Duyệt và xuất các nút chuỗi của ds ra màn hình");
+            Console.WriteLine("49. Tìm chuỗi dài nhất trong danh sách");
+            Console.WriteLine("50. Tìm chuỗi ngắn nhất trong danh sách");
+
+
+            Console.WriteLine("0. Thoát chương trình");
+            try
+            {
+                Console.Write("Lựa chọn: ");
+                choice = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Lỗi nhập dữ liệu. Nhấn phím bất kỳ để thử lại...");
+                Console.ReadKey();
+                continue;
+            }
+            Console.Clear();
+            switch (choice)
+            {
+                case 0:
+                    return;
+
+                case 1:
+                    linkedList.PrintList();
+                    break;
+
+                case 2:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    Console.Write("Nhập giá trị V cần tìm: ");
+                    V = int.Parse(Console.ReadLine());
+                    if (linkedList.AddXAfterV(X, V) == null)
+                        Console.WriteLine($"Không tìm thấy nút {V} trong ds");
+                    else
+                    {
+                        Console.WriteLine($"\nĐã thêm {X} vào sau {V}");
+                        linkedList.PrintList();
+                    }
+                    break;
+                
+                case 3:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    Console.Write("Nhập giá V cần tìm: ");
+                    V = int.Parse(Console.ReadLine());
+                    if (linkedList.AddXBeforeV(X, V) == null)
+                        Console.WriteLine($"Không tìm thấy nút {V} trong ds");
+                    else
+                    {
+                        Console.WriteLine($"\nĐã thêm {X} vào trước {V}");
+                        linkedList.PrintList();
+                    }
+                    break;
+
+                case 4:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào đầu danh sách");
+                    linkedList.PrintList();
+                    break;
+
+                case 5:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào cuối danh sách");
+                    linkedList.PrintList();
+                    break;
+
+                case 6:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeEvenLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 7:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterEvenLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị chẵn sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 8:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeEvenFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị chẵn đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 9:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterEvenFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị chẵn đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 10:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeOddLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lẻ sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 11:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterOddLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lẻ sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 12:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeOddFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lẻ đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 13:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterOddFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lẻ đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 14:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeMinLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị nhỏ nhất sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 15:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterMinLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị nhỏ nhất sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 16:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterMinLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị nhỏ nhất đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 17:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterMinFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị nhỏ nhất đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 18:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeMaxLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lớn nhất sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 19:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterMaxLast(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lớn nhất sau cùng trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 20:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXBeforeMaxFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào trước giá trị lớn nhất đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+                
+                case 21:
+                    Console.Write("Nhập giá trị X cần thêm: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.AddXAfterMaxFirst(X);
+                    Console.WriteLine($"\nĐã thêm {X} vào sau giá trị lớn nhất đầu tiên trong danh sách");
+                    linkedList.PrintList();
+                    break;
+
+                case 22:
+                    Console.Write("Nhập giá trị X cần xóa: ");
+                    X = int.Parse(Console.ReadLine());
+                    linkedList.Remove(X);
+                    linkedList.PrintList();
+                    break;
+
+                case 23:
+                    linkedList.RemoveAll();
+                    linkedList.PrintList(); 
+                    break;
+
+                case 24:
+                    Console.Write("Nhập giá trị Q để xóa các phần tử kề sau: ");
+                    Q = int.Parse(Console.ReadLine());
+                    linkedList.RemoveAfter(Q);
+                    linkedList.PrintList();
+                    break;
+                
+                case 25:
+                    Console.Write("Nhập giá trị Q để xóa các phần tử kề trước: ");
+                    Q = int.Parse(Console.ReadLine());
+                    linkedList.RemoveBefore(Q);
+                    linkedList.PrintList();
+                    break;
+
+                case 26:
+                    linkedList.RemoveFirst(); 
+                    linkedList.PrintList(); 
+                    break;
+
+                case 27:
+                    linkedList.RemoveLast();
+                    linkedList.PrintList();
+                    break;
+
+                case 28:
+                    linkedList.RemoveCenter();
+                    linkedList.PrintList();
+                    break;
+
+                case 29:
+                    linkedList.RemoveEvenFirst();
+                    linkedList.PrintList();
+                    break;
+
+                case 30:
+                    linkedList.RemoveEvenLast();
+                    linkedList.PrintList();
+                    break;
+
+                case 31:
+                    linkedList.RemoveOddFirst();
+                    linkedList.PrintList();
+                    break;
+
+                case 32:
+                    linkedList.RemoveOddLast();
+                    linkedList.PrintList();
+                    break;
+
+                case 33:
+                    linkedList.RemoveMin();
+                    linkedList.PrintList();
+                    break;
+
+                case 34: 
+                    linkedList.RemoveMinFirst();
+                    linkedList.PrintList();
+                    break;
+
+                case 35: 
+                    linkedList.RemoveMinLast();
+                    linkedList.PrintList();
+                    break;
+
+                case 36:
+                    linkedList.RemoveMax();
+                    linkedList.PrintList();
+                    break;
+
+                case 37: 
+                    linkedList.RemoveMaxFirst();
+                    linkedList.PrintList();
+                    break;
+
+                case 38: 
+                    linkedList.RemoveMaxLast();
+                    linkedList.PrintList();
+                    break;
+
+                case 39:
+                    linkedList.FindMin();
+                    break;
+
+                case 40:
+                    linkedList.FindLastMin();
+                    break;
+
+                case 41:
+                    linkedList.FindFirstMin();
+                    break;
+
+                case 42:
+                    linkedList.FindMax();
+                    break;
+
+                case 43:
+                    linkedList.FindLastMax();
+                    break;
+
+                case 44: 
+                    linkedList.FindFirstMax();
+                    break;
+
+                case 45:
+                    linkedList.FindPrime(); 
+                    break;
+
+                case 46:
+                    Console.Write("Nhập chuỗi S cần thêm: ");
+                    S = Console.ReadLine();
+                    linkedList.AddStringFirst(S);
+                    Console.WriteLine($"\nĐã thêm {S} vào đầu danh sách");
+                    linkedList.PrintStringList();
+                    break;
+                
+                case 47:
+                    Console.Write("Nhập chuỗi S cần thêm: ");
+                    S = Console.ReadLine();
+                    linkedList.AddStringLast(S);
+                    Console.WriteLine($"\nĐã thêm {S} vào cuối danh sách");
+                    linkedList.PrintStringList();
+                    break;
+
+                case 48:
+                    linkedList.PrintStringList();
+                    break;
+
+                case 49:
+                    linkedList.FindMaxStringLength();
+                    break;
+
+                case 50: 
+                    linkedList.FindMinStringLength();
+                    break;
+
+                default:
+                    Console.WriteLine("Không hợp lệ.");
+                    break;
+            }
+
+            Console.WriteLine("\n\n\nNhấn phím bất kỳ để tiếp tục...");
+            Console.ReadKey();
+        }
     }
 }

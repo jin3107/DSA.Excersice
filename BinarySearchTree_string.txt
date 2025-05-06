@@ -1,0 +1,295 @@
+public class Node
+{
+    public string Value;
+    public Node Left;
+    public Node Right;
+
+    public Node()
+    {
+        Left = null;
+        Right = null;
+    }
+
+    public Node(string value)
+    {
+        Value = value;
+    }
+}
+
+public class BinarySearchTree
+{
+    public Node root;
+
+    public BinarySearchTree()
+    {
+        root = null;
+    }
+
+    // Hiển thị khóa chuỗi
+    public void DisplayString(Node node)
+    {
+        if (node != null)
+            Console.Write($"{node.Value}      ");
+        else
+            Console.Write("null ");
+    }
+
+    // 1. Thêm nút bằng đệ quy
+    public bool Add_DeQuy(ref Node aRoot, string S)
+    {
+        if (aRoot == null)
+        {
+            aRoot = new Node(S);
+            return true;
+        }
+        int soSanhChuoi = string.Compare(S, aRoot.Value);
+        if (soSanhChuoi < 0)
+            return Add_DeQuy(ref aRoot.Left, S);
+        else if (soSanhChuoi >= 0) // cho phép trùng lặp vào cây con phải, ko trùng thì bỏ dấu =
+            return Add_DeQuy(ref aRoot.Right, S);
+        else
+            return false;
+    }
+
+    // 2. Thêm nút bằng pp lặp
+    public bool Add_Lap_String(string S)
+    {
+        bool result = true;
+        Node newNode = new Node(S);
+        if (root == null)
+        {
+            root = newNode;
+            return result;
+        }
+        Node curNode = root;
+        Node parentNode;
+        while (true)
+        {
+            parentNode = curNode;
+            int cmp = string.Compare(S, curNode.Value);
+            if (cmp < 0)
+            {
+                curNode = curNode.Left;
+                if (curNode == null)
+                {
+                    parentNode.Left = newNode;
+                    return result;
+                }
+            }
+            else if (cmp > 0)
+            {
+                curNode = curNode.Right;
+                if (curNode == null)
+                {
+                    parentNode.Right = newNode;
+                    return result;
+                }
+            }
+            else
+            {
+                // Không thêm giá trị trùng lặp (nếu đề bài ko có giá trị trùng thì xài cái này)
+                //result = false;
+                //return result;
+
+                // Thêm giá trị trùng lặp vào cây con phải
+                curNode = curNode.Right;
+                if (curNode == null)
+                {
+                    parentNode.Right = newNode;
+                    return result;
+                }
+            }
+        }
+    }
+
+    public void Process(Node node)
+    {
+        DisplayString(node);
+    }
+
+    // 3. Duyệt cây theo thứ tự trước
+    public void PreOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            Process(aRoot);
+            PreOrder(aRoot.Left);
+            PreOrder(aRoot.Right);
+        }
+    }
+
+    // 4. Duyệt cây theo thứ tự giữa
+    public void InOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            InOrder(aRoot.Left);
+            Process(aRoot);
+            InOrder(aRoot.Right);
+        }
+    }
+
+    // 5. Duyệt cây theo thứ tự sau
+    public void PostOrder(Node aRoot)
+    {
+        if (aRoot != null)
+        {
+            PostOrder(aRoot.Left);
+            PostOrder(aRoot.Right);
+            Process(aRoot);
+        }
+    }
+
+    // 6. Tạo cây từ mảng
+    public void CreateTreeString(string[] arr)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            //Add_Lap_String(arr[i]);
+            Add_DeQuy(ref root, arr[i]);
+        }
+    }
+
+    // 7. tạo cây từ bàn phím
+    public void CreateTreeString()
+    {
+        Console.Write("Nhập số lượng nút: ");
+        int n = int.Parse(Console.ReadLine());
+        string[] arr = new string[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Nhập giá trị khóa thứ {i + 1}: ");
+            arr[i] = Console.ReadLine();
+        }
+        CreateTreeString(arr);
+    }
+
+    // 8. Tìm chuỗi dài nhất theo độ dài
+    public string FindMaxStringLength(Node aRoot)
+    {
+        if (aRoot == null) return null;
+        string max = aRoot.Value;
+        string left = FindMaxStringLength(aRoot.Left);
+        string right = FindMaxStringLength(aRoot.Right);
+        if (left != null && left.Length > max.Length)
+            max = left;
+        if (right != null && right.Length > max.Length)
+            max = right;
+        return max;
+    }
+
+    // 9. Tìm chuỗi ngắn nhất theo độ dài
+    public string FindMinStringLength(Node aRoot)
+    {
+        if (aRoot == null) return null;
+        string min = aRoot.Value;
+        string left = FindMinStringLength(aRoot.Left);
+        string right = FindMinStringLength(aRoot.Right);
+        if (left != null && left.Length < min.Length)
+            min = left;
+        if (right != null && right.Length < min.Length)
+            min = right;
+        return min;
+    }
+}
+
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+        BinarySearchTree tree = new BinarySearchTree();
+        int choice;
+        string S;
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("\n===== MENU =====");
+            Console.WriteLine("1. Thêm nút (đệ quy)");
+            Console.WriteLine("2. Thêm nút (lặp)");
+            Console.WriteLine("3. Duyệt cây PreOrder");
+            Console.WriteLine("4. Duyệt cây InOrder");
+            Console.WriteLine("5. Duyệt cây PostOrder");
+            Console.WriteLine("6. Tạo cây từ mảng");
+            Console.WriteLine("7. Tạo cây từ bàn phím");
+            Console.WriteLine("8. Tìm nút dài nhất");
+            Console.WriteLine("9. Tìm nút ngắn nhất");
+
+            Console.WriteLine("0. Thoát");
+            Console.Write("\nChọn chức năng: ");
+            choice = int.Parse(Console.ReadLine());
+
+            Console.Clear();
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Nhập giá trị X để thêm (đệ quy): ");
+                    S = Console.ReadLine();
+                    if (tree.Add_DeQuy(ref tree.root, S))
+                        Console.WriteLine("Đã thêm thành công.");
+                    else
+                        Console.WriteLine("Không thể thêm (giá trị đã tồn tại).");
+                    break;
+
+                case 2:
+                    Console.Write("Nhập giá trị X để thêm (lặp): ");
+                    S = Console.ReadLine();
+                    if (tree.Add_Lap_String(S))
+                        Console.WriteLine("Đã thêm thành công.");
+                    else
+                        Console.WriteLine("Không thể thêm (giá trị đã tồn tại).");
+                    break;
+
+                case 3:
+                    Console.WriteLine("Duyệt cây theo PreOrder:");
+                    tree.PreOrder(tree.root);
+                    break;
+
+                case 4:
+                    Console.WriteLine("Duyệt cây theo InOrder:");
+                    tree.InOrder(tree.root);
+                    break;
+
+                case 5:
+                    Console.WriteLine("Duyệt cây theo PostOrder:");
+                    tree.PostOrder(tree.root);
+                    break;
+
+                case 6:
+                    Console.WriteLine("Đã tạo cây từ mảng");
+                    string[] arr = { "Chương", "Như_Võ", "Như_Ngô", "QTrang", "Duy_Khang", "Phương", "Nguyên" };
+                    tree.CreateTreeString(arr);
+                    break;
+
+                case 7:
+                    Console.WriteLine("Tạo cây từ bàn phím.");
+                    tree.CreateTreeString();
+                    break;
+
+                case 8:
+                    string chuoiDaiNhat = tree.FindMaxStringLength(tree.root);
+                    Console.WriteLine($"Chuỗi dài nhất trong cây là: {chuoiDaiNhat}");
+                    break;
+
+                case 9:
+                    string chuoiNganNhat = tree.FindMinStringLength(tree.root);
+                    Console.WriteLine($"Chuỗi dài nhất trong cây là: {chuoiNganNhat}");
+                    break;
+
+                case 0:
+                    Console.WriteLine("Thoát chương trình.");
+                    return;
+
+                default:
+                    Console.WriteLine("Lựa chọn không hợp lệ.");
+                    break;
+            }
+
+            Console.WriteLine("\nNhấn phím bất kỳ để tiếp tục...");
+            Console.ReadKey();
+        }
+    }
+}
