@@ -10,9 +10,15 @@ namespace BT_BS4
     {
         protected Node First;
 
+        // Nếu cây tknp cho chuỗi. Thay đỗi First -> FirstString để tránh bị chèn chuỗi vào First
+        protected Node FirstString;
+
         public LinkedList() 
         { 
             First = null;
+
+            // Nếu cây tknp cho chuỗi
+            FirstString = null;
         }
 
         // 1. Duyệt và xuất giá trị các nút của ds ra màn hình
@@ -1110,5 +1116,87 @@ namespace BT_BS4
             return true;
         }
 
+        // 46. Thêm chuỗi X vào đầu trong dslk
+        public void AddStringFirst(object S)
+        {
+            if (S == null) return;
+            Node newNode = new Node(S);
+            newNode.Next = FirstString;
+            FirstString = newNode;
+        }
+
+        // 47. Thêm chuỗi X vào cuối trong dslk
+        public void AddStringLast(object S)
+        {
+            Node newNode = new Node(S);
+            if (S == null) return;
+            if (FirstString == null)
+                FirstString = newNode;
+            else
+            {
+                Node curNode = FirstString;
+                while (curNode.Next != null)
+                    curNode = curNode.Next;
+                curNode.Next = newNode;
+            }
+        }
+
+        // 48. Duyệt và xuất các nút chuỗii của ds ra màn hình
+        public void PrintStringList()
+        {
+            if (FirstString == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = FirstString;
+            while (curNode != null)
+            {
+                Console.Write(curNode.Value);
+                if (curNode.Next != null)
+                    Console.Write(" -> ");
+                curNode = curNode.Next;
+            }
+        }
+
+        // 49. Tìm chuỗi dài nhất trong ds
+        public void FindMaxStringLength()
+        {
+            if (FirstString == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = FirstString.Next;
+            Node maxNode = FirstString;
+            while (curNode != null)
+            {
+                if (curNode.Value.ToString().Length > maxNode.Value.ToString().Length)
+                    maxNode = curNode;
+
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Chuỗi dài nhất trong danh sách là: {maxNode.Value}");
+        }
+
+        // 50. Tìm chuỗi ngắn nhất trong ds
+        public void FindMinStringLength()
+        {
+            if (FirstString == null)
+            {
+                Console.WriteLine("Danh sách rỗng");
+                return;
+            }
+            Node curNode = FirstString.Next;
+            Node minNode = FirstString;
+            while (curNode != null)
+            {
+                if (curNode.Value.ToString().Length < minNode.Value.ToString().Length)
+                    minNode = curNode;
+
+                curNode = curNode.Next;
+            }
+            Console.WriteLine($"Chuỗi ngắn nhất trong danh sách là: {minNode.Value}");
+        }
     }
 }

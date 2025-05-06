@@ -14,8 +14,10 @@ namespace BT_BS4
             Console.OutputEncoding = Encoding.UTF8;
 
             int choice, X, V, Q;
+            string S; // Nếu cây tìm kiếm nhị phân cho chuỗi 
             LinkedList linkedList = new LinkedList();
             int[] arr = { 15, 81, 4, 76, 4, 5, 90, 3 };
+            string[] arrString = { "Chương", "Như Võ", "Như Ngô", "Trang", "Duy Khang", "Phương", "Nguyên" };
             //int[] arr = { 1, 3, 5, 7 };
             //int[] arr = { };
             foreach (var item in arr)
@@ -23,11 +25,20 @@ namespace BT_BS4
                 linkedList.AddXLast(item);
             }
 
+            foreach (var item in arrString)
+            {
+                linkedList.AddStringLast(item);
+            }
+
             while (true)
             {
                 Console.Clear();
-                Console.Write("\n\nMảng hiện tại: ");
+                Console.Write("\n\nMảng số hiện tại: ");
                 linkedList.PrintList();
+                
+                Console.Write("\n\nMảng chuỗi hiện tại: ");
+                linkedList.PrintStringList();
+
 
                 Console.WriteLine("\n\n");
                 Console.WriteLine("\t\t--- *** MENU *** ---");
@@ -76,6 +87,11 @@ namespace BT_BS4
                 Console.WriteLine("43. Tìm phần tử lớn nhất sau cùng trong danh sách");
                 Console.WriteLine("44. Tìm phần tử lớn nhất đầu tiên trong danh sách");
                 Console.WriteLine("45. Tìm phần tử là số nguyên tố trong danh sách");
+                Console.WriteLine("46. Thêm chuỗi S vào đầu danh sách");
+                Console.WriteLine("47. Thêm chuỗi S vào cuối danh sách");
+                Console.WriteLine("48. Duyệt và xuất các nút chuỗi của ds ra màn hình");
+                Console.WriteLine("49. Tìm chuỗi dài nhất trong danh sách");
+                Console.WriteLine("50. Tìm chuỗi ngắn nhất trong danh sách");
 
 
                 Console.WriteLine("0. Thoát chương trình");
@@ -389,6 +405,34 @@ namespace BT_BS4
 
                     case 45:
                         linkedList.FindPrime(); 
+                        break;
+
+                    case 46:
+                        Console.Write("Nhập chuỗi S cần thêm: ");
+                        S = Console.ReadLine();
+                        linkedList.AddStringFirst(S);
+                        Console.WriteLine($"\nĐã thêm {S} vào đầu danh sách");
+                        linkedList.PrintStringList();
+                        break;
+                    
+                    case 47:
+                        Console.Write("Nhập chuỗi S cần thêm: ");
+                        S = Console.ReadLine();
+                        linkedList.AddStringLast(S);
+                        Console.WriteLine($"\nĐã thêm {S} vào cuối danh sách");
+                        linkedList.PrintStringList();
+                        break;
+
+                    case 48:
+                        linkedList.PrintStringList();
+                        break;
+
+                    case 49:
+                        linkedList.FindMaxStringLength();
+                        break;
+
+                    case 50: 
+                        linkedList.FindMinStringLength();
                         break;
 
                     default:
