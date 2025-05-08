@@ -1,0 +1,108 @@
+------ Bài 1,2,3 - trang 47
+public class CStack
+{
+    private int topIndex;
+    private ArrayList list;
+
+    public CStack()
+    {
+        topIndex = -1;
+        list = new ArrayList();
+    }
+
+    public void Push(object item)
+    {
+        list.Add(item);
+        topIndex++;
+    }
+
+    public object Pop()
+    {
+        object obj = list[topIndex];
+        list.RemoveAt(topIndex);
+        topIndex--;
+        return obj;
+    }
+
+    public object Peek()
+    {
+        return list[topIndex];
+    }
+
+    public int Count
+    {
+        get { return list.Count; }
+    }
+
+    public void Clear()
+    {
+        list.Clear();
+        topIndex = -1;
+    }
+}
+
+
+
+public class Service
+{
+    public void ReserveString(string str)
+    {
+        //Stack<string> stack = new Stack<string>(); Phương thức có sẵn của C#
+        CStack stack = new CStack();
+        string[] words = str.Split(' ');
+        foreach (string word in words)
+        {
+            stack.Push(word);
+        }
+        string reversedString = "";
+        while (stack.Count > 0)
+        {
+            reversedString += stack.Pop() + " ";
+        }
+        Console.WriteLine("Chuỗi ký tự đã đảo ngược: " + reversedString.Trim());
+    }
+
+    public string DoiCoSo(int so, int coSo)
+    {
+        //Stack<string> stack = new Stack<string>(); Phương thức có sẵn của C#
+        CStack stack = new CStack();
+        do
+        {
+            int soDu = so % coSo;
+            stack.Push(soDu);
+            so /= coSo;
+        }
+        while (so != 0);
+        string ketQua = "";
+        while (stack.Count > 0)
+            ketQua += stack.Pop().ToString();
+        return ketQua;
+    }
+}
+
+
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+        Console.Write("Nhập chuỗi ký tự: ");
+        string input = Console.ReadLine();
+        Service reserve = new Service();
+        reserve.ReserveString(input);
+        Console.WriteLine();
+
+        int so, coSo;
+        Console.Write("Nhập vào cơ số muốn đổi: ");
+        so = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Nhập vào số muốn đổi: ");
+        coSo = Convert.ToInt32(Console.ReadLine());
+
+        string ketQua = reserve.DoiCoSo(so, coSo);
+        Console.WriteLine($"Số {so} đổi sang cơ số {coSo} là {ketQua}");
+        Console.ReadKey();
+    }
+}

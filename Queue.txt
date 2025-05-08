@@ -1,0 +1,250 @@
+----- Bài 9,10,11 - trang 49
+
+public class CQueue
+{
+    private ArrayList list;
+
+    public CQueue()
+    {
+        list = new ArrayList();
+    }
+
+    public void Enqueue(object item)
+    {
+        list.Add(item);
+    }
+
+    public object Dequeue()
+    {
+        object item = list[0];
+        list.RemoveAt(0);
+        return item;
+    }
+
+    public object Peek()
+    {
+        return list[0];
+    }
+
+    public bool IsEmpty()
+    {
+        return list.Count == 0;
+    }
+
+    public int Count
+    {
+        get { return list.Count; }
+    }
+
+    public void Clear()
+    {
+        list.Clear();
+    }
+}
+
+
+
+
+public class Sort
+{
+    public void Display(int[] arr)
+    {
+        foreach (int item in arr)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+
+    public int FindMaxValue(int[] arr)
+    {
+        int maxTempt = arr[0];
+        for (int i = 1; i < arr.Length; i++)
+        {
+            if (arr[i] > maxTempt)
+                maxTempt = arr[i];
+        }
+        return maxTempt;
+    }
+
+    public byte DemSoChuSo(long num)
+    {
+        byte soChuSo = 0;
+        while (num > 0)
+        {
+            soChuSo++;
+            num /= 10;
+        }
+        return soChuSo;
+    }
+
+    public void RSPass(byte chuSoHang, int[] arr)
+    {
+        int i, iQue;
+        CQueue[] que = new CQueue[10];
+        for(i = 0; i < 10; i++)
+            que[i] = new CQueue();
+        for (i = 0; i < arr.Length; i++)
+        {
+            int temp = arr[i] / (int)Math.Pow(10, chuSoHang);
+            iQue = temp % 10;
+            que[iQue].Enqueue(arr[i]);
+        }
+
+        i = 0;
+        for (iQue = 0; iQue < 10; iQue++)
+        {
+            while (que[iQue].Count > 0)
+            {
+                arr[i] = Convert.ToInt32(que[iQue].Dequeue().ToString());
+                i++;
+            }
+        }
+    }
+
+    public void RadixSort(int[] arr)
+    {
+        int maxValue = FindMaxValue(arr);
+        byte soChuSo = DemSoChuSo(maxValue);
+        for (byte i = 0; i < soChuSo; i++)
+        {
+            RSPass(i, arr);
+            Console.Write($"Dãy sau chuyến {i + 1}:\t ");
+            Display(arr);
+        }
+    }
+}
+
+
+
+
+public class LoHang
+{
+    public string MaLoHang { get; set; }
+    public string TenLoHang { get; set; }
+
+    public LoHang() { }
+
+    public LoHang(string maLoHang, string tenLoHang)
+    {
+        MaLoHang = maLoHang;
+        TenLoHang = tenLoHang;
+    }
+
+    public void NhapLoHang()
+    {
+        Console.Write("Nhập mã lô hàng: ");
+        MaLoHang = Console.ReadLine();
+
+        Console.Write("Nhập tên lô hàng: ");
+        TenLoHang = Console.ReadLine();
+    }
+
+    public override string ToString()
+    {
+        return $"Mã lô hàng: {MaLoHang}, Tên lô hàng: {TenLoHang}";
+    }
+}
+
+
+
+public class QuanLyKhoHang
+{
+    public Queue<LoHang> khoHang = new Queue<LoHang>();
+
+    public void NhapKho(int soLuong, List<LoHang> danhSachNhap)
+    {
+        foreach (var lo in danhSachNhap)
+        {
+            khoHang.Enqueue(lo);
+        }
+    }
+
+    public LoHang XuatKho()
+    {
+        if (khoHang.Count > 0)
+        {
+            return khoHang.Dequeue();
+        }
+        else
+        {
+            Console.WriteLine("Kho hàng rỗng!");
+            return null;
+        }
+    }
+
+    public int SoLuongTonKho()
+    {
+        return khoHang.Count;
+    }
+
+    public void HienThiKho()
+    {
+        if (khoHang.Count == 0)
+        {
+            Console.WriteLine("Kho hàng rỗng.");
+            return;
+        }
+
+        Console.WriteLine("Danh sách lô hàng trong kho:");
+        foreach (var lo in khoHang)
+        {
+            Console.WriteLine(lo.ToString());
+        }
+    }
+}
+
+
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+        // Phần sắp xếp Radix
+        Sort sort = new Sort();
+        int[] arr = { 19, 133, 60, 2450, 35, 9, 638, 478 };
+
+        Console.WriteLine("\t--- Radix Sort ---");
+        Console.Write("Dãy ban đầu:\t\t");
+        sort.Display(arr);
+        sort.RadixSort(arr);
+        Console.Write("\nDãy đã sắp xếp:\t\t");
+        sort.Display(arr);
+        Console.WriteLine("\n");
+
+        // Phần quản lý kho hàng
+        Console.WriteLine("\t--- Quản lý kho hàng ---");
+        QuanLyKhoHang khoHang = new QuanLyKhoHang();
+        List<LoHang> danhSachNhap = new List<LoHang>();
+
+        Console.Write("Nhập số lượng lô hàng: ");
+        int n = int.Parse(Console.ReadLine());
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine($"\nNhập lô hàng thứ {i + 1}:");
+            LoHang loHang = new LoHang();
+            loHang.NhapLoHang();
+            danhSachNhap.Add(loHang);
+        }
+
+        khoHang.NhapKho(danhSachNhap.Count, danhSachNhap);
+
+        Console.WriteLine("\nDanh sách trong kho:");
+        khoHang.HienThiKho();
+        Console.WriteLine($"Tổng số lô hàng trong kho: {khoHang.SoLuongTonKho()}");
+
+        Console.WriteLine("\nXuất kho lô hàng đầu tiên:");
+        LoHang xuatKho = khoHang.XuatKho();
+        if (xuatKho != null)
+            Console.WriteLine(xuatKho.ToString());
+        else
+            Console.WriteLine("Kho rỗng, không thể xuất.");
+
+        Console.WriteLine($"Số lượng còn lại trong kho: {khoHang.SoLuongTonKho()}");
+
+        Console.ReadKey();
+    }
+}

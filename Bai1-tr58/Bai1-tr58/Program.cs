@@ -106,7 +106,8 @@ namespace Bai1_tr58
 
                     case 7:
                         Console.WriteLine("Đã tạo cây từ mảng");
-                        int[] arr = { 10, 6, 15, 12, 9, 12, 26, 14, 56, 35 };
+                        //int[] arr = { 10, 6, 15, 12, 9, 12, 26, 14, 56, 35 };
+                        int[] arr = { 50, 30, 70, 60, 80 };
                         tree.CreateTree(arr);
                         break;
 
