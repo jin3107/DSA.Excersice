@@ -11,12 +11,31 @@ namespace Bai9_tr49
     {
         public Queue<LoHang> khoHang = new Queue<LoHang>();
 
-        public void NhapKho(int soLuong, List<LoHang> danhSachNhap)
+        //public void NhapKho(int soLuong, List<LoHang> danhSachNhap)
+        //{
+        //    foreach (var lo in danhSachNhap)
+        //    {
+        //        khoHang.Enqueue(lo);
+        //    }
+        //}
+        public void NhapKho()
         {
-            foreach (var lo in danhSachNhap)
+            Console.Write("Nhập số lượng lô hàng: ");
+            int soLuong = int.Parse(Console.ReadLine());
+            for (int i = 0; i < soLuong; i++)
             {
-                khoHang.Enqueue(lo);
+                Console.WriteLine($"\nNhập lô hàng thứ {i + 1}:");
+                LoHang loHang = new LoHang();
+                loHang.NhapLoHang();
+                khoHang.Enqueue(loHang);
             }
+
+            Console.WriteLine("\nĐơn hàng đã nhập:");
+            foreach (var lo in khoHang)
+            {
+                Console.WriteLine(lo.ToString());
+            } 
+
         }
 
         public LoHang XuatKho()

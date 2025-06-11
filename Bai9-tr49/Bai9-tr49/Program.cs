@@ -28,17 +28,18 @@ namespace Bai9_tr49
             QuanLyKhoHang khoHang = new QuanLyKhoHang();
             List<LoHang> danhSachNhap = new List<LoHang>();
 
-            Console.Write("Nhập số lượng lô hàng: ");
-            int n = int.Parse(Console.ReadLine());
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine($"\nNhập lô hàng thứ {i + 1}:");
-                LoHang loHang = new LoHang();
-                loHang.NhapLoHang();
-                danhSachNhap.Add(loHang);
-            }
+            //Console.Write("Nhập số lượng lô hàng: ");
+            //int n = int.Parse(Console.ReadLine());
+            //for (int i = 0; i < n; i++)
+            //{
+            //    Console.WriteLine($"\nNhập lô hàng thứ {i + 1}:");
+            //    LoHang loHang = new LoHang();
+            //    loHang.NhapLoHang();
+            //    danhSachNhap.Add(loHang);
+            //}
 
-            khoHang.NhapKho(danhSachNhap.Count, danhSachNhap);
+            //khoHang.NhapKho(danhSachNhap.Count, danhSachNhap);
+            khoHang.NhapKho();
 
             Console.WriteLine("\nDanh sách trong kho:");
             khoHang.HienThiKho();

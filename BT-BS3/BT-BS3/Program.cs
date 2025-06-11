@@ -14,7 +14,8 @@ namespace BT_BS3
             Console.OutputEncoding = Encoding.UTF8;
 
             Sort sort = new Sort();
-            int[] arr = { 45, 23, 78, 67, 12, 88, 34, 56, 92, 34 };
+            //int[] arr = { 45, 23, 78, 67, 12, 88, 34, 56, 92, 34 };
+            int[] arr = { 45, 23, 78, 67, 12, 88, 34, 56, 92, 4 };
             Console.WriteLine("Mảng trước khi sắp xếp: ");
             PrintArray(arr);
             Console.WriteLine();
@@ -25,7 +26,6 @@ namespace BT_BS3
                 sort.HeapSort(arr, arr.Length);
 
             Console.WriteLine("\nMảng sau khi sắp xếp: ");
-            PrintArray(arr);
         }
 
         static bool MangTangDan(int[] arr)

@@ -60,6 +60,37 @@ namespace BT_BS3
             }
         }
 
+        public void QuickSort(int[] arr, int left, int right)
+        {
+            if (left >= right) return;
+
+            int pivot = arr[(left + right) / 2];
+            int index = Partition(arr, left, right, pivot);
+
+            Console.WriteLine($"Pivot: {pivot} → {string.Join(", ", arr)}"); // In mảng sau mỗi lần partition
+
+            QuickSort(arr, left, index - 1);
+            QuickSort(arr, index, right);
+        }
+
+        int Partition(int[] arr, int left, int right, int pivot)
+        {
+            while (left <= right)
+            {
+                while (arr[left] < pivot) left++;
+                while (arr[right] > pivot) right--;
+
+                if (left <= right)
+                {
+                    int temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                    left++;
+                    right--;
+                }
+            }
+            return left;
+        }
 
     }
 }
