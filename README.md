@@ -1,6 +1,8 @@
 ﻿> Thực hiện: **Huỳnh Tấn Chương**
 >
 > Cập nhật lần cuối: **11/04/2025**
+> 
+> Lưu ý: Đây là bài tập hướng dẫn cho môn học Cấu trúc dữ liệu - Giải thuật bằng ngôn ngữ C#. Các bài tập được lấy từ giáo trình môn học và được thực hiện bằng ngôn ngữ C# (Cập nhật README.md chưa đù nhưng bài tập thì đủ).
 
 # Bài tập Cấu trúc dữ liệu - Giải thuật bằng ngôn ngữ C#
 
